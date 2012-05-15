@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Contributingcode::Application.load_tasks
+Tumblrtv::Application.load_tasks

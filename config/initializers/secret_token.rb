@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Contributingcode::Application.config.secret_token = 'b4a0b3627e2d21f24739a826480e14114ad12c41bcf07c205dac2ba1147ace197fb47aa3a13cdfc70f69b0b2fad7d8df92c439fea39b9a9c21a37bdb98179512'
+Tumblrtv::Application.config.secret_token = 'b774f1f26174a7dd165b6f3053ce5d985cc421a5043538f9c74863d08b9636ce97774c0269774c74732caf0c4cb56eb39c746a569ce147a2012a455f08bdc6e5'
