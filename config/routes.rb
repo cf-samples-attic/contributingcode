@@ -2,7 +2,7 @@ Tumblrtv::Application.routes.draw do
 
   root :to => 'home#index'
 
-  match '/auth/:provider/callback' => 'sessions#create'
+  match '/auth/github/callback' => 'sessions#create'
   match '/auth/failure' => 'sessions#failure'
 
   match '/login' => 'sessions#new', :as => :login

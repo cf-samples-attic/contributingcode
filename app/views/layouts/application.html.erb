@@ -17,7 +17,7 @@
 
 <h1>Contributing CODE</h1>
 <% if current_user %>
-  Welcome <%= current_user.name %>!
+  Welcome <%= current_user.fname %>!
   <%= link_to "Logut", logout_path %>
 <% else %>
   <%= link_to "Sign in with Github", "/auth/github" %>

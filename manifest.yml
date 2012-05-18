@@ -12,5 +12,5 @@ applications:
     mem: 256M
     instances: 1
     services:
-      mysql-482d1:
+      mysql-90f1:
         type: mysql
