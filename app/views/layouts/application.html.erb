@@ -16,7 +16,12 @@
 <body>
 
 <h1>Contributing CODE</h1>
-
+<% if current_user %>
+  Welcome <%= current_user.name %>!
+  <%= link_to "Logut", logout_path %>
+<% else %>
+  <%= link_to "Sign in with Github", "/auth/github" %>
+<% end %>
 <%= yield %>
 <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fcfmagi.cloudfoundry.com&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=80&amp;appId=152055234921453" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
 <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cfmagi.cloudfoundry.com" data-via="mahilis">Tweet</a>

@@ -6,6 +6,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 
   provider :developer unless Rails.env.production?
   provider :github, SERVICES['github']['key'], SERVICES['github']['secret'] # if SERVICES['github']
-  provider :twitter, SERVICES['twitter']['key'], SERVICES['twitter']['secret'] # if SERVICES['twitter']
 
 end
