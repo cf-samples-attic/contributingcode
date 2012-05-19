@@ -10,5 +10,6 @@ Tumblrtv::Application.routes.draw do
   
   match '/update/user' => 'home#update_user', :as => 'update_user'
 
-  resources :tasks
+  resources :team
+
 end
