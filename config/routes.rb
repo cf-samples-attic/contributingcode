@@ -9,4 +9,6 @@ Tumblrtv::Application.routes.draw do
   match '/logout' => 'sessions#destroy', :as => :logout
   
   match '/update/user' => 'home#update_user', :as => 'update_user'
+
+  resources :tasks
 end

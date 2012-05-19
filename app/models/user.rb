@@ -5,8 +5,7 @@ class User < ActiveRecord::Base
     def create_with_omniauth(auth)
       create! do |user|
         user.uid = auth["uid"]
-        user.fname = auth["info"]["name"]
-        user.lname = ""
+        user.name = auth["info"]["name"]
         user.email = ""
         user.handle = auth["extra"]["raw_info"]["login"]
       end
@@ -15,8 +14,7 @@ class User < ActiveRecord::Base
     # Update user info after registering 
     def update_info(params, current_user)
       user = current_user
-      user.fname = params[:fname]
-      user.lname = params[:lname]
+      user.name = params[:name]
       user.email = params[:email]
       if user.save
         #return
