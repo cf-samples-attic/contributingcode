@@ -1,2 +1,6 @@
 <br>
 Contributing code welcomes you :) 
+
+<% if current_user.blank? %>
+  <%= link_to "Register", "auth/github" %>
+<% end %>
