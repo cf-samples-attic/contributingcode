@@ -9,8 +9,8 @@ applications:
         description: Rails Application
         exec: 
     url: ${name}.${target-base}
-    mem: 256M
+    mem: 512M
     instances: 1
     services:
-      mysql-90f1:
+      cf:
         type: mysql
