@@ -1,0 +1,48 @@
+Please Fill with team information 
+<div id='team' class="container ghost-padding">
+  <div class="row-fluid">
+  <div class="checkform">
+  <%= form_tag teams_path , :id=>"team_form",:class => "formset", :method => "post" %>
+  
+   <div class="control-group">
+    <%= label_tag :TeamName, nil, :class => "control-label" %>
+    <div class="controls">
+    <%= text_field_tag(:name, nil, :class => "mandatory input-xlarge", "placeholder" => "Team name", "data-error-msg" => "Please enter your first name") %>
+      <p class="help-block"></p>
+    </div>
+  </div>
+
+
+   <div class='control-group' style='margin-bottom:0'>
+    <%= label_tag :add_members, nil, :class => "control-label" %>
+    <div class="controls" style='margin-bottom: 10px'>
+      <%= text_field_tag(:emails, nil, :class => "email input-xlarge", "placeholder" => "Email of member 1", "data-error-msg" => "Please enter a valid email address") %>
+      <p class="help-block"></p>
+    </div>
+  </div>
+  <div class='control-group' style='margin-bottom:0'>
+    <div class="controls" style='margin-bottom: 10px'>
+      <%= text_field_tag(:emails, nil, :class => "email input-xlarge", "placeholder" => "Email of member 2", "data-error-msg" => "Please enter a valid email address") %>
+      <p class="help-block"></p>
+    </div>
+  </div>
+  <div class='control-group' style='margin-bottom:0'>
+    <div class="controls">
+      <%= text_field_tag(:emails, nil, :class => "email input-xlarge", "placeholder" => "Email of member 3", "data-error-msg" => "Please enter a valid email address") %>
+      <p class="help-block">You can do this later, too.</p>
+    </div>
+  </div>
+  
+  <div id="my_helper"></div>
+
+  <div class="clearfix">
+    <div class="input">
+      <%= submit_tag "Save", :class => "btn" %>
+    </div>
+  </div>
+  
+
+</div>
+</div>
+</div>
+

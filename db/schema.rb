@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(:version => 20120519064210) do
   create_table "teams", :force => true do |t|
     t.string   "name"
     t.integer  "owner_id"
-    t.integer  "count"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "member_count"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "users", :force => true do |t|

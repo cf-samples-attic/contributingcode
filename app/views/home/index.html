@@ -4,7 +4,7 @@ Contributing code welcomes you :)
 <% if current_user.blank? %>
   <%= link_to "Register", "auth/github" %>
 <% else %>
-   <%= link_to "Create Team", "team/new" %>
-   <%= link_to "Join Teams", "team/index" %>
+   <%= link_to "Create Team", new_team_path %>
+   <%= link_to "Join Teams", teams_path %>
 <% end %>
 
