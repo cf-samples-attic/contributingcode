@@ -25,12 +25,12 @@ class Team < ActiveRecord::Base
       emails.delete(current_user.email)
       # Find if all emails are registered users 
       existing_users = User.where(:email => emails) 
-      if existing_users.size != emails.size 
-        return {:err => "e2", :data => "Unregistered members!"}
-      end
+       if existing_users.size != emails.size 
+          return {:err => "e2", :data => "Unregistered members!"}
+       end
       team.member_count = team.member_count + emails.size()
       if team.save
-        TeamMember.add_members(team.id,existing_users.colect(&:id)) if emails.size != 0 
+        TeamMembers.add_members(team.id,existing_users.collect(&:id)) if emails.size != 0 
         return {:err => nil, :data => team}
       else 
         return {:err => "e3", :data => "Error! Please try again later!"}
