@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </script>
 </head>
-<body>
+<body bgcolor="silver">
   <div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function() {
@@ -32,13 +32,15 @@
    }(document));
 </script>
 
-<h1>Contributing CODE</h1>
+<h1 align="center">Contributing CODE</h1>
+<div style="position:fixed;top:0;right:0;padding:20px;">
 <% if current_user %>
   Welcome <%= current_user.name %>!
-  <%= link_to "Logut", logout_path %>
+  <%= link_to "Logout", logout_path %>
 <% else %>
-  <%= link_to "Sign in with Github", "/auth/github" %>
+  <%= link_to "Sign-in/Register with Github", "/auth/github" %>
 <% end %>
+</div>
 <%= yield %>
 <br>
 <br>
@@ -46,6 +48,8 @@
 <br>
 <br>
 <br>
+
+<div style="color:#0900C4;position:fixed;bottom:0;" bgcolor="silver">
 <div class="fb-like" data-href="http://contributingcode.cloudfoundry.com" data-send="true" data-width="450" data-show-faces="true"></div>
 
 <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://contributingcode.cloudfoundry.com" data-text="@cloudfoundry @cfcodesprint checkout" data-related="cfcodesprint" data-hashtags="contributingcode">Tweet</a>
@@ -61,6 +65,6 @@
   })();
 
 <!-- Place this render call where appropriate -->
-
+<div> 
 </body>
 </html>

@@ -9,7 +9,7 @@ class TeamsController < ApplicationController
     if team[:err].present?
       render :json => {:err => "e1", :data=> team[:data]} 
     else 
-      render :json => {:err => nil, :data=> teams_path} 
+      render :json => {:err => nil, :data=> team[:data]} 
     end 
   end 
 

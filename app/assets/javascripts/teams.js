@@ -1,6 +1,5 @@
 
 $(document).ready(function(){
-    console.log("lllll");
     $("#team_form").submit(function(){
         event.preventDefault();
         var o = {}
@@ -16,7 +15,7 @@ $(document).ready(function(){
             o[obj.name] = obj.value || ''
           }
         });
-
+        console.log("before");
         $.ajax({
             url: '/teams',
             type: "POST",
@@ -24,8 +23,10 @@ $(document).ready(function(){
             success: function(response) {
                 if(response.err)
                   $("#my_helper").html("<p>"+response.data+"</p>")
-                else 
-                    window.location = response.data 
+                else{ 
+                    $("#create_team").remove();
+                    $("#teams_list").append("<li>"+response.data.name+"</li>");
+               }
             }
         });
             return false;
