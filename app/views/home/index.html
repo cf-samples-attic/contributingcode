@@ -1,135 +1,27 @@
 <br>
 
-<div class="home" style="font-size:20px;width:800px;height:800px">
-<h1>Home</h1>
-Help the government solve real world problems. Contribute to open source projects, Comming up with great ideas!
-Cloudfoundry is working to change the way cities work through technology and public service. You can  contribute to make a difference.
-Take part in the 2 week contributing code sprint and make a difference ! 
-For more details visit the rules page .
-</div>
+<%= render  :partial => "partials/home"%>
 
 <br>
 
-<div class="bootcamp" style="font-size:20px;width:800px;height:800px">
-  <h1>Bootcamp </h1>
-   The web applications built for the contributing code sprint are to be deployed on cloudfoundry.(PASS). Bootcamp is the ideal place to come and learn about the latest developments in web applications and to deploy your awesome web applications on cloudfoundry. Please check the schedule for more details.
-</div>
+<%= render  :partial => "partials/bootcamp"%>
 
 <br>
 
-<div class="rules" style="font-size:20px;width:800px;height:800px">
-<h1>Rules </h1>
-<ul>
-  <li>Its a two week code sprint</li>
-  <li>Themes will be told on the day on bootcamp</li>
-  <li>Each team will given a git repo to push the code</li>
-  <li>Teams can start coding once the git repo is given</li>
-  <li>Apps are to be deployed on cloudfoundry</li>
-  <li>Teams showing up on July 28th for the last 12 hr hacking are only eligible for prizes </li>
-  <li>Each team is required to have a maximum of 5 members</li>
-</ul>
-
-</div>
+<%= render  :partial => "partials/rules"%>
 
 <br>
 
-<div class="schedule" style="font-size:20px;width:800px;height:800px">
- <h1>Schedule</h1>
-<h3>Bootcamp July 13,2012 </h3>
-<table border="1">
-  <tr>
-    <th>Time</th>
-    <th>Event</th>
-  </tr>
-  <tr>
-    <td>12:00 - 12:30pm</td>
-    <td>Introduction</td>
-  </tr>
-  <tr>
-    <td>12:30 - 1:30pm</td>
-    <td>CLOUD FOUNDRY BOOTCAMP</td>
-  </tr>
-  <tr>
-    <td>1:30 - 2:00pm</td>
-    <td>Ruby Quick Start</td>
-  </tr>
-  <tr>
-    <td>2:00 - 2:30pm</td>
-    <td>Java/Spring Quick Start</td>
-  </tr>
-  <tr>
-    <td>2:30 - 3:00pm</td>
-    <td>NodeJS Quick Start</td>
-  </tr>
-  <tr>
-    <td>3:00 - 4:00pm</td>
-    <td>Feed Henry/ Mobile Development Quick Start</td>
-  </tr>
-   <tr>
-    <td>4:00 - 4:30pm</td>
-    <td>Contest Rules</td>
-  </tr>
-</table>
-
-<h3>Code Sprint July 28,2012 </h3>
-<table border="1">
-  <tr>
-    <th>Time</th>
-    <th>Event</th>
-  </tr>
-  <tr>
-    <td>09:00am - 09:30am</td>
-    <td>Introduction</td>
-  </tr>
-  <tr>
-    <td>09:30am - 08:00pm</td>
-    <td>Code sprint</td>
-  </tr>
-  <tr>
-    <td>08:00pm - 08:45pm</td>
-    <td>Dinner</td>
-  </tr>
-  <tr>
-    <td>09:00pm - 10:00pm</td>
-    <td>Winners and demo by them</td>
-  </tr>
-</table>
-
-</div>
+<%= render  :partial => "partials/schedule"%>
 
 <br>
 
-<div class="location" style="font-size:20px;width:800px;height:800px">
-<h1>Venue and getting here</h1>
-Info about shuttle goes here ! 
-<br>
-<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=vmware++paloalto&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=48.50801,92.373047&amp;ie=UTF8&amp;hq=vmware++paloalto&amp;hnear=&amp;ll=37.394014,-122.147894&amp;spn=46.890512,92.373047&amp;t=m&amp;z=4&amp;iwloc=A&amp;cid=1482153777868435151&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=vmware++paloalto&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=48.50801,92.373047&amp;ie=UTF8&amp;hq=vmware++paloalto&amp;hnear=&amp;ll=37.394014,-122.147894&amp;spn=46.890512,92.373047&amp;t=m&amp;z=4&amp;iwloc=A&amp;cid=1482153777868435151" style="color:#0000FF;text-align:left">View Larger Map</a></small>
-</div>
+<%= render  :partial => "partials/venue"%>
 
 <br>
 
-<div class="prizes" style="font-size:20px;width:800px;height:800px">
-<h1>Prizes!</h1> 
-<ul>
-  <li>T-Shirts - All interns who stay until 10pm</li>
-  <li>First prize -  MAc book air 13" 3</li>
-  <li>Second prize - iPads - 3</li>
-  <li>Third prize - Github accounts / ipods  3</li>
-  <li>Discount on Cloud Foundry Accounts - All interns who stay until Saturday at 10pm</li>
-</ul>
-</div>
+<%= render  :partial => "partials/prizes"%>
 
 <br>
 
-<div class="teams" style="font-size:20px;width:800px;height:800px">
-  <h1>Create/Join a team</h1>
-<% if current_user.blank? %>
-  Please Login to Create or Join Teams ! 
-<% else %>
-   <% if @owner.blank? %>
-    <%= render  :partial => "partials/create_team"%>
-  <% end %> 
-   <%= render  :partial => "partials/list_teams"%>
-<% end %>
-</div>
-
+<%= render  :partial => "partials/teams"%>
