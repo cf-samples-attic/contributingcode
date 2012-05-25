@@ -28,7 +28,6 @@ class Team < ActiveRecord::Base
        if existing_users.size != emails.size 
           return {:err => "e2", :data => "Unregistered members!"}
        end
-      team.member_count = team.member_count + emails.size()
       if team.save
         TeamMembers.add_members(current_user,team,existing_users) if emails.size != 0 
         return {:err => nil, :data => team}
@@ -36,6 +35,22 @@ class Team < ActiveRecord::Base
         return {:err => "e3", :data => "Error! Please try again later!"}
       end
     end
+
+
+  # user leaves team 
+  # Remove team_member
+  # decrease count in team 
+  # Email owner 
+  def leave_team(current_user)
+    team_member = TeamMembers.where(:user_id => current_user.id).first 
+    if team_members.blank? 
+      return {:err => "e1", :data => "You are not in any team !"}
+    end 
+    team = Team.find(team_member.team_id)
+    team.count = team.count - 1 
+    team_member.delete
+    return {:err => nil, :data => team}
+  end 
 
   end 
 end

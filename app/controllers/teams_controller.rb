@@ -23,4 +23,19 @@ class TeamsController < ApplicationController
   def delete 
   end 
 
+  # User joins existing teams 
+  # 
+  def join
+    raise params.inspect 
+  end 
+
+  def leave
+    team = Team.leave
+     if team[:err].present?
+      render :json => {:err => "e1", :data=> team[:data]} 
+    else 
+      render :json => {:err => nil, :data=> team[:data]} 
+    end
+  end 
+
 end
