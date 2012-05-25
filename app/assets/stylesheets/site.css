@@ -1,3 +1,16 @@
 .content_pos{
    padding:70px 0;
 }
+
+.wdb-social {
+  background: #FFFFFF;
+  border:1px solid #DDDDDD;
+  margin-left: -80px;
+  margin-right: 10px;
+  margin-top: 240px;
+  position: fixed;
+  width: 83px;
+  z-index: 0;
+}
+.wdb-social-box { padding:5px; width:68px; text-align:center;}
+.wdb-social-box-horizontal { padding:5px; width:58px; float:left; text-align:center;}
