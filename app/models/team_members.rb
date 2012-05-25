@@ -1,13 +1,20 @@
 class TeamMembers < ActiveRecord::Base
   class << self 
 
-    def add_members(team_id,uids)
-      puts uids.inspect
-       uids.each do |uid|
-          member = TeamMembers.new(:team_id => team_id, :user_id => uid )
-          member.save
-       end 
-       return true
+    # Add members to teams 
+    # Send them an email to confirm the team
+    def add_members(current_user, team, members)
+      members.each do |user|
+        member = TeamMembers.new
+        member.team_id = team.id
+        member.user_id = user.id
+        member.status = false 
+        member.token = Digest::SHA1.hexdigest([Time.now, user.id, rand].join).slice(0..5)
+        if  member.save
+          Notifier.join_team_email(current_user, team, user, member).deliver
+        end 
+      end 
+      return true
     end 
 
   end 

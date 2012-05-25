@@ -11,13 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120519064210) do
+ActiveRecord::Schema.define(:version => 20120524224840) do
 
   create_table "team_members", :force => true do |t|
     t.integer  "team_id"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.string   "token"
+    t.boolean  "status",     :default => false
   end
 
   create_table "teams", :force => true do |t|

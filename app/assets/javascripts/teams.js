@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-
+    console.log("ko");
     function scrollToElement(selector, callback){
     var animation = {scrollTop: $(selector).offset().top};
     $('html,body').animate(animation, 'slow', 'swing', function() {
@@ -50,7 +50,7 @@ $(document).ready(function(){
             o[obj.name] = obj.value || ''
           }
         });
-        console.log("before");
+        
         $.ajax({
             url: '/teams',
             type: "POST",

@@ -16,4 +16,15 @@ class Notifier < ActionMailer::Base
           :template_name  => 'register' )
   end
 
+
+  def join_team_email(sender,team, user, member)
+    @team = team.name 
+    @sender = sender.name 
+    @token = member.token 
+    mail( :to             => user.email, 
+          :subject        => "Confirm team contributingcode",
+          :template_path  => 'mailer',
+          :template_name  => 'join_team')
+  end
+
 end

@@ -30,7 +30,7 @@ class Team < ActiveRecord::Base
        end
       team.member_count = team.member_count + emails.size()
       if team.save
-        TeamMembers.add_members(team.id,existing_users.collect(&:id)) if emails.size != 0 
+        TeamMembers.add_members(current_user,team,existing_users) if emails.size != 0 
         return {:err => nil, :data => team}
       else 
         return {:err => "e3", :data => "Error! Please try again later!"}

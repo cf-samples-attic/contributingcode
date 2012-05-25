@@ -11,6 +11,9 @@ Tumblrtv::Application.configure do
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
 
+  #defaut url
+  config.action_mailer.default_url_options = {:host => "contributingcode.cloudfoundry.com", :trailing_slash => true}
+
   # Compress JavaScripts and CSS
   config.assets.compress = true
 

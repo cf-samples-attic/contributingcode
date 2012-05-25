@@ -15,4 +15,25 @@ class HomeController < ApplicationController
     redirect_to root_url
   end 
 
+  def accept_team
+    team_member =  TeamMembers.where(:token=>params[:token], :status =>false).first
+    if team_member.present? 
+      team_member.status = true
+      team_member.save
+    end 
+    redirect_to "/"
+  end 
+
+  def decline_team 
+    team_member = TeamMembers.where(:token=>params[:token], :status =>false).first
+    if team_member.present? 
+      team_member.delete
+    end 
+    redirect_to "/"
+  end 
+
+  def leave_team 
+
+  end 
+
 end
