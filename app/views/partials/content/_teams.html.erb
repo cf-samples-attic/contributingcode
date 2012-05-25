@@ -1,12 +1,12 @@
 <div class="teams content_pos" style="font-size:20px;width:800px;height:800px">
   <h1>Create/Join a team</h1>
-<% if current_user.blank? %>
-  Please Login to Create or Join Teams ! 
-<% else %>
-   <% if @owner.blank? %>
-    <%= render  :partial => "partials/create_team"%>
-  <% end %> 
-   <%= render  :partial => "partials/list_teams"%>
-<% end %>
+  <% if current_user.blank? %>
+    Please Login to Create or Join or view your Team ! 
+  <% else %>
+     <% if @owner.blank? %>
+      <%= render  :partial => "partials/create_team"%>
+    <% end %> 
+      <%= render  :partial => "partials/list_teams"%>
+  <% end %>
 </div>
 

@@ -14,6 +14,8 @@ class TeamMembers < ActiveRecord::Base
           Notifier.join_team_email(current_user, team, user, member).deliver
         end 
       end 
+      member = TeamMembers.new(:team_id => team.id, :user_id => current_user.id, :status => true)
+      member.save
       return true
     end 
 

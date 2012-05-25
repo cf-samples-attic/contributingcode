@@ -6,10 +6,10 @@ Tumblrtv::Application.initialize!
 
 
 # ActionMailer::Base.smtp_settings = {
-#   :user_name            => "appcloud",
-#   :password             => "@ppcl0ud",
+#   :user_name            => "mvmware.com776",
+#   :password             => "sharedpass",
 #   :domain               => "cloudfoundry.org",
-#   :address              => "smtp.las01.emcatmos.com",
+#   :address              => "smtp.sendgrid.net",
 #   :port                 => 587,
 #   :authentication       => :plain,
 #   :enable_starttls_auto => false

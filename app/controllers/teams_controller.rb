@@ -1,10 +1,10 @@
 class TeamsController < ApplicationController
  before_filter :require_user
+  
   def new 
   end 
 
   def create 
-    puts params.inspect
     team = Team.create_team(params,current_user)
     if team[:err].present?
       render :json => {:err => "e1", :data=> team[:data]} 
