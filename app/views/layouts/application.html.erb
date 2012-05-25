@@ -2,81 +2,49 @@
 <html>
 <head>
   <title>Contributing code</title>
-  <%= stylesheet_link_tag "application" %>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+  <![endif]-->
+  <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body bgcolor="silver">
-  <div id="fb-root"></div>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '383833141652123', // App ID
-      channelUrl : 'www.contributingcode.cloudfoundry.com', // Channel File
-      status     : true, // check login status
-      cookie     : true, // enable cookies to allow the server to access the session
-      xfbml      : true  // parse XFBML
-    });
+<body>
+  <%= render  :partial => "partials/fb_like" %>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+       <a class="brand" href="/">Contributing CODE</a>         
+        <div class='pull-right' style="font-size: 16px; padding:10px 0;">
+          <% if current_user %>
+            Hi <strong><%= current_user.name %></strong> |
+            <a href="/logout/"> <strong>Logout</strong></a>
+          <% else %>
+            <a href="/auth/github" class="dropdown-toggle"><strong>Sign-in/Register with Github</strong></a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
-    // Additional initialization code here
-  };
-
-  // Load the SDK Asynchronously
-  (function(d){
-     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement('script'); js.id = id; js.async = true;
-     js.src = "//connect.facebook.net/en_US/all.js";
-     ref.parentNode.insertBefore(js, ref);
-   }(document));
-</script>
-
-<h1 align="center">Contributing CODE</h1>
-
-
-<div style="position:fixed;top:400;right:0;padding:20px;">
-<input type="button" class="b1" value="Home"> <br>
-<input type="button" class="b1" value="Bootcamp"> <br>
-<input type="button" class="b1" value="Rules"> <br>
-<input type="button" class="b1" value="Schedule"> <br>
-<input type="button" class="b1" value="Venue"><br> 
-<input type="button" class="b1" value="Prizes"><br>
-<input type="button" class="b1" value="Teams"><br>
-</div>
-
-<div style="position:fixed;top:0;right:0;padding:20px;">
-<% if current_user %>
-  Welcome <%= current_user.name %>!
-  <%= link_to "Logout", logout_path %>
-<% else %>
-  <%= link_to "Sign-in/Register with Github", "/auth/github" %>
-<% end %>
-</div>
-<%= yield %>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<div style="color:#0900C4;position:fixed;bottom:0;" bgcolor="silver">
-<div class="fb-like" data-href="http://contributingcode.cloudfoundry.com" data-send="true" data-width="450" data-show-faces="true"></div>
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://contributingcode.cloudfoundry.com" data-text="@cloudfoundry @cfcodesprint checkout" data-related="cfcodesprint" data-hashtags="contributingcode">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-<!-- Place this tag where you want the +1 button to render -->
-<g:plusone annotation="inline"></g:plusone>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-
-<!-- Place this render call where appropriate -->
-<div> 
+  <div class="container">
+    <div class="row">
+      <div class="span9" >
+        <%= render  :partial => "partials/side_icons" %>
+        <%= yield %>
+      </div>
+      <div class="span3">
+         <%= render  :partial => "partials/share_buttons" %>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
+

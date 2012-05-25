@@ -12,7 +12,7 @@
         <td align='center' style='font-family: Georgia; padding:10px 0 25px; font-size:26px'><%= @sender %> has added you to the team <%= @team %></td>
       </tr>
       <tr>
-        <input type="button" value="Accept"  onclick="window.open(&quot;<%= accept_team_url(@token) %>&quot;);" />
+        <a href='<%=accept_team_url(@token) %>'>Accept</a>
         <a href='<%=decline_team_url(@token) %>'>Decline</a>
       </tr>
       <tr>
