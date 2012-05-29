@@ -11,7 +11,7 @@ class TeamMembers < ActiveRecord::Base
         member.status = false 
         member.token = Digest::SHA1.hexdigest([Time.now, user.id, rand].join).slice(0..5)
         if  member.save
-          Notifier.join_team_email(current_user, team, user, member).deliver
+          Notifier.join_team_email(current_user, team, user, 0).deliver
         end 
       end 
       member = TeamMembers.new(:team_id => team.id, :user_id => current_user.id, :status => true)

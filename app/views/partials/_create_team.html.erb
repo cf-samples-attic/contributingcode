@@ -1,14 +1,15 @@
 <div id="create_team">
+  <br>
 Please Fill with team information 
 <div id='team' class="container ghost-padding">
   <div class="row-fluid">
   <div class="checkform">
-  <%= form_tag teams_path , :id=>"team_form",:class => "formset", :method => "post" %>
+  <%= form_tag teams_path , :name => "team_form", :id=>"team_form",:class => "formset", :method => "post" %>
   
    <div class="control-group">
     <%= label_tag :TeamName, nil, :class => "control-label" %>
     <div class="controls">
-    <%= text_field_tag(:name, nil, :class => "mandatory input-xlarge", "placeholder" => "Team name", "data-error-msg" => "Please enter your first name") %>
+    <%= text_field_tag(:name, nil, :class => "validate input-xlarge", :"data-rules" => "required", :"data-display"=>"Team Name", "placeholder" => "Team name", :"data-name" =>"Team Name", :id=>"Team Name") %>
       <p class="help-block"></p>
     </div>
   </div>
@@ -17,25 +18,25 @@ Please Fill with team information
    <div class='control-group' style='margin-bottom:0'>
     <%= label_tag :add_members, nil, :class => "control-label" %>
     <div class="controls" style='margin-bottom: 10px'>
-      <%= text_field_tag(:emails, nil, :class => "email input-xlarge", "placeholder" => "Email of member 1", "data-error-msg" => "Please enter a valid email address") %>
+      <%= text_field_tag(:emails, nil, :class => "validate input-xlarge", "placeholder" => "Email of member 1", :"data-rules"=> "valid_email", :"data-display"=>"Email", :"data-name" =>"email1", :id=>"email1") %>
       <p class="help-block"></p>
     </div>
   </div>
   <div class='control-group' style='margin-bottom:0'>
     <div class="controls" style='margin-bottom: 10px'>
-      <%= text_field_tag(:emails, nil, :class => "email input-xlarge", "placeholder" => "Email of member 2", "data-error-msg" => "Please enter a valid email address") %>
+      <%= text_field_tag(:emails, nil, :class => "validate input-xlarge", "placeholder" => "Email of member 2", :"data-rules"=> "valid_email", :"data-display"=>"Email",:"data-name" =>"email2", :id=>"email2") %>
       <p class="help-block"></p>
     </div>
   </div>
   <div class='control-group' style='margin-bottom:0'>
     <div class="controls">
-      <%= text_field_tag(:emails, nil, :class => "email input-xlarge", "placeholder" => "Email of member 3", "data-error-msg" => "Please enter a valid email address") %>
-      <p class="help-block">You can do this later, too.</p>
+      <%= text_field_tag(:emails, nil, :class => "validate input-xlarge", "placeholder" => "Email of member 3", :"data-rules"=> "valid_email", :"data-display"=>"Email",:"data-name" =>"email3", :id=>"email3") %>
+      <p class="help-block"></p>
     </div>
   </div>
   
   <div id="my_helper"></div>
-
+<p> You can add members later too.</p>
   <div class="clearfix">
     <div class="input">
       <%= submit_tag "Save", :class => "btn" %>
@@ -47,3 +48,4 @@ Please Fill with team information
 </div>
 </div>
 </div>
+

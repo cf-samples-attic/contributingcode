@@ -4,8 +4,13 @@ class HomeController < ApplicationController
   def index
     if current_user.present?
       @teams = Team.all
-      @owner = Team.where(:owner_id => current_user.id).first 
-    end
+      # Check to determine if the current_ user already is in a team ?
+      @is_member = TeamMembers.where(:user_id => current_user.id, :status => true).first 
+      if @is_member.blank?
+        # collect requests to join if any 
+        @has_requested = TeamMembers.where(:user_id => current_user.id).collect(&:team_id) 
+      end 
+    end 
   end
    
   def update_user

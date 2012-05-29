@@ -37,6 +37,9 @@ $(document).ready(function(){
 
     $("#team_form").submit(function(){
         event.preventDefault();
+        console.log($("#team_form").find(".error").length)
+        if($("#team_form").find(".error").length > 0 )
+            return false
         var o = {}
         formValues = $(this).serializeArray()
         

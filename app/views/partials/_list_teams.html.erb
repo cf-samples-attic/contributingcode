@@ -1,17 +1,21 @@
 <h1> Teams </h1>
 <ul id="teams_list">
-  <% if @owner %> 
+  <% if @is_member.present? %> 
     <% @teams.each do |team| %>
       <li><%= team.name %></li>
-  <% end %>
-
+    <% end %>
   <% else %>
     <% @teams.each do |team| %>
-       <li><%= team.name %>
-        <% if team.member_count < 4 %>
-          <a href= '<%= join_team_path(team) %>' > Join </a>
-        <% end %>
-      </li>
+        <li>
+          <%= team.name %>
+            <% if team.member_count < 4 %>
+              <% if @has_requested.length > 0  && @has_requested.include?(team.id) %>
+                Request pending !
+              <% else %>
+                <a href= '<%= join_team_path(team) %>' > Join </a>
+            <% end %>
+          <% end %>
+        </li>
     <% end %>
   <% end %>
 </ul> 

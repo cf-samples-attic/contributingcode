@@ -15,6 +15,9 @@ class Team < ActiveRecord::Base
     def create_team(params, current_user)
       # return if no name
       return {:err => "e1", :data => "Team name cannot be blank !"} if params[:name].blank?
+      # double check if user is already a part of a team
+      already_member = TeamMembers.where(:user_id=>current_user.id).first
+      return {:err => "e5", :data => "you are already in a Team !"} if already_member.present?
       team = Team.new( 
           :name => params[:name], 
           :owner_id => current_user.id,
@@ -28,8 +31,12 @@ class Team < ActiveRecord::Base
        if existing_users.size != emails.size 
           return {:err => "e2", :data => "Unregistered members!"}
        end
+       # check is already belong to team 
+       members_already = TeamMembers.where(:user_id => existing_users.collect(&:id), :status => true)
+      return {:err => "e4", :data => "Few members already belong to another team !"} if members_already.length > 0
+      # check for save
       if team.save
-        TeamMembers.add_members(current_user,team,existing_users) if emails.size != 0 
+        TeamMembers.add_members(current_user,team,existing_users)
         return {:err => nil, :data => team}
       else 
         return {:err => "e3", :data => "Error! Please try again later!"}
@@ -51,6 +58,29 @@ class Team < ActiveRecord::Base
     team_member.delete
     return {:err => nil, :data => team}
   end 
+
+  # Join team 
+    def join(current_user,team_id)
+      # check if the user is already in a team 
+      member = TeamMembers.where(:user_id => current_user.id, :status => true).first
+      return {:err => "e1", :data => "You are already in a team !"} if member.present?
+      # Get the team record  
+      team = Team.find(team_id)
+      # check if there exists a team with the id in params
+      return {:err => "e2", :data => "No such team !"} if team.blank?
+      # Check for team size
+      return {:err => "e3", :data => "Team has already has four members !"} if team.member_count == 4
+      # Add to team members 
+      team_member = TeamMembers.new(:team_id => team_id, :user_id => current_user.id, :status => false)
+      # save teammember 
+      team_member.save
+      # Query owner user object 
+      owner = User.find(team.owner_id)
+      # Now send an accept email to owner 
+      Notifier.join_team_email(current_user, team, owner, 1).deliver
+      return {:err => nil, :data => team_member}
+    end
+
 
   end 
 end

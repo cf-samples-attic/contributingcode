@@ -26,7 +26,8 @@ class TeamsController < ApplicationController
   # User joins existing teams 
   # 
   def join
-    raise params.inspect 
+    team = Team.join(current_user,params[:id]) 
+    render :json => {:err =>team["err"], :data => team[:data]} 
   end 
 
   def leave

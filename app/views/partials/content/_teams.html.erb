@@ -3,7 +3,7 @@
   <% if current_user.blank? %>
     Please Login to Create or Join or view your Team ! 
   <% else %>
-     <% if @owner.blank? %>
+     <% if @is_member.blank? %>
       <%= render  :partial => "partials/create_team"%>
     <% end %> 
       <%= render  :partial => "partials/list_teams"%>
