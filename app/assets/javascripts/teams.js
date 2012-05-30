@@ -37,7 +37,6 @@ $(document).ready(function(){
 
     $("#team_form").submit(function(){
         event.preventDefault();
-        console.log($("#team_form").find(".error").length)
         if($("#team_form").find(".error").length > 0 )
             return false
         var o = {}
@@ -60,7 +59,7 @@ $(document).ready(function(){
             data: o,
             success: function(response) {
                 if(response.err)
-                  $("#my_helper").html("<p>"+response.data+"</p>")
+                  $("#my_helper").html("<p>"+response.data+"</p>").removeClass("error").addClass("error")
                 else{ 
                     $("#create_team").remove();
                     $("#teams_list").append("<li>"+response.data.name+"</li>");

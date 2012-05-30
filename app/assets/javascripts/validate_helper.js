@@ -17,7 +17,6 @@ validate: function( that, callback ) {
                      display: $el.attr("data-display")
                    })
         })
-        console.log(temp)
         // Create FormValidator object
         var validator = new FormValidator($this.attr('name'), temp, function(errors, event) {
           // Clear all error fields
@@ -25,7 +24,6 @@ validate: function( that, callback ) {
           $this.find(".help-block").html("")
           // Check for errors 
           if(errors.length > 0) {            
-            console.log(errors)
               $.each(errors, function (index, err) {
                 // Displays the erros message in the help-block
                 var $target = $this

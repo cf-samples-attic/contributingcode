@@ -5,6 +5,8 @@
   <% else %>
      <% if @is_member.blank? %>
       <%= render  :partial => "partials/create_team"%>
+    <% else %>
+      <%= render :partial => "partials/team_details" %>
     <% end %> 
       <%= render  :partial => "partials/list_teams"%>
   <% end %>

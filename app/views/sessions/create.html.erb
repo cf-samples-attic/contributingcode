@@ -1,13 +1,14 @@
+<div class="content_pos">
 Please Fill up the form to finish the registraion 
-<div id='pms' class="container ghost-padding">
+<div class="container ghost-padding">
   <div class="row-fluid">
   <div class="checkform">
-  <%= form_tag update_user_path , :class => "formset", :method => "post" %>
+  <%= form_tag update_user_path , :class => "formset",  :name => "register_form", :id=>"register_form", :method => "post" %>
   
    <div class="control-group">
     <%= label_tag :FirstName, nil, :class => "control-label" %>
     <div class="controls">
-    <%= text_field_tag(:name,@user.name,  :class => "mandatory input-xlarge", "data-error-msg" => "Please enter your first name") %>
+    <%= text_field_tag(:name,@user.name,  :class => " input-xlarge") %>
       <p class="help-block"></p>
     </div>
   </div>
@@ -16,7 +17,7 @@ Please Fill up the form to finish the registraion
   <div class="control-group">
     <%= label_tag :Email, nil, :class => "control-label" %>
     <div class="controls">
-      <%= text_field_tag(:email,@user.email, :class => "mandatory input-xlarge", "data-error-msg" => "Please enter your Email") %>
+      <%= text_field_tag(:email,@user.email, :class => "validate input-xlarge", :"data-rules"=> "required|valid_email", :"data-display"=>"Email", :"data-name" =>"email" ) %>
       <p class="help-block"></p>
     </div>
   </div>
@@ -28,8 +29,8 @@ Please Fill up the form to finish the registraion
     </div>
   </div>
 
-
 </div>
 </div>
 </div>
 
+</div>

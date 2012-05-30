@@ -9,6 +9,13 @@ class HomeController < ApplicationController
       if @is_member.blank?
         # collect requests to join if any 
         @has_requested = TeamMembers.where(:user_id => current_user.id).collect(&:team_id) 
+      else  
+        my_team_id = TeamMembers.where(:user_id => current_user.id).first.team_id
+        @my_team = Team.find(my_team_id) 
+        if @my_team.owner_id == current_user.id 
+          owner_id = [current_user.id]
+          @team_members = User.where(:id => (TeamMembers.where(:team_id => @my_team.id).collect(&:user_id) - owner_id))
+        end 
       end 
     end 
   end
