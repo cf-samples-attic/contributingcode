@@ -11,8 +11,10 @@ Tumblrtv::Application.routes.draw do
   
   match '/update/user' => 'home#update_user', :as => 'update_user'
 
-  match '/accept/:token' => 'home#accept_team', :as => 'accept_team'
-  match '/decline/:token' => 'home#decline_team', :as => 'decline_team'
+  match '/accept/:id' => 'teams#accept', :as => 'accept'
+  match '/decline/:id'=> 'teams#decline', :as => 'decline'
+  match '/leave/:id'  => 'teams#leave',  :as =>'leave_team'
+  match '/remove/:id'  =>'teams#remove_member',   :as => 'remove_member'
 
   match '/join/:id' => 'teams#join', :as => 'join_team'
 

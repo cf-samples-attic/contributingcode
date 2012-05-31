@@ -1,6 +1,12 @@
 
 $(document).ready(function(){
     console.log("ko");
+    $.ajaxSetup({
+    headers: {
+      'X-CSRF-Token': jQuery("meta[name='csrf-token']").attr('content')
+    }
+  });
+    
     function scrollToElement(selector, callback){
     var animation = {scrollTop: $(selector).offset().top};
     $('html,body').animate(animation, 'slow', 'swing', function() {
@@ -42,6 +48,21 @@ $(document).ready(function(){
     scrollToElement('.rules');
    })
 
+    
+    $("#delete_team").click(function(){
+      event.preventDefault();
+      console.log("lolsss")
+       $.ajax({
+          url     : $("#delete_team").attr("href")
+        , data    : {}
+        , type    : "DELETE"
+        , success : function (response) {
+               console.log(response.data)
+          }
+        });
+       return
+    })
+  
 
     $("#team_form").submit(function(){
         event.preventDefault();

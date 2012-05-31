@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <table width="100%" style='border: 2px dashed #aaa'>
+      <tr>
+        <td style='padding:5px;'></td>
+      </tr>
+      <tr
+        <td align='center' style='font-family: Georgia; padding:10px 0 25px; font-size:26px'>
+          <%if @type == 0 %>
+            <%= @sender %> has declined your request to join the team <%= @team %>
+          <% elsif @type == 1 %>
+            <%= @sender %> has accepted your request to join your team <%= @team %>
+          <% elsif @type == 2 %>
+            <%= @sender %> has left your team <%= @team %>
+          <% elsif @type == 3 %>
+            <%= @sender %> has removed you from the team <%= @team %>
+          <% else %>
+            <%= @sender %> has deleted the team <%= @team %>. Please join an another team or create one.
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td align='center' style='font-family: Georgia; padding:40px 0 10px; font-size:26px; color: #d04429'>Visit contributingcode.cloudfoundry.com for more information </td>
+      </tr>
+      <tr>
+        <td style='padding:10px;'></td>
+      </tr>
+    </table>
+  </body>
+</html>

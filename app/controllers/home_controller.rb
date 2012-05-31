@@ -12,9 +12,12 @@ class HomeController < ApplicationController
       else  
         my_team_id = TeamMembers.where(:user_id => current_user.id).first.team_id
         @my_team = Team.find(my_team_id) 
+        owner_id = [@my_team.owner_id]
+        @team_members = User.where(:id => (TeamMembers.where(:team_id => @my_team.id, :status => true).collect(&:user_id) - owner_id))
         if @my_team.owner_id == current_user.id 
-          owner_id = [current_user.id]
-          @team_members = User.where(:id => (TeamMembers.where(:team_id => @my_team.id).collect(&:user_id) - owner_id))
+          if @team_members.length < 3 
+            @requests = User.where(:id => (TeamMembers.where(:team_id => @my_team.id, :status=> false).collect(&:user_id)))
+          end
         end 
       end 
     end 
