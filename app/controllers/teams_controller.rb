@@ -20,9 +20,7 @@ class TeamsController < ApplicationController
   def update 
   end 
 
-  def delete 
-  end 
-
+ 
   # User joins existing teams 
   # 
   def join
@@ -59,7 +57,7 @@ class TeamsController < ApplicationController
     team.save
     member = User.find(team_member.user_id)
     # Email member 
-    Notifier.decide_team_email(current_user, team, member, 1).deliver
+    Resque.enqueue(DeleteTeamMailer, current_user.name, team.name, member.email, 1)
     render :json => {:err =>nil, :data => nil} 
   end
 
@@ -71,7 +69,7 @@ class TeamsController < ApplicationController
     render :json => {:err =>"e2", :data => "No such request"} if team_member.blank?
     member = User.find(team_member.user_id)
     team_member.delete
-    Notifier.decide_team_email(current_user, team, member, 0).deliver
+    Resque.enqueue(DecideTeamMailer, current_user.name, team.name, member.email, 0) if member.user_id != current_user.id
     render :json => {:err =>nil, :data => nil} 
   end 
 
@@ -83,7 +81,8 @@ class TeamsController < ApplicationController
     render :json => {:err =>"e3", :data => "No such request"} if team_member.blank?
     member = User.find(team_member.user_id)
     team_member.delete
-    Notifier.decide_team_email(current_user, team, member, 3).deliver
+    team.member_count = team.member_count - 1 
+    Resque.enqueue(DecideTeamMailer, current_user.name, team.name, member.email, 3) 
     render :json => {:err =>nil, :data => nil} 
   end 
 
@@ -93,8 +92,10 @@ class TeamsController < ApplicationController
     render :json => {:err =>"e1", :data => "No such team"} if team.blank?
     team_members = TeamMembers.where(:team_id =>team.id, :status => true)
     team_members.each do |member|
-      #Notifier.decide_team_email(current_user, team, member, 4).deliver
-      member.delete
+      to_email = User.find(member.user_id).email
+      # send email to all except owner
+      Resque.enqueue(DecideTeamMailer, current_user.name, team.name, to_email, 4) if member.user_id != current_user.id
+    member.delete
     end
     team.delete
     render :json => {:err =>nil, :data => "Deleted!"} 

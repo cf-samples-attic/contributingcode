@@ -26,7 +26,7 @@ class HomeController < ApplicationController
   def update_user
     user = User.update_info(params, current_user)
     user = user[:data]
-    Notifier.register_email(user.name, user.email).deliver
+    Resque.enqueue(RegisterMailer, user.id)
     redirect_to root_url
   end 
 

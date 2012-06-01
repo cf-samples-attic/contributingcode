@@ -66,7 +66,7 @@ class Team < ActiveRecord::Base
       team.save
       # email
       owner = User.find(team.owner_id)
-      Notifier.decide_team_email(current_user, team, owner, 2).deliver
+      Resque.enqueue(DecideTeamMailer, current_user.name, team.name, owner.email, 2)
       return {:err => nil, :data => team}
     end 
 
@@ -88,7 +88,7 @@ class Team < ActiveRecord::Base
       # Query owner user object 
       owner = User.find(team.owner_id)
       # Now send an accept email to owner 
-      Notifier.join_team_email(current_user, team, owner, 1).deliver
+      Resque.enqueue(RequestMailer, current_user.name, team.name, owner.email, 1)
       return {:err => nil, :data => team_member}
     end
 

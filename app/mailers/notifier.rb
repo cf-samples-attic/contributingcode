@@ -20,12 +20,12 @@ class Notifier < ActionMailer::Base
   #reused method for join a team/ Add member
   # type = 1 => join
   # type = 0 => added by owner
-  def join_team_email(sender, team, user, type)
+  def join_team_email(sender_name, team_name, user_email, type)
     @type = type
-    @team = team.name 
-    @sender = sender.name  
+    @team = team_name 
+    @sender = sender_name  
 
-    mail( :to             => user.email, 
+    mail( :to             => user_email, 
           :subject        => "Confirm team contributingcode",
           :template_path  => 'mailer',
           :template_name  => 'join_team')
@@ -37,10 +37,10 @@ class Notifier < ActionMailer::Base
   #type 2 leaves team
   #type 3 owner removes an accepted member
   #type 4 owner deletes team
-  def decide_team_email(sender, team, user, type)
+  def decide_team_email(sender_name, team_name, to_email, type)
     @type = type
-    @team = team.name 
-    @sender = sender.name
+    @team = team_name 
+    @sender = sender_name
     if type == 0 
       subject = "Request to join team was declined!"  
     elsif type == 1
@@ -52,7 +52,7 @@ class Notifier < ActionMailer::Base
     else 
       subject = "The owener deleted your team!" 
     end
-    mail( :to             => user.email, 
+    mail( :to             => to_email, 
           :subject        => subject,
           :template_path  => 'mailer',
           :template_name  => 'decide_team')

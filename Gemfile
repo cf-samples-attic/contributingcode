@@ -13,3 +13,5 @@ gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'omniauth-github'
 
+gem 'resque'
+
