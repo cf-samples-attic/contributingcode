@@ -1,60 +1,41 @@
 class HomeController < ApplicationController
 
 
+  # Landing page 
+  # Gather all info if user is logged in 
+  # Lists teams
   def index
     if current_user.present?
       @teams = Team.all
       # Check to determine if the current_ user already is in a team ?
-      @is_member = TeamMembers.where(:user_id => current_user.id, :status => true).first 
+      @is_member = current_user.team_member
       if @is_member.blank?
         # collect requests to join if any 
-        @has_requested = TeamMembers.where(:user_id => current_user.id).collect(&:team_id) 
+        @requested_teams = current_user.join_requests.collect(&:id)
       else  
-        my_team_id = TeamMembers.where(:user_id => current_user.id).first.team_id
-        @my_team = Team.find(my_team_id) 
-        owner_id = [@my_team.owner_id]
-        @team_members = User.where(:id => (TeamMembers.where(:team_id => @my_team.id, :status => true).collect(&:user_id) - owner_id))
-        if @my_team.owner_id == current_user.id 
-          if @team_members.length < 3 
-            @requests = User.where(:id => (TeamMembers.where(:team_id => @my_team.id, :status=> false).collect(&:user_id)))
-          end
+        # Fined the current user's team
+        @my_team = Team.find(@is_member.team_id) 
+        # Push into array to remove from list of team members 
+        owner = [@is_member]
+        # REmove owner 
+        @team_members = @my_team.team_members - owner
+        # To show team join requests to owner alone 
+        if @my_team.owner_id == current_user.id
+          @requests = @my_team.join_requests
         end 
       end 
     end 
   end
    
+
+  # Update user info as soon as the first github authorization occurs 
+  # User submits email 
+  # optionally avatar 
   def update_user
     user = User.update_info(params, current_user)
     user = user[:data]
     Resque.enqueue(RegisterMailer, user.id)
     redirect_to root_url
-  end 
-
-
-  # Click form accept in email brings here 
-  def accept_team
-    team_member =  TeamMembers.where(:token=>params[:token], :status =>false).first
-    if team_member.present? 
-      team = Team.find(team_member.team_id)
-      if team.member_count < 4
-        team_member.status = true
-        team_member.save
-        team.member_count = team.member_count+1
-        team.save
-      else 
-        team_member.delete
-      end 
-    end 
-    redirect_to "/"
-  end 
-
-  # click from decline in email brings here 
-  def decline_team 
-    team_member = TeamMembers.where(:token=>params[:token], :status =>false).first
-    if team_member.present? 
-      team_member.delete
-    end 
-    redirect_to "/"
-  end 
+  end  
 
 end

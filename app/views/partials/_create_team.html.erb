@@ -7,9 +7,17 @@ Please Fill with team information
   <%= form_tag teams_path , :name => "team_form", :id=>"team_form",:class => "formset", :method => "post" %>
   
    <div class="control-group">
-    <%= label_tag :TeamName, nil, :class => "control-label" %>
+    <%= label_tag :"Team Name", nil, :class => "control-label" %>
     <div class="controls">
     <%= text_field_tag(:name, nil, :class => "validate input-xlarge", :"data-rules" => "required", :"data-display"=>"Team Name", "placeholder" => "Team name", :"data-name" =>"Team Name", :id=>"Team Name") %>
+      <p class="help-block"></p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= label_tag :"Team Description", nil, :class => "control-label"%>
+    <div class="controls">
+    <%= text_area_tag(:desc, nil, :class => " input-xlarge") %>
       <p class="help-block"></p>
     </div>
   </div>

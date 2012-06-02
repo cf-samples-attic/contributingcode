@@ -1,20 +1,18 @@
 ---
 applications:
   .:
-    name: ccworker
+    name: contributingcode
     framework:
-      name: standalone
+      name: rails3
       info:
-        mem: 64M
-        description: Standalone Application
+        mem: 256M
+        description: Rails Application
         exec: 
-    runtime: ruby19
-    command: ! ' bundle exec rake VERBOSE=true QUEUE=''*'' resque:work'
-    url: 
-    mem: 256M
+    url: ${name}.${target-base}
+    mem: 512M
     instances: 1
     services:
-      ccque:
-        type: redis
       cf:
         type: mysql
+      ccque:
+        type: redis

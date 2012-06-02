@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TeamMemberTest < ActiveSupport::TestCase
+class JoinRequestTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -11,21 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120524224840) do
+ActiveRecord::Schema.define(:version => 20120602020727) do
+
+  create_table "join_requests", :force => true do |t|
+    t.string   "user_handle"
+    t.integer  "team_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "team_members", :force => true do |t|
     t.integer  "team_id"
     t.integer  "user_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.string   "token"
-    t.boolean  "status",     :default => false
+    t.string   "user_handle"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "teams", :force => true do |t|
     t.string   "name"
     t.integer  "owner_id"
+    t.string   "owner_handle"
     t.integer  "member_count"
+    t.string   "desc"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -35,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20120524224840) do
     t.string   "name"
     t.string   "email"
     t.string   "handle"
+    t.string   "avatar"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

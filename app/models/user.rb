@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_one :team_member
+  has_many :join_requests
+
   class << self 
 
     # Create user with github info 

@@ -1,10 +1,9 @@
 class Team < ActiveRecord::Base
+  has_many :team_members, :dependent => :destroy
+  has_many :join_requests, :dependent => :destroy
   class << self 
 
     # Create New Team
-    # @date 05/21/2012 
-    # @author Magil
-    #
     # <b>Expects</b>
     # * <em>params</em> Teamname and member's email 
     # * <em>current_user</em> user id
@@ -16,11 +15,13 @@ class Team < ActiveRecord::Base
       # return if no name
       return {:err => "e1", :data => "Team name cannot be blank !"} if params[:name].blank?
       # double check if user is already a part of a team
-      already_member = TeamMembers.where(:user_id=>current_user.id, :status => true).first
+      already_member = current_user.team_member
       return {:err => "e5", :data => "you are already in a Team !"} if already_member.present?
       team = Team.new( 
           :name => params[:name], 
+          :desc => params[:desc],
           :owner_id => current_user.id,
+          :owner_handle => current_user.handle,
           :member_count => 1)
       # sanitize emails (trim whitespaces and split by comman)
       emails = params[:emails].compact.reject(&:blank?).uniq
@@ -32,16 +33,13 @@ class Team < ActiveRecord::Base
           return {:err => "e2", :data => "Unregistered members!"}
        end
        # check is already belong to team 
-       members_already = TeamMembers.where(:user_id => existing_users.collect(&:id), :status => true)
+       members_already = TeamMember.where(:user_id => existing_users.collect(&:id))
       return {:err => "e4", :data => "Few members already belong to another team !"} if members_already.length > 0
       # check for save
       if team.save
         # Delete previous requests
-        my_requests = TeamMembers.where(:user_id=>current_user.id)
-        my_requests.each do |request|
-          request.delete
-        end
-        TeamMembers.add_members(current_user,team,existing_users)
+        current_user.join_requests.delete
+        TeamMember.add_members(current_user,team,existing_users)
         return {:err => nil, :data => team}
       else 
         return {:err => "e3", :data => "Error! Please try again later!"}
@@ -55,7 +53,7 @@ class Team < ActiveRecord::Base
     # Email owner 
     def leave_team(current_user)
       # Get the member info 
-      team_member = TeamMembers.where(:user_id=>current_user.id, :status => true).first
+      team_member = current_user.team_member
       # return error if user has no team
       render :json => {:err =>"e1", :data => "Invalid request"} if team_member.blank? 
       # Find the team
@@ -71,9 +69,10 @@ class Team < ActiveRecord::Base
     end 
 
     # Join team 
+    # 
     def join(current_user,team_id)
       # check if the user is already in a team 
-      member = TeamMembers.where(:user_id => current_user.id, :status => true).first
+      member = current_user.team_member
       return {:err => "e1", :data => "You are already in a team !"} if member.present?
       # Get the team record  
       team = Team.find(team_id)
@@ -82,16 +81,15 @@ class Team < ActiveRecord::Base
       # Check for team size
       return {:err => "e3", :data => "Team has already has four members !"} if team.member_count == 4
       # Add to team members 
-      team_member = TeamMembers.new(:team_id => team_id, :user_id => current_user.id, :status => false)
+      join_request = JoinRequest.new(:team_id => team_id, :user_id => current_user.id, :user_handle => current_user.handle)
       # save teammember 
-      team_member.save
+      join_request.save
       # Query owner user object 
       owner = User.find(team.owner_id)
       # Now send an accept email to owner 
       Resque.enqueue(RequestMailer, current_user.name, team.name, owner.email, 1)
-      return {:err => nil, :data => team_member}
+      return {:err => nil, :data => join_request}
     end
-
 
   end 
 end

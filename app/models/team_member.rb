@@ -1,20 +1,19 @@
-class TeamMembers < ActiveRecord::Base
+class TeamMember < ActiveRecord::Base
   class << self 
 
     # Add members to teams 
     # Send them an email to confirm the team
     def add_members(current_user, team, members)
       members.each do |user|
-        member = TeamMembers.new
+        member = TeamMember.new
         member.team_id = team.id
         member.user_id = user.id
-        member.status = false 
-        member.token = Digest::SHA1.hexdigest([Time.now, user.id, rand].join).slice(0..5)
+        member.user_handle = user.handle 
         if  member.save
           Resque.enqueue(RequestMailer,current_user.name,team.name,user.email,0)
         end 
       end 
-      member = TeamMembers.new(:team_id => team.id, :user_id => current_user.id, :status => true)
+      member = TeamMember.new(:team_id => team.id, :user_id => current_user.id, :user_handle => current_user.handle)
       member.save
       return true
     end 
