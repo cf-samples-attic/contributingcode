@@ -10,7 +10,7 @@
   <h3>Requests</h3>
   <ul>
     <% @requests.each do |request| %>
-      <li> <a href='<%= get_url(request.user_handle) %>'> <%= request.user_handle %></a> <a href='<%= accept_path(request.id) %>' class='btn'>Accept</a> <a href='<%= decline_path(request.id) %>' class='btn'>Decline</a></li>
+      <li> <a href='<%= get_url(request.user_handle) %>'> <%= request.user_handle %></a> <a href='<%= accept_path(request.user_id) %>' class='btn'>Accept</a> <a href='<%= decline_path(request.user_id) %>' class='btn'>Decline</a></li>
     <% end %>
   </ul>
   <a href='<%= team_path(@my_team) %>' id="delete_team" class='btn'>Delete team</a>

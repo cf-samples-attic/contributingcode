@@ -1,4 +1,5 @@
 class Team < ActiveRecord::Base
+  belongs_to :user 
   has_many :team_members, :dependent => :destroy
   has_many :join_requests, :dependent => :destroy
   class << self 
