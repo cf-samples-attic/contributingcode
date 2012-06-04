@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   has_one :team_member
   has_many :join_requests
-  has_one :team, :foreign_key => 'owner_id'
+  has_one :owned_team, :foreign_key => 'owner_id', :class_name => 'Team'
+  has_one :team, :through => :team_member
   class << self 
 
     # Create user with github info 

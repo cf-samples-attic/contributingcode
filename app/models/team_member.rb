@@ -1,4 +1,8 @@
 class TeamMember < ActiveRecord::Base
+  
+  belongs_to :user
+  belongs_to :team
+
   class << self 
 
     # Add members to teams 

@@ -15,3 +15,7 @@ gem 'omniauth-github'
 
 gem 'resque'
 
+gem 'carrierwave' , '0.6.1'
+gem 'carrierwave-mongoid', :require => "carrierwave/mongoid"
+gem 'bson_ext'
+

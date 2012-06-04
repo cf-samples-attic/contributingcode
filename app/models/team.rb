@@ -2,6 +2,10 @@ class Team < ActiveRecord::Base
   belongs_to :user 
   has_many :team_members, :dependent => :destroy
   has_many :join_requests, :dependent => :destroy
+
+  mount_uploader :image, TeamImageUploader
+
+
   class << self 
 
     # Create New Team
@@ -23,24 +27,28 @@ class Team < ActiveRecord::Base
           :desc => params[:desc],
           :owner_id => current_user.id,
           :owner_handle => current_user.handle,
-          :member_count => 1)
+          :member_count => 1,
+          :image => params[:image])
       # sanitize emails (trim whitespaces and split by comman)
-      emails = params[:emails].compact.reject(&:blank?).uniq
+     # emails = params[:emails].compact.reject(&:blank?).uniq
       # remove current user 
-      emails.delete(current_user.email)
+      #emails.delete(current_user.email)
       # Find if all emails are registered users 
-      existing_users = User.where(:email => emails) 
-       if existing_users.size != emails.size 
-          return {:err => "e2", :data => "Unregistered members!"}
-       end
-       # check is already belong to team 
-       members_already = TeamMember.where(:user_id => existing_users.collect(&:id))
-      return {:err => "e4", :data => "Few members already belong to another team !"} if members_already.length > 0
-      # check for save
+      # existing_users = User.where(:email => emails) 
+      #  if existing_users.size != emails.size 
+      #     return {:err => "e2", :data => "Unregistered members!"}
+      #  end
+      #  # check is already belong to team 
+      #  members_already = TeamMember.where(:user_id => existing_users.collect(&:id))
+      # return {:err => "e4", :data => "Few members already belong to another team !"} if members_already.length > 0
+      # # check for save
       if team.save
+        member = TeamMember.new(:team_id => team.id, :user_id => current_user.id, :user_handle => current_user.handle)
+        member.save
+      
         # Delete previous requests
         current_user.join_requests.delete
-        TeamMember.add_members(current_user,team,existing_users)
+        # TeamMember.add_members(current_user,team,existing_users)
         return {:err => nil, :data => team}
       else 
         return {:err => "e3", :data => "Error! Please try again later!"}
@@ -96,7 +104,7 @@ class Team < ActiveRecord::Base
     def accept(params, current_user) 
       return { :err=>"e1", :data => "Invalid request!" } if params[:id].blank?
       # Fetch to check if owner 
-      team = current_user.team
+      team = current_user.owned_team
       # check if team exists
       return {:err =>"e1", :data => "No such team"} if team.blank?
       # check team capacity 
@@ -129,7 +137,7 @@ class Team < ActiveRecord::Base
       # check for blank id 
       render :json => { :err=>"e1", :data => "Invalid request!" } if params[:id].blank?
       # fetch the team 
-      team = current_user.team
+      team = current_user.owned_team
       return {:err =>"e1", :data => "No such team"} if team.blank?
       # Fetch the request
       join_request = JoinRequest.where(:user_id=>params[:id], :team_id =>team.id).first
@@ -147,7 +155,7 @@ class Team < ActiveRecord::Base
     # Remove member from team 
     def remove_memeber(params, current_user)
       return { :err=>"e1", :data => "Invalid request!" } if params[:id].blank?
-      team = current_user.team
+      team = current_user.owned_team
       return {:err =>"e2", :data => "No such team"} if team.blank?
       # Check if the user is a member of the team 
       team_member = TeamMember.where(:user_id=>params[:id], :team_id =>team.id).first
@@ -164,7 +172,7 @@ class Team < ActiveRecord::Base
     end 
 
     def delete_team(params, current_user) 
-      team = Team.where(:owner_id => current_user.id).first
+      team = current_user.owned_team
       return {:err =>"e1", :data => "No such team"} if team.blank?
       team_members = team.team_members
       # collect all users in team 

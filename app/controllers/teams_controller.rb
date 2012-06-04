@@ -6,6 +6,7 @@ class TeamsController < ApplicationController
 
   # crate a new team 
   def create  
+    puts params.inspect
     team = Team.create_team(params,current_user)
     render :json => {:err =>team["err"], :data => team[:data]} 
   end 
@@ -30,7 +31,7 @@ class TeamsController < ApplicationController
   # A non owner leaves team and an email is sent to notify the owner
   def leave
     team = Team.leave_team(current_user)
-    render :json => {:err => team[:err], :data => [:data]} and return  
+    render :json => {:err => team[:err], :data => team[:data]} and return  
   end 
 
   # Owner of a team accepts the join request 
@@ -38,7 +39,7 @@ class TeamsController < ApplicationController
   # An email is sent to the requester 
   def accept
     team = Team.accept(params,current_user)
-    render :json => {:err => team[:err], :data => [:data]} and return 
+    render :json => {:err => team[:err], :data => team[:data]} and return 
   end
 
 
@@ -47,7 +48,7 @@ class TeamsController < ApplicationController
   # Requestor is notified via email 
   def decline
    team = Team.decline(params, current_user)
-   render :json => {:err => team[:err], :data => [:data]} and return 
+   render :json => {:err => team[:err], :data => team[:data]} and return 
   end 
 
   # Remove a memeber from a team 

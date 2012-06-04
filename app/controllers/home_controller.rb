@@ -14,7 +14,7 @@ class HomeController < ApplicationController
         @requested_teams = current_user.join_requests.collect(&:id)
       else  
         # Fined the current user's team
-        @my_team = Team.find(@is_member.team_id) 
+        @my_team = current_user.team
         # Push into array to remove from list of team members 
         owner = [@is_member]
         # REmove owner 

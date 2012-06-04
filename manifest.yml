@@ -12,7 +12,9 @@ applications:
     mem: 512M
     instances: 1
     services:
-      cf:
-        type: mysql
+      ccmdb:
+        type: mongodb
       ccque:
         type: redis
+      cf:
+        type: mysql

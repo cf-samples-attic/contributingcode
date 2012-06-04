@@ -4,7 +4,7 @@ Please Fill with team information
 <div id='team' class="container ghost-padding">
   <div class="row-fluid">
   <div class="checkform">
-  <%= form_tag teams_path , :name => "team_form", :id=>"team_form",:class => "formset", :method => "post" %>
+  <%= form_tag teams_path , :name => "team_form", :id=>"team_form",:class => "formset", :method => "post" ,  :multipart => true do %>
   
    <div class="control-group">
     <%= label_tag :"Team Name", nil, :class => "control-label" %>
@@ -36,6 +36,7 @@ Please Fill with team information
       <p class="help-block"></p>
     </div>
   </div>
+
   <div class='control-group' style='margin-bottom:0'>
     <div class="controls">
       <%= text_field_tag(:emails, nil, :class => "validate input-xlarge", "placeholder" => "Email of member 3", :"data-rules"=> "valid_email", :"data-display"=>"Email",:"data-name" =>"email3", :id=>"email3") %>
@@ -43,6 +44,15 @@ Please Fill with team information
     </div>
   </div>
   
+
+  <div class='control-group' style='margin-bottom:0'>
+    <div class="controls">
+      <%= file_field_tag :image, :class => "medium", :size => "30" %>
+     <p class="help-block"></p>
+    </div>
+  </div>
+  
+
   <div id="my_helper"></div>
 <p> You can add members later too.</p>
   <div class="clearfix">
@@ -50,8 +60,7 @@ Please Fill with team information
       <%= submit_tag "Save", :class => "btn" %>
     </div>
   </div>
-  
-
+<% end %>
 </div>
 </div>
 </div>
