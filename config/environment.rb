@@ -4,7 +4,6 @@ require File.expand_path('../application', __FILE__)
 # Initialize the rails application
 Tumblrtv::Application.initialize!
 
-
 # ActionMailer::Base.smtp_settings = {
 #   :user_name            => "mvmware.com776",
 #   :password             => "sharedpass",
