@@ -1,10 +1,10 @@
 class Team < ActiveRecord::Base
-   require 'carrierwave/orm/activerecord'
   belongs_to :user 
+
   has_many :team_members, :dependent => :destroy
   has_many :join_requests, :dependent => :destroy
 
-  mount_uploader :image, TeamImageUploader
+  
 
 
   class << self 
@@ -31,18 +31,18 @@ class Team < ActiveRecord::Base
           :member_count => 1,
           :image => params[:image])
       # sanitize emails (trim whitespaces and split by comman)
-     # emails = params[:emails].compact.reject(&:blank?).uniq
+      emails = params[:emails].compact.reject(&:blank?).uniq
       # remove current user 
-      #emails.delete(current_user.email)
+      emails.delete(current_user.email)
       # Find if all emails are registered users 
-      # existing_users = User.where(:email => emails) 
-      #  if existing_users.size != emails.size 
-      #     return {:err => "e2", :data => "Unregistered members!"}
-      #  end
-      #  # check is already belong to team 
-      #  members_already = TeamMember.where(:user_id => existing_users.collect(&:id))
-      # return {:err => "e4", :data => "Few members already belong to another team !"} if members_already.length > 0
-      # # check for save
+      existing_users = User.where(:email => emails) 
+      if existing_users.size != emails.size 
+        return {:err => "e2", :data => "Unregistered members!"}
+      end
+      # check is already belong to team 
+      members_already = TeamMember.where(:user_id => existing_users.collect(&:id))
+      return {:err => "e4", :data => "Few members already belong to another team !"} if members_already.length > 0
+      # check for save
       if team.save
         member = TeamMember.new(:team_id => team.id, :user_id => current_user.id, :user_handle => current_user.handle)
         member.save

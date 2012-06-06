@@ -9,7 +9,7 @@ Tumblrtv::Application.routes.draw do
   match '/login' => 'sessions#new', :as => :login
   match '/logout' => 'sessions#destroy', :as => :logout
   
-  match '/update/user' => 'home#update_user', :as => 'update_user'
+  match '/update/user/:token' => 'home#update_user', :as => 'update_user'
 
   match '/accept/:id' => 'teams#accept', :as => 'accept'
   match '/decline/:id'=> 'teams#decline', :as => 'decline'

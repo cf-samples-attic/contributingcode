@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120604192110) do
+ActiveRecord::Schema.define(:version => 20120606002418) do
 
   create_table "join_requests", :force => true do |t|
     t.string   "user_handle"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20120604192110) do
     t.string   "avatar"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "token"
   end
 
 end

@@ -1,7 +1,4 @@
 <h2> My team </h2>
-<div stypr="width:200px;height100px;">
-<img src='<%= @my_team.image_url %>' >
-</div>
 <h3><%= @my_team.name %></h3><br>
 <% if @my_team.owner_id == current_user.id %>
   <ul>
