@@ -4,4 +4,12 @@
   <%= render  :partial => "partials/content/schedule"%>
   <%= render  :partial => "partials/content/venue"%>
   <%= render  :partial => "partials/content/prizes"%>
-  <%= render  :partial => "partials/content/teams"%>
+  <%= render  :partial => "partials/main/my_team"%>
+  <%= render  :partial => "partials/main/teams"%>
+  <%= render  :partial => "partials/main/contributors"%>
+
+
+
+<% if (params[:action] == "create" || params[:action] == "create_user")&& current_user.blank? %>
+  <%= render :partial => "users/new" %>
+<% end %>

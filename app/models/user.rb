@@ -3,31 +3,12 @@ class User < ActiveRecord::Base
   has_many :join_requests
   has_one :owned_team, :foreign_key => 'owner_id', :class_name => 'Team'
   has_one :team, :through => :team_member
-  class << self 
+  has_many :add_requests
+  
+  validates_presence_of   :handle
+  validates_presence_of   :email , :message => "Email required!"
+  validates_uniqueness_of :email
+  validates_format_of     :email, :with => %r{.+@.+\..+}
 
-    # Create user with github info 
-    def create_with_omniauth(auth)
-      create! do |user|
-        user.uid = auth["uid"]
-        user.name = auth["info"]["name"]
-        user.email = ""
-        user.handle = auth["extra"]["raw_info"]["login"]
-      end
-    end
 
-    # Update user info after registering 
-    def update_info(params, current_user)
-      user = current_user
-      user.name = params[:name]
-      user.email = params[:email]
-      if user.save
-        #return
-        return {:err => nil, :data => user}
-      else 
-        # else
-        return {:err => "e2", :data => nil}
-      end 
-    end 
-
-  end
 end

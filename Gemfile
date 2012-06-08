@@ -15,6 +15,10 @@ gem 'omniauth-github'
 
 gem 'resque'
 
-gem 'carrierwave', '0.6.1'
-gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'bson_ext'
+
+
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+  gem "webrat"
+end
