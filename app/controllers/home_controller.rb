@@ -1,15 +1,20 @@
 class HomeController < ApplicationController
 
-
   # Landing page 
   # Gather all info if user is logged in 
   # Lists teams
   def index
     if current_user.present?
+      # Get all teams
       @teams = Team.all
+      # Get all users
+      @users = User.all
       # Check to determine if the current_ user already is in a team ?
       @is_member = current_user.team_member
       if @is_member.blank?
+        @handles = User.all.collect(&:handle)
+        @handles = @handles.to_s
+        puts @handles.inspect
         # collect requests to join if any 
         @requested_teams = current_user.join_requests.collect(&:id)
       else  
@@ -27,15 +32,4 @@ class HomeController < ApplicationController
     end 
   end
    
-
-  # Update user info as soon as the first github authorization occurs 
-  # User submits email 
-  # optionally avatar 
-  def update_user
-    user = User.update_info(params, current_user)
-    user = user[:data]
-    Resque.enqueue(RegisterMailer, user.id)
-    redirect_to root_url
-  end  
-
 end

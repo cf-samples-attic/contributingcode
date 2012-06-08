@@ -1,0 +1,27 @@
+<div class="contributors content_pos" style="font-size:20px;width:800px;height:800px">
+  <% if current_user.blank? %>
+  <h3> Login to view teams </h3>
+<% else %>
+<div id="contributorsCarousel" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="active item">
+      <div class="hero-unit">
+        <h1> Contributors </h1>
+      </div>
+    </div>
+      <% @users.each do |user| %>
+          <div class="item">
+            <div class="hero-unit">
+            <img src="<%= user.avatar %>">
+            <h1><%= user.name %></h1>
+             <a href='<%= add_request_path(user.id) %>' class="btn add">Add</a>
+          </div>
+        </div>
+      <% end %>
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+<% end %>
+</div>

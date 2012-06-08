@@ -1,61 +1,14 @@
 class Team < ActiveRecord::Base
-   require 'carrierwave/orm/activerecord'
   belongs_to :user 
+
   has_many :team_members, :dependent => :destroy
   has_many :join_requests, :dependent => :destroy
 
-  mount_uploader :image, TeamImageUploader
-
-
+  validates_presence_of :name
+  validates_uniqueness_of :name
+  validates_uniqueness_of :owner_id, :message => "Cant own many teams"
+  
   class << self 
-
-    # Create New Team
-    # <b>Expects</b>
-    # * <em>params</em> Teamname and member's email 
-    # * <em>current_user</em> user id
-    #
-    # <b>Returns</b>
-    # * <em>Hash[:err]</em> Error code
-    # * <em>Hash[:data]</em> Team
-    def create_team(params, current_user)
-      # return if no name
-      return {:err => "e1", :data => "Team name cannot be blank !"} if params[:name].blank?
-      # double check if user is already a part of a team
-      already_member = current_user.team_member
-      return {:err => "e5", :data => "you are already in a Team !"} if already_member.present?
-      team = Team.new( 
-          :name => params[:name], 
-          :desc => params[:desc],
-          :owner_id => current_user.id,
-          :owner_handle => current_user.handle,
-          :member_count => 1,
-          :image => params[:image])
-      # sanitize emails (trim whitespaces and split by comman)
-     # emails = params[:emails].compact.reject(&:blank?).uniq
-      # remove current user 
-      #emails.delete(current_user.email)
-      # Find if all emails are registered users 
-      # existing_users = User.where(:email => emails) 
-      #  if existing_users.size != emails.size 
-      #     return {:err => "e2", :data => "Unregistered members!"}
-      #  end
-      #  # check is already belong to team 
-      #  members_already = TeamMember.where(:user_id => existing_users.collect(&:id))
-      # return {:err => "e4", :data => "Few members already belong to another team !"} if members_already.length > 0
-      # # check for save
-      if team.save
-        member = TeamMember.new(:team_id => team.id, :user_id => current_user.id, :user_handle => current_user.handle)
-        member.save
-      
-        # Delete previous requests
-        current_user.join_requests.delete
-        # TeamMember.add_members(current_user,team,existing_users)
-        return {:err => nil, :data => team}
-      else 
-        return {:err => "e3", :data => "Error! Please try again later!"}
-      end
-    end
-
 
     # user leaves team 
     # Remove team_member
