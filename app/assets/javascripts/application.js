@@ -5,7 +5,11 @@
 // the compiled file.
 //
 //= require lib/jquery-1.7.1.min.js
+//= require lib/bsmodal.js
+//= require lib/bstypeahead.js
+//= require lib/bscarousel.js
 //= require lib/validate.min.js
 //= require validate_helper.js
 //= require teams.js
+
 

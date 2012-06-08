@@ -16,3 +16,9 @@ gem 'omniauth-github'
 gem 'resque'
 
 gem 'bson_ext'
+
+
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+  gem "webrat"
+end

@@ -1,0 +1,24 @@
+<h2> My team </h2>
+<h3><%= @my_team.name %></h3><br>
+<% if @my_team.owner_id == current_user.id %>
+  <ul>
+   <% @team_members.each do |member| %>
+      <li><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %></a>  <a  href='<%= remove_member_path(member.user_id) %>' class='btn'>Remove member</a> </li>
+   <% end %>
+  </ul>
+  <br>
+  <h3>Requests</h3>
+  <ul>
+    <% @requests.each do |request| %>
+      <li> <a href='<%= get_url(request.user_handle) %>'> <%= request.user_handle %></a> <a href='<%= accept_path(request.user_id) %>' class='btn'>Accept</a> <a href='<%= decline_path(request.user_id) %>' class='btn'>Decline</a></li>
+    <% end %>
+  </ul>
+  <a href='<%= team_path(@my_team) %>' id="delete_team" class='btn'>Delete team</a>
+<% else %>
+  <ul>
+   <% @team_members.each do |member| %>
+      <li><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %> </a></li>
+   <% end %>
+  </ul>
+  <a href='<%= leave_team_path(current_user.id) %>' class='btn'>Leave team</a>
+<% end %> 

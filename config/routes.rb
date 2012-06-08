@@ -8,8 +8,6 @@ Tumblrtv::Application.routes.draw do
 
   match '/login' => 'sessions#new', :as => :login
   match '/logout' => 'sessions#destroy', :as => :logout
-  
-  match '/update/user/:token' => 'home#update_user', :as => 'update_user'
 
   match '/accept/:id' => 'teams#accept', :as => 'accept'
   match '/decline/:id'=> 'teams#decline', :as => 'decline'
@@ -17,7 +15,9 @@ Tumblrtv::Application.routes.draw do
   match '/remove/:id'  =>'teams#remove_member',   :as => 'remove_member'
 
   match '/join/:id' => 'teams#join', :as => 'join_team'
+  match '/add/:id' => 'teams#add_request', :as => 'add_request'
 
   resources :teams
-
+  resources :users
+  
 end

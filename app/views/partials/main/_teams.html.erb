@@ -1,0 +1,25 @@
+<div class="teams content_pos" style="font-size:20px;width:800px;height:800px">
+<% if current_user.blank? %>
+  <h3> Login to view teams </h3>
+<% else %>
+  <div id="myCarousel" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="active item">
+        <div class="hero-unit">
+          <h1> Teams </h1>
+        </div>
+      </div>
+        <% @teams.each do |team| %>
+            <div class="item">
+              <div class="hero-unit">
+              <h1><%= team.name %></h1>
+            </div>
+          </div>
+        <% end %>
+    </div>
+    <!-- Carousel nav -->
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+  </div>
+<% end %>
+</div>

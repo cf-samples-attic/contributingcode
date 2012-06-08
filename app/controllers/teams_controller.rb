@@ -6,9 +6,21 @@ class TeamsController < ApplicationController
 
   # crate a new team 
   def create  
-    puts params.inspect
-    team = Team.create_team(params,current_user)
-    render :json => {:err =>team["err"], :data => team[:data]} 
+    team = Team.new
+    team.name = params[:name] 
+    team.desc = params[:desc]
+    team.owner_id = current_user.id
+    team.owner_handle = current_user.handle
+    team.member_count = 1
+    # check for validations before save
+    if team.save
+      # Create a team memeber 
+      member = TeamMember.new(:team_id => team.id, :user_id => team.owner_id, :user_handle => team.owner_handle)
+      member.save
+      render :json => {:err => nil, :data => team} 
+    else
+      render :json => {:err => "present", :data => team.errors.full_messages.to_s} 
+    end 
   end 
  
   # fetch all teams 
@@ -65,5 +77,23 @@ class TeamsController < ApplicationController
     team = Team.delete_team(params, current_user)
     render :json => {:err => team[:err], :data => [:data]} and return 
   end 
+  
+  # Add request  
+  # Send email to member and wait for conf 
+  def add_request
+    team = current_user.owned_team
+    render :json => {:err => "present", :data => nil} if team.blank?
+    request = AddRequest.new
+    request.team_id = team.id
+    request.user_id = params[:id]
+    request.team_name = team.name
+      if request.save
+        #Resque.enqueue(RequestMailer,current_user.name,team.name,user.email,0)
+        render :json => {:err => nil, :data => request}
+      else  
+        render :json => {:err => "present", :data => request.errors.full_messages.to_s}
+      end 
+  end 
 
 end
+
