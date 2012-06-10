@@ -31,32 +31,6 @@ class TeamsController < ApplicationController
   def update 
   end 
 
- 
-  # User joins existing teams 
-  # 
-  def join
-    team = Team.join(current_user,params[:id]) 
-    render :json => {:err =>team["err"], :data => team[:data]} 
-  end 
-
-  # Owner of a team accepts the join request 
-  # All other join requests are deleted 
-  # An email is sent to the requester 
-  def accept
-    team = Team.accept(params,current_user)
-    render :json => {:err => team[:err], :data => team[:data]} and return 
-  end
-
-
-  # User request is decline by team owner 
-  # That particular join request record is deleted 
-  # Requestor is notified via email 
-  def decline
-   team = Team.decline(params, current_user)
-   render :json => {:err => team[:err], :data => team[:data]} and return 
-  end 
-
-
   # Delete whole team 
   # Inform all members via email 
   def destroy

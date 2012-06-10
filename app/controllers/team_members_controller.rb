@@ -1,5 +1,4 @@
 class TeamMembersController < ApplicationController
-
   
   # Remove a memeber from a team 
   # Can be doen only by the owner 
