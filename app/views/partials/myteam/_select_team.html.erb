@@ -1,0 +1,14 @@
+<ul>
+<% @teams.each do |team| %>
+  <% if team.member_count < 4 %>
+    <li>
+    <%= team.name %>
+    <%  if @requested_teams.include?(team.id) %>
+      Request pending !
+    <% else %>
+      <a href= '<%= join_team_path(team) %>' class="btn selectTeam"> Join </a>
+    <% end %>
+    </li>
+  <% end %>
+<% end %>
+</ul>

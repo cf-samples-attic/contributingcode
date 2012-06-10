@@ -29,7 +29,31 @@ $(document).ready(function(){
       $("#a3").removeClass("hide")
   })
     
-  // DEcide join request 
+  // Join  a team 
+  $(".selectTeam").click(function(e){
+    e.preventDefault();
+    var $this = $(this)
+    console$this
+    bootbox.confirm("Are you sure ?", function(result) {
+      if (!result) {
+        return false
+      }
+      $.ajax({
+        url     : $this.attr("href")
+      , success : function (response) {
+        if(response.err){
+          window.location = "/"
+        }
+        else{
+          $this.html("Request pending !")
+        }
+        }
+      });
+    }); 
+    return false
+  })
+
+  // Decide join request 
   $(".owner_decides").click(function(e){
     e.preventDefault();
     var $this = $(this)
@@ -53,7 +77,7 @@ $(document).ready(function(){
   })
   
 
-  // Make it a normal call with  conf box
+  // Delete team 
   $("#delete_team").click(function(e){
     e.preventDefault();
     bootbox.confirm("Are you sure you want to delete the team ?", function(result) {
@@ -90,10 +114,9 @@ $(document).ready(function(){
           o[obj.name] = obj.value || ''
         }
       });
-      
       $.ajax({
-          url: '/teams',
-          type: "POST",
+          url: $("#team_form").attr('action'),
+          type: $("#team_form").attr('method'),
           data: o,
           success: function(response) {
             if(response.err){

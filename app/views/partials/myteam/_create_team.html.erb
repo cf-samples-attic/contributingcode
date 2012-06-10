@@ -1,13 +1,5 @@
-<a class="btn" data-toggle="modal" href="#newTeamModal" >Create Team</a>
 
-<div class="modal hide" id="newTeamModal">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">×</button>
       <h3>Please complete with team information</h3>
-  </div>
-  <div class="modal-body">
-    <div id="create_team">
-  
       <%= form_tag teams_path , :name => "team_form", :id=>"team_form",:class => "formset", :method => "post" ,  :multipart => true do %>
     
         <div class="control-group">
@@ -54,9 +46,4 @@
           </div>
         </div>
       <% end %>
-    </div>
-  </div>
-</div>
-
-
-
+  

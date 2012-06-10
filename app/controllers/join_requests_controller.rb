@@ -13,7 +13,7 @@ class JoinRequestsController < ApplicationController
     # Check for team size
     render :json => {:err => "e3", :data => "Team has already has four members !"} if team.member_count == 4
     # Add to team members 
-    join_request = JoinRequest.new(:team_id => team_id, :user_id => current_user.id, :user_handle => current_user.handle)
+    join_request = JoinRequest.new(:team_id => team.id, :user_id => current_user.id, :user_handle => current_user.handle)
     # save teammember 
     join_request.save
     # Query owner user object 

@@ -1,8 +1,59 @@
 <div class="general" id="a1">
-<ul>
-  <% @team_members.each do |member| %>
-    <li><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %></a>  <a  href='<%= team_member_path(member.user_id) %>' class='btn removeMember'> Remove member</a> </li>
-  <% end %>
-</ul>
-<a href='<%= team_path(@my_team) %>' id="delete_team" class='btn'>Delete team</a>    
+  <div class="row-fluid">
+    <div class="span6">
+      <%= form_tag team_path(@my_team) , :name => "team_form", :id=>"team_form",:class => "formset", :method => "put" ,  :multipart => true do %>
+    
+        <div class="control-group">
+          <%= label_tag :"Team Name", nil, :class => "control-label" %>
+          <div class="controls">
+            <%= text_field_tag(:name, @my_team.name, :class => "validate input-xlarge", :"data-rules" => "required", :"data-display"=>"Team Name", "placeholder" => "Team name", :"data-name" =>"Team Name", :id=>"Team Name") %>
+            <p class="help-block"></p>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= label_tag :"Team Description", nil, :class => "control-label"%>
+          <div class="controls">
+          <%= text_area_tag(:desc, @my_team.desc, :class => " input-xlarge") %>
+            <p class="help-block"></p>
+          </div>
+        </div>
+
+        <div class='control-group' style='margin-bottom:0'>
+          <%= label_tag :add_members, nil, :class => "control-label" %>
+          <div class="controls" style='margin-bottom: 10px'>
+            <%= text_field_tag(:emails, nil, :class => "validate input-xlarge", "placeholder" => "Email of member 1", :"data-rules"=> "valid_email", :"data-display"=>"Email", :"data-name" =>"email1", :id=>"email1", :"data-provide"=>"typeahead", :"data-source" => @handles ) %>
+            <p class="help-block"></p>
+          </div>
+        </div>
+
+        <div class='control-group' style='margin-bottom:0'>
+          <div class="controls">
+            <%= file_field_tag :image, :class => "medium", :size => "30" %>
+           <p class="help-block"></p>
+          </div>
+        </div>
+    
+        <p> You can add members later too.</p>
+
+        <div class='backend control-group'>
+          <p class="help-block"></p>
+        </div>      
+
+        <div class="clearfix">
+          <div class="input">
+            <%= submit_tag "Save", :class => "btn" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="span6">
+      <ul>
+        <% @team_members.each do |member| %>
+          <li><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %></a>  <a  href='<%= team_member_path(member.user_id) %>' class='btn removeMember'> Remove member</a> </li>
+        <% end %>
+      </ul>
+      <a href='<%= team_path(@my_team) %>' id="delete_team" class='btn'>Delete team</a>    
+    </div>
+  </div>
 </div>

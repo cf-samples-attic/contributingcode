@@ -12,11 +12,11 @@ class HomeController < ApplicationController
       # Check to determine if the current_ user already is in a team ?
       @is_member = current_user.team_member
       if @is_member.blank?
+        # For propmpting to add users (auto complete)
         @handles = User.all.collect(&:handle)
         @handles = @handles.to_s
-        puts @handles.inspect
         # collect requests to join if any 
-        @requested_teams = current_user.join_requests.collect(&:id)
+        @requested_teams = current_user.join_requests.collect(&:team_id)
       else  
         # Fined the current user's team
         @my_team = current_user.team

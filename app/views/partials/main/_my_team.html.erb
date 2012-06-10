@@ -3,8 +3,16 @@
     Please Login to Create or Join or view your Team ! 
   <% else %>
      <% if @is_member.blank? %>
-      <h1>Create/Join a team</h1>
-      <%= render  :partial => "partials/myteam/create_team"%>
+      <div class="row-fluid">
+        <div class="span6">
+          <h1>Create team</h1>
+          <%= render  :partial => "partials/myteam/create_team"%>
+        </div>
+        <div class="span6">
+          <h1>Join team</h1>
+          <%= render  :partial => "partials/myteam/select_team"%>
+        </div>
+      </div>
     <% else %>
       <%= render :partial => "partials/myteam/team_details" %>
     <% end %> 
