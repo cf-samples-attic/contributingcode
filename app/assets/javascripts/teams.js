@@ -29,9 +29,33 @@ $(document).ready(function(){
       $("#a3").removeClass("hide")
   })
     
+  // DEcide join request 
+  $(".owner_decides").click(function(e){
+    e.preventDefault();
+    var $this = $(this)
+    bootbox.confirm("Are you sure ?", function(result) {
+      if (!result) {
+        return false
+      }
+      $.ajax({
+        url     : $this.attr("href")
+      , success : function (response) {
+        if(response.err){
+          window.location = "/"
+        }
+        else{
+          $this.parent().remove()
+        }
+        }
+      });
+    }); 
+    return false
+  })
+  
+
   // Make it a normal call with  conf box
-  $("#delete_team").click(function(){
-    event.preventDefault();
+  $("#delete_team").click(function(e){
+    e.preventDefault();
     bootbox.confirm("Are you sure you want to delete the team ?", function(result) {
       if (!result) {
         return false
@@ -50,8 +74,8 @@ $(document).ready(function(){
   
 
   // Create team form 
-  $("#team_form").submit(function(){
-      event.preventDefault();
+  $("#team_form").submit(function(e){
+      e.preventDefault();
       if($("#team_form").find(".error").length > 0 )
           return false
       var o = {}
@@ -72,7 +96,6 @@ $(document).ready(function(){
           type: "POST",
           data: o,
           success: function(response) {
-            console.log(response)
             if(response.err){
               $('.help-block').last().html(response.data)
               $('.backend').last().addClass("error")      
@@ -88,54 +111,32 @@ $(document).ready(function(){
 
   // Remove member
   $(".removeMember").click(function(){
-      event.preventDefault();
-      bootbox.confirm("Are you sure you want to delete the team member ?", function(result) {
+    event.preventDefault();
+    var $this = $(this)
+    bootbox.confirm("Are you sure you want to delete the team member ?", function(result) {
       if (!result) {
         return false
       } 
+      $.ajax({
+          url: this.href,
+          type: "DELETE",
+          data: {},
+          success: function(response) {
+              if(response.err){
+                window.location = "/"       
+              }
+              else{ 
+                $this.parent().remove()
+             }
+          }
+      });
     });
-      var $this = $(this)
-      $.ajax({
-          url: this.href,
-          type: "DELETE",
-          data: {},
-          success: function(response) {
-            console.log(response)
-              if(response.err){
-                window.location = "/"       
-              }
-              else{ 
-                $this.parent().remove()
-             }
-          }
-      });
-    return false;
+  return false;
   });
 
-  // Accept or Reject memeber request 
-  $(".removeMember").click(function(){
-      event.preventDefault();
-      var $this = $(this)
-      $.ajax({
-          url: this.href,
-          type: "DELETE",
-          data: {},
-          success: function(response) {
-            console.log(response)
-              if(response.err){
-                window.location = "/"       
-              }
-              else{ 
-                $this.parent().remove()
-             }
-          }
-      });
-    return false;
-  });
-
-
-    // For page scrolling 
-    function scrollToElement(selector, callback){
+  
+  // For page scrolling 
+  function scrollToElement(selector, callback){
     var animation = {scrollTop: $(selector).offset().top};
     $('html,body').animate(animation, 'slow', 'swing', function() {
         if (typeof callback == 'function') {
@@ -143,44 +144,44 @@ $(document).ready(function(){
         }
         callback = null;
     });
-    }
+  }
 
     
-   $(".h").click(function(){
+  $(".h").click(function(){
     scrollToElement('.home');
-   })
+  })
 
-    $(".b").click(function(){
+  $(".b").click(function(){
     scrollToElement('.bootcamp');
-   })
+  })
 
-    $(".t").click(function(){
+  $(".t").click(function(){
     scrollToElement('.teams');
-   })
- 
-   $(".p").click(function(){
+  })
+
+  $(".p").click(function(){
     scrollToElement('.prizes');
-   })
+  })
 
-   $(".v").click(function(){
+  $(".v").click(function(){
     scrollToElement('.venue');
-   })
+  })
 
 
-   $(".s").click(function(){
+  $(".s").click(function(){
     scrollToElement('.schedule');
-   })
+  })
 
-   $(".r").click(function(){
+  $(".r").click(function(){
     scrollToElement('.rules');
-   })
+  })
 
-   $(".c").click(function(){
+  $(".c").click(function(){
     scrollToElement('.contributors');
-   })
+  })
 
-   $(".m").click(function(){
+  $(".m").click(function(){
     scrollToElement('.myteam');
-   })
+  })
   
 });

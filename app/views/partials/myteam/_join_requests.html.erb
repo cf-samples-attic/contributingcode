@@ -1,7 +1,7 @@
 <div class="general hide" id="a2">
 <ul class = "requests">
     <% @requests.each do |request| %>
-      <li> <a href='<%= get_url(request.user_handle) %>'> <%= request.user_handle %></a> <a href='<%= accept_path(request.user_id) %>' class='btn'>Accept</a> <a href='<%= decline_path(request.user_id) %>' class='btn'>Decline</a></li>
+      <li> <a href='<%= get_url(request.user_handle) %>'> <%= request.user_handle %></a> <a href='<%= accept_path(request.user_id) %>' class='btn owner_decides'>Accept</a> <a href='<%= decline_path(request.user_id) %>' class='btn owner_decides'>Decline</a></li>
     <% end %>
 </ul>
 </div>
