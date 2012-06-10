@@ -1,0 +1,13 @@
+<div class="general hide" id="a3">
+  <ul>
+    <% @users.each do |user| %>
+      <% if user.team.blank? %>
+        <li>
+          <img src="<%= user.avatar %>">
+          <h3><%= user.handle %></h3>
+          <a href='<%= add_request_path(user.id) %>' class="btn add">Add</a>    
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

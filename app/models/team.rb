@@ -7,29 +7,20 @@ class Team < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
   validates_uniqueness_of :owner_id, :message => "Cant own many teams"
-  
+  validate :user_not_in_a_team
+
+  def user_not_in_a_team
+    user = User.find(owner_id)
+    team = user.team
+    puts team.inspect
+    if team.present?
+     errors.add(:owner_id,"Already in a team")
+    end   
+ end
+
+
   class << self 
 
-    # user leaves team 
-    # Remove team_member
-    # decrease count in team 
-    # Email owner 
-    def leave_team(current_user)
-      # Get the member info 
-      team_member = current_user.team_member
-      # return error if user has no team
-      render :json => {:err =>"e1", :data => "Invalid request"} if team_member.blank? 
-      # Find the team
-      team = Team.where(:id => team_member.team_id).first
-      render :json => {:err =>"e2", :data => "No such team"} if team.blank?
-      team.member_count = team.member_count - 1 
-      team_member.delete
-      team.save
-      # email
-      owner = User.find(team.owner_id)
-      Resque.enqueue(DecideTeamMailer, current_user.name, team.name, owner.email, 2)
-      return {:err => nil, :data => team}
-    end 
 
     # Join team 
     # 
@@ -106,40 +97,6 @@ class Team < ActiveRecord::Base
       return {:err =>nil, :data => team} 
     end 
 
-    # Remove member from team 
-    def remove_memeber(params, current_user)
-      return { :err=>"e1", :data => "Invalid request!" } if params[:id].blank?
-      team = current_user.owned_team
-      return {:err =>"e2", :data => "No such team"} if team.blank?
-      # Check if the user is a member of the team 
-      team_member = TeamMember.where(:user_id=>params[:id], :team_id =>team.id).first
-      return {:err =>"e3", :data => "No such memeber in team"} if team_member.blank?
-      # Find member to email 
-      member = User.find(team_member.user_id)
-      team_member.delete
-      # Decrease team count and save 
-      team.member_count = team.member_count - 1 
-      team.save
-      # EMail user as removed form team 
-      Resque.enqueue(DecideTeamMailer, current_user.name, team.name, member.email, 3) 
-      return {:err =>nil, :data => team} 
-    end 
-
-    def delete_team(params, current_user) 
-      team = current_user.owned_team
-      return {:err =>"e1", :data => "No such team"} if team.blank?
-      team_members = team.team_members
-      # collect all users in team 
-      users = User.where(:id => team_members.collect(&:user_id)).index_by(&:id)
-      puts users.inspect
-      # Send email to each memeber
-      team_members.each do |member|
-        # send email to all except owner
-        Resque.enqueue(DecideTeamMailer, current_user.name, team.name, users[member.user_id].email, 4) if member.user_id != current_user.id
-      end
-      team.destroy
-      return {:err =>nil, :data => "Deleted!"} 
-    end
    
   end 
 end

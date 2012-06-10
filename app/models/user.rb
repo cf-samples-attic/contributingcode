@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :join_requests
   has_one :owned_team, :foreign_key => 'owner_id', :class_name => 'Team'
   has_one :team, :through => :team_member
-  has_many :add_requests
+  
   
   validates_presence_of   :handle
   validates_presence_of   :email , :message => "Email required!"

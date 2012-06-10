@@ -1,0 +1,8 @@
+<div class="general" id="a1">
+<ul>
+  <% @team_members.each do |member| %>
+    <li><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %></a>  <a  href='<%= team_member_path(member.user_id) %>' class='btn removeMember'> Remove member</a> </li>
+  <% end %>
+</ul>
+<a href='<%= team_path(@my_team) %>' id="delete_team" class='btn'>Delete team</a>    
+</div>

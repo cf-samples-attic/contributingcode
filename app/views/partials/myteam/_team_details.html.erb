@@ -1,0 +1,17 @@
+<h2> My team </h2>
+<h3><%= @my_team.name %></h3><br>
+<% if @my_team.owner_id == current_user.id %>
+  <a class="btn primary team_btn" id="b1">My Team</a>
+  <a class="btn team_btn" id="b2">Join Requests</a>
+  <a class="btn team_btn" id="b3">Add Members</a>
+    <%= render :partial => "partials/myteam/edit_team"%>
+    <%= render :partial => "partials/myteam/join_requests"%>
+    <%= render :partial => "partials/myteam/add_members"%>
+<% else %>
+  <ul>
+   <% @team_members.each do |member| %>
+      <li><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %> </a></li>
+   <% end %>
+  </ul>
+  <a href='<%= leave_team_path(current_user.id) %>' class='btn'>Leave team</a>
+<% end %> 

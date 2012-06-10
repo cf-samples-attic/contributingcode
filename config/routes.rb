@@ -11,13 +11,14 @@ Tumblrtv::Application.routes.draw do
 
   match '/accept/:id' => 'teams#accept', :as => 'accept'
   match '/decline/:id'=> 'teams#decline', :as => 'decline'
-  match '/leave/:id'  => 'teams#leave',  :as =>'leave_team'
-  match '/remove/:id'  =>'teams#remove_member',   :as => 'remove_member'
+  match '/leave/:id'  => 'team_members#leave',  :as =>'leave_team'
+  
 
   match '/join/:id' => 'teams#join', :as => 'join_team'
   match '/add/:id' => 'teams#add_request', :as => 'add_request'
 
   resources :teams
   resources :users
+  resources :team_members
   
 end

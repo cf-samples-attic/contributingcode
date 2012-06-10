@@ -4,9 +4,9 @@
   <% else %>
      <% if @is_member.blank? %>
       <h1>Create/Join a team</h1>
-      <%= render  :partial => "partials/main/create_team"%>
+      <%= render  :partial => "partials/myteam/create_team"%>
     <% else %>
-      <%= render :partial => "partials/main/team_details" %>
+      <%= render :partial => "partials/myteam/team_details" %>
     <% end %> 
   <% end %>
 </div>

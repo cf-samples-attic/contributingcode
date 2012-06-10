@@ -39,13 +39,6 @@ class TeamsController < ApplicationController
     render :json => {:err =>team["err"], :data => team[:data]} 
   end 
 
-
-  # A non owner leaves team and an email is sent to notify the owner
-  def leave
-    team = Team.leave_team(current_user)
-    render :json => {:err => team[:err], :data => team[:data]} and return  
-  end 
-
   # Owner of a team accepts the join request 
   # All other join requests are deleted 
   # An email is sent to the requester 
@@ -63,19 +56,22 @@ class TeamsController < ApplicationController
    render :json => {:err => team[:err], :data => team[:data]} and return 
   end 
 
-  # Remove a memeber from a team 
-  # Can be doen only by the owner 
-  # Notify via email 
-  def remove_member
-    team = Team.remove_member(params, current_user)
-    render :json => {:err => team[:err], :data => [:data]} and return 
-  end 
 
   # Delete whole team 
   # Inform all members via email 
   def destroy
-    team = Team.delete_team(params, current_user)
-    render :json => {:err => team[:err], :data => [:data]} and return 
+    team = current_user.owned_team
+    render :json => {:err => nil, :data => nil} if team.blank?
+    team_members = team.team_members
+    # collect all users in team 
+    users = User.where(:id => team_members.collect(&:user_id)).index_by(&:id)
+    # Send email to each memeber
+    team_members.each do |member|
+      # send email to all except owner
+      Resque.enqueue(DecideTeamMailer, current_user.name, team.name, users[member.user_id].email, 4) if member.user_id != current_user.id
+    end
+    team.destroy
+    render :json => {:err => nil, :data => nil}
   end 
   
   # Add request  
@@ -83,10 +79,8 @@ class TeamsController < ApplicationController
   def add_request
     team = current_user.owned_team
     render :json => {:err => "present", :data => nil} if team.blank?
-    request = AddRequest.new
-    request.team_id = team.id
-    request.user_id = params[:id]
-    request.team_name = team.name
+    render :json => {:err => "present", :data => nil} if team.blank?
+    request = team.add_requests.build :user_id =>params[:id] 
       if request.save
         #Resque.enqueue(RequestMailer,current_user.name,team.name,user.email,0)
         render :json => {:err => nil, :data => request}
