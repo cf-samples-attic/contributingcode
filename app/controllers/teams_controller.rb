@@ -6,6 +6,7 @@ class TeamsController < ApplicationController
 
   # crate a new team 
   def create  
+    render :json => {:err => "present", :data =>"Already in a team"} if current_user.team.present?
     team = Team.new
     team.name = params[:name] 
     team.desc = params[:desc]
@@ -29,6 +30,14 @@ class TeamsController < ApplicationController
   end 
 
   def update 
+    team = Team.find_by_owner_id(current_user.id)
+    render :json => {:err => "present", :data => nil}  if team.blank?
+    if Team.update(team.id,:name=> params[:name],:desc=>params[:desc]) 
+      # team.update_attribute("desc",params[:desc])
+      render :json => {:err => nil, :data => team} 
+    else 
+      render :json => {:err => "present", :data => nil}  
+    end 
   end 
 
   # Delete whole team 
@@ -48,20 +57,5 @@ class TeamsController < ApplicationController
     render :json => {:err => nil, :data => nil}
   end 
   
-  # Add request  
-  # Send email to member and wait for conf 
-  def add_request
-    team = current_user.owned_team
-    render :json => {:err => "present", :data => nil} if team.blank?
-    render :json => {:err => "present", :data => nil} if team.blank?
-    request = team.add_requests.build :user_id =>params[:id] 
-      if request.save
-        #Resque.enqueue(RequestMailer,current_user.name,team.name,user.email,0)
-        render :json => {:err => nil, :data => request}
-      else  
-        render :json => {:err => "present", :data => request.errors.full_messages.to_s}
-      end 
-  end 
-
 end
 

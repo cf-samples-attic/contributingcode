@@ -6,7 +6,7 @@
         <div class="control-group">
           <%= label_tag :"Team Name", nil, :class => "control-label" %>
           <div class="controls">
-            <%= text_field_tag(:name, @my_team.name, :class => "validate input-xlarge", :"data-rules" => "required", :"data-display"=>"Team Name", "placeholder" => "Team name", :"data-name" =>"Team Name", :id=>"Team Name") %>
+            <%= text_field_tag(:name, @my_team.name, :class => " input-xlarge", :"data-rules" => "required", :"data-display"=>"Team Name", "placeholder" => "Team name", :"data-name" =>"Team Name", :id=>"Team Name") %>
             <p class="help-block"></p>
           </div>
         </div>
@@ -19,13 +19,6 @@
           </div>
         </div>
 
-        <div class='control-group' style='margin-bottom:0'>
-          <%= label_tag :add_members, nil, :class => "control-label" %>
-          <div class="controls" style='margin-bottom: 10px'>
-            <%= text_field_tag(:emails, nil, :class => "validate input-xlarge", "placeholder" => "Email of member 1", :"data-rules"=> "valid_email", :"data-display"=>"Email", :"data-name" =>"email1", :id=>"email1", :"data-provide"=>"typeahead", :"data-source" => @handles ) %>
-            <p class="help-block"></p>
-          </div>
-        </div>
 
         <div class='control-group' style='margin-bottom:0'>
           <div class="controls">

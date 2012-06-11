@@ -37,20 +37,26 @@ class Notifier < ActionMailer::Base
   #type 2 leaves team
   #type 3 owner removes an accepted member
   #type 4 owner deletes team
+  #type 5 member accepts request
+  # type 6 member declines request
   def decide_team_email(sender_name, team_name, to_email, type)
     @type = type
     @team = team_name 
     @sender = sender_name
-    if type == 0 
-      subject = "Request to join team was declined!"  
-    elsif type == 1
-      subject = "Request to join team was accepted!"  
-    elsif type == 2
+    if @type == 0 
+      subject = "Request to join team was declined"  
+    elsif @type == 1
+      subject = "Request to join team was accepted"  
+    elsif @type == 2
       subject = "A member left your team"
-    elsif type == 3
+    elsif @type == 3
       subject = "You were removed from the team"  
-    else 
-      subject = "The owener deleted your team!" 
+    elsif @type == 5
+      subject = "A member accepted your request"
+    elsif @type == 6
+      subject = "A member declined your request"  
+    elsif @type == 4
+      subject = "The owener deleted your team" 
     end
     mail( :to             => to_email, 
           :subject        => subject,

@@ -16,11 +16,14 @@ Tumblrtv::Application.routes.draw do
   match '/accept/:id' => 'join_requests#accept', :as => 'accept'
   match '/decline/:id'=> 'join_requests#decline', :as => 'decline'
 
+  # for managing add_requests
+  match '/add/:id' => 'add_requests#create', :as => 'add_request'
+  match '/accept_add/:id' => 'add_requests#accept', :as => 'accept_add'
+  match '/decline_add/:id'=> 'add_requests#destroy', :as => 'decline_add'
+
+
   # User  leaves team
   match '/leave/:id'  => 'team_members#leave',  :as =>'leave_team'
-  
-  # todo
-  match '/add/:id' => 'teams#add_request', :as => 'add_request'
 
   # REST methods
   resources :teams

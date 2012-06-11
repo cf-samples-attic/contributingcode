@@ -1,11 +1,11 @@
 <div class="general hide" id="a3">
   <ul>
     <% @users.each do |user| %>
-      <% if user.team.blank? %>
+      <% if user.team.blank? && !@added_members.include?(user.id)%>
         <li>
           <img src="<%= user.avatar %>">
           <h3><%= user.handle %></h3>
-          <a href='<%= add_request_path(user.id) %>' class="btn add">Add</a>    
+          <a href='<%= add_request_path(user.id) %>' class="btn addReq">Add</a>    
         </li>
       <% end %>
     <% end %>
