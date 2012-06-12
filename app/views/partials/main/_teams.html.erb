@@ -13,6 +13,10 @@
             <div class="item">
               <div class="hero-unit">
               <h1><%= team.name %></h1>
+              <% team.team_members.each do |member| %>
+                 <img src='<%= @members[member.user_id].avatar%>'>
+                 <%= @members[member.user_id].handle %>
+              <% end %>
             </div>
           </div>
         <% end %>
