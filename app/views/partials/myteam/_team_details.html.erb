@@ -10,7 +10,7 @@
 <% else %>
   <ul>
    <% @team_members.each do |member| %>
-      <li><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %> </a></li>
+     <li><img src='<%= @members[member.user_id].avatar %>'><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %> </a></li>
    <% end %>
   </ul>
   <a href='<%= leave_team_path(current_user.id) %>' class='btn'>Leave team</a>

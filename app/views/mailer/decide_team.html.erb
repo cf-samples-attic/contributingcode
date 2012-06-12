@@ -18,6 +18,10 @@
             <%= @sender %> has left your team <%= @team %>
           <% elsif @type == 3 %>
             <%= @sender %> has removed you from the team <%= @team %>
+          <% elsif @type == 5 %>
+            <%= @sender %> has accepted your request to join the team <%= @team %>
+          <% elsif @type == 6 %>
+            <%= @sender %> has declined your request to the team <%= @team %>
           <% else %>
             <%= @sender %> has deleted the team <%= @team %>. Please join an another team or create one.
           <% end %>

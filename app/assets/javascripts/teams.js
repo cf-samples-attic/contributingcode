@@ -33,7 +33,6 @@ $(document).ready(function(){
   $(".selectTeam").click(function(e){
     e.preventDefault();
     var $this = $(this)
-    console$this
     bootbox.confirm("Are you sure ?", function(result) {
       if (!result) {
         return false
@@ -53,14 +52,26 @@ $(document).ready(function(){
     return false
   })
 
+
+
+  // Owner adds a user to team  request 
+  $(".addReq").click(function(e){
+    e.preventDefault();
+    var $this = $(this)
+      $.ajax({
+        url     : $this.attr("href")
+      , success : function (response) {
+          window.location = "/"        
+        }
+      }); 
+    return false
+  })
+  
+
   // Decide join request 
   $(".owner_decides").click(function(e){
     e.preventDefault();
     var $this = $(this)
-    bootbox.confirm("Are you sure ?", function(result) {
-      if (!result) {
-        return false
-      }
       $.ajax({
         url     : $this.attr("href")
       , success : function (response) {
@@ -72,7 +83,6 @@ $(document).ready(function(){
         }
         }
       });
-    }); 
     return false
   })
   
@@ -83,9 +93,8 @@ $(document).ready(function(){
     bootbox.confirm("Are you sure you want to delete the team ?", function(result) {
       if (!result) {
         return false
-      } 
-    });
-    $.ajax({
+      }
+      $.ajax({
         url     : $("#delete_team").attr("href")
       , data    : {}
       , type    : "DELETE"
@@ -93,7 +102,8 @@ $(document).ready(function(){
           window.location = "/"
         }
       });
-     return
+     return false  
+    });
   })
   
 

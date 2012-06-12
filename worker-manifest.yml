@@ -1,7 +1,7 @@
 ---
 applications:
   .:
-    name: ccworker
+    name: cc-worker
     framework:
       name: standalone
       info:
@@ -9,12 +9,12 @@ applications:
         description: Standalone Application
         exec: 
     runtime: ruby19
-    command: ! ' bundle exec rake VERBOSE=true QUEUE=''*'' resque:work'
+    command: bundle exec rake VERBOSE=true QUEUE="*" resque:work
     url: 
     mem: 256M
     instances: 1
     services:
+      ccmdb:
+        type: mongodb
       ccque:
         type: redis
-      cf:
-        type: mysql
