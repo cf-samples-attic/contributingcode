@@ -20,7 +20,7 @@ $(document).ready(function(){
   $("#ShareTweet").click(function(e) {
       e.preventDefault()
       var self = this
-      var turl = "https://twitter.com/intent/tweet?text=" + "contributingcode.cloudfoundry.com&related=cloudfoundry" 
+      var turl = "https://twitter.com/intent/tweet?text=Team for good @cfcodesprint&url=http://contributingcode.cloudfoundry.com&related=cloudfoundry" 
       var width  = 575,
         height = 400,
         left   = ($(window).width()  - width)  / 2,
@@ -145,6 +145,7 @@ $(document).ready(function(){
     });
   })
   
+  
 
   // // Create team form 
   // $("#team_form").submit(function(e){
@@ -219,7 +220,44 @@ $(document).ready(function(){
     });
   }
 
-    
+  // On hover animation
+  $(function() {
+      $(".nav_hover")
+          .mouseover(function() { 
+             if ($(this).hasClass('clicked1')) {
+              return false
+          }else{
+              var src = $(this).attr("src").replace(".png", "_hover.png");
+              $(this).attr("src", src);
+            }
+          })
+          .mouseout(function() {
+            if ($(this).hasClass('clicked1')) {
+              return false 
+            }else {
+              var src = $(this).attr("src").replace("_hover.png", ".png");
+              $(this).attr("src", src);
+            }
+          });
+  });
+
+  //On click animation 
+  $(function() {
+      $(".nav_hover")
+          .click(function() { 
+            var self = $(this)
+            var els = $(".nav_hover")
+            $.each(els, function (index, el) {
+              $(el).removeClass("clicked1")
+              var src = $(el).attr("src").replace("_hover.png", ".png");
+              $(el).attr("src", src);
+            })
+          var src = self.attr("src").replace(".png", "_hover.png");
+          self.attr("src", src);
+          self.addClass("clicked1");
+          })
+  });
+
   $(".h").click(function(){
     scrollToElement('.home');
   })

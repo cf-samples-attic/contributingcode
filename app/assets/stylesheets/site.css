@@ -1,9 +1,13 @@
+
+
 body {
   font-family: Arial, sans-serif;
   background: url('/assets/bg_full_gears.gif') repeat-y fixed;
   background-size: 100%;
   color: #4c5355;
 }
+
+
 
 p, .hero-unit p {
   font-size: 16px;

@@ -12,6 +12,7 @@
         <td align='center' style='font-family: Georgia; padding:10px 0 25px; font-size:26px'>
           <%if @type == 0 %>
             <%= @sender %> has added you to the team <%= @team %>
+            PS: you may not be able to join if the team gets filled up.
           <% else %>
             <%= @sender %> has requested to join your team <%= @team %>
           <% end %>
