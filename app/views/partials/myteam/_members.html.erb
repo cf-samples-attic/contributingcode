@@ -1,0 +1,7 @@
+<div class="general" id="a1">
+  <ul>
+    <% @team_members.each do |member| %>
+      <li><img src="<%= @members[member.user_id].avatar %>"><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %></a>  <a  href='<%= team_member_path(member.user_id) %>' class='btn removeMember'> Remove member</a> </li>
+    <% end %>
+  </ul>
+</div>

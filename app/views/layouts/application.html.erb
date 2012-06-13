@@ -11,40 +11,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
-  <%= render  :partial => "partials/fb_like" %>
+<%= render  :partial => "partials/fb_like" %>
   <%= render  :partial => "partials/side_icons" %>
+  
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-       <a class="brand" href="/">#ContributingCode Sprint</a>         
-        <div class='pull-right' style="font-size: 16px; padding:10px 0;">
+        <a class="brand" href="/"><img src="<%= image_path 'logo_mini.png' %>"></a>
+        <div class='pull-right'>
           <% if current_user %>
             Hi <strong><%= current_user.name %></strong> |
             <a href="/logout/"> <strong>Logout</strong></a>
           <% else %>
-            <a href="/auth/github" class="dropdown-toggle"><strong>Sign-in/Register with Github</strong></a>
+            <a href="/auth/github" class="dropdown-toggle">Sign-in/Register with Github</a>
           <% end %>
         </div>
       </div>
     </div>
   </div>
-  
   <div class="container">
     <div class="row">
       <%= render  :partial => "partials/share_buttons" %>
-      <div class="span9" >
+      <div class="span12" >
         <%= yield %>
-      </div>
-      <div class="span3">
       </div>
     </div>
   </div>
+
 <script>
 var $my_form =  $("#team_form")
 $my_form.validate( self, self.onteam_formSubmit )

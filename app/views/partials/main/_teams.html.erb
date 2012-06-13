@@ -1,29 +1,29 @@
-<div class="teams content_pos" style="font-size:20px;width:800px;height:800px">
-<% if current_user.blank? %>
-  <h3> Login to view teams </h3>
-<% else %>
-  <div id="myCarousel" class="carousel slide">
-    <div class="carousel-inner">
-      <div class="active item">
-        <div class="hero-unit">
-          <h1> Teams </h1>
+<div class="teams content_pos" style="font-size:20px;width:1000px;height:1000px;">
+  <% if current_user.blank? %>
+    <h3> Login to view teams </h3>
+  <% else %>
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="active item">
+          <div class="hero-unit">
+            <h1> Teams </h1>
+          </div>
         </div>
-      </div>
         <% @teams.each do |team| %>
-            <div class="item">
-              <div class="hero-unit">
+          <div class="item">
+            <div class="hero-unit">
               <h1><%= team.name %></h1>
               <% team.team_members.each do |member| %>
-                 <img src='<%= @members[member.user_id].avatar%>'>
-                 <%= @members[member.user_id].handle %>
+                <img src='<%= @members[member.user_id].avatar%>'>
+                <%= @members[member.user_id].handle %>
               <% end %>
             </div>
           </div>
         <% end %>
+      </div>
+      <!-- Carousel nav -->
+      <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
     </div>
-    <!-- Carousel nav -->
-    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-  </div>
-<% end %>
+  <% end %>
 </div>

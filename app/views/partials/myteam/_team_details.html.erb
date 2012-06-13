@@ -6,14 +6,21 @@
   <a class="btn primary team_btn" id="b1">My Team</a>
   <a class="btn team_btn" id="b2">Join Requests</a>
   <a class="btn team_btn" id="b3">Add Members</a>
-    <%= render :partial => "partials/myteam/edit_team"%>
-    <%= render :partial => "partials/myteam/join_requests"%>
-    <%= render :partial => "partials/myteam/add_members"%>
+  <div class="row-fluid">
+    <div class="span6">
+      <%= render :partial => "partials/myteam/edit_team"%>
+    </div>
+    <div class="span6">
+      <%= render :partial => "partials/myteam/members"%>
+      <%= render :partial => "partials/myteam/join_requests"%>
+      <%= render :partial => "partials/myteam/add_members"%>
+    </div>
+  </div>
 <% else %>
   <img src= '<%= @my_team.image_url %>'>
   <ul>
    <% @team_members.each do |member| %>
-      <li><img src='<%= @members[member.user_id].avatar %>'><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %> </a></li>
+     <li><img src='<%= @members[member.user_id].avatar %>'><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %> </a></li>
    <% end %>
   </ul>
   <a href='<%= leave_team_path(current_user.id) %>' class='btn'>Leave team</a>

@@ -228,9 +228,9 @@ $(document).ready(function(){
     scrollToElement('.bootcamp');
   })
 
-  $(".t").click(function(){
-    scrollToElement('.teams');
-  })
+  // $(".t").click(function(){
+  //   scrollToElement('.teams');
+  // })
 
   $(".p").click(function(){
     scrollToElement('.prizes');
@@ -249,9 +249,9 @@ $(document).ready(function(){
     scrollToElement('.rules');
   })
 
-  $(".c").click(function(){
-    scrollToElement('.contributors');
-  })
+  // $(".c").click(function(){
+  //   scrollToElement('.contributors');
+  // })
 
   $(".m").click(function(){
     scrollToElement('.myteam');

@@ -20,21 +20,11 @@
 
 
         <div class='control-group' style='margin-bottom:0'>
-          <%= label_tag :add_members, nil, :class => "control-label" %>
-          <div class="controls" style='margin-bottom: 10px'>
-            <%= text_field_tag(:emails, nil, :class => "validate input-xlarge", "placeholder" => "Email of member 1", :"data-rules"=> "valid_email", :"data-display"=>"Email", :"data-name" =>"email1", :id=>"email1", :"data-provide"=>"typeahead", :"data-source" => @handles ) %>
-            <p class="help-block"></p>
-          </div>
-        </div>
-
-        <div class='control-group' style='margin-bottom:0'>
           <div class="controls">
             <%= file_field_tag :image, :class => "medium", :size => "30" %>
            <p class="help-block"></p>
           </div>
         </div>
-    
-        <p> You can add members later too.</p>
 
         <div class='backend control-group'>
           <p class="help-block"></p>
