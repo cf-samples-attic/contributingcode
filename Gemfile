@@ -18,6 +18,9 @@ gem 'resque'
 gem 'bson_ext'
 
 
+gem 'carrierwave', '0.6.1'
+gem 'carrierwave-mongoid',  :require => 'carrierwave/mongoid'
+
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem "webrat"

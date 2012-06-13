@@ -13,6 +13,7 @@ class TeamsController < ApplicationController
     team.owner_id = current_user.id
     team.owner_handle = current_user.handle
     team.member_count = 1
+    team.image = params[:image]
     # check for validations before save
     if team.save
       # Create a team memeber 

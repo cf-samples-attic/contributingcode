@@ -12,7 +12,7 @@ Tumblrtv::Application.configure do
   config.serve_static_assets = false
 
   #defaut url
-  config.action_mailer.default_url_options = {:host => "contributingcode.cloudfoundry.com", :trailing_slash => true}
+  config.action_mailer.default_url_options = {:host => "magitest.cloudfoundry.com", :trailing_slash => true}
 
   # Compress JavaScripts and CSS
   config.assets.compress = true

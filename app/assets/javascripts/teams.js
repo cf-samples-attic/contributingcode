@@ -146,39 +146,40 @@ $(document).ready(function(){
   })
   
 
-  // Create team form 
-  $("#team_form").submit(function(e){
-      e.preventDefault();
-      if($("#team_form").find(".error").length > 0 )
-          return false
-      var o = {}
-      formValues = $(this).serializeArray()
-      formValues.map(function(obj) {
-        if (o[obj.name] !== undefined) {
-          if (!o[obj.name].push) {
-              o[obj.name] = [o[obj.name]]
-          }
-          o[obj.name].push(obj.value || '')
-        } else {
-          o[obj.name] = obj.value || ''
-        }
-      });
-      $.ajax({
-          url: $("#team_form").attr('action'),
-          type: $("#team_form").attr('method'),
-          data: o,
-          success: function(response) {
-            if(response.err){
-              $('.help-block').last().html(response.data)
-              $('.backend').last().addClass("error")      
-            }
-            else{ 
-              window.location = "/"
-            }
-          }
-      });
-    return false;
-  });
+  // // Create team form 
+  // $("#team_form").submit(function(e){
+  //     e.preventDefault();
+  //     if($("#team_form").find(".error").length > 0 )
+  //         return false
+  //     var o = {}
+  //     formValues = $(this).serializeArray()
+  //     formValues.map(function(obj) {
+  //       if (o[obj.name] !== undefined) {
+  //         if (!o[obj.name].push) {
+  //             o[obj.name] = [o[obj.name]]
+  //         }
+  //         o[obj.name].push(obj.value || '')
+  //       } else {
+  //         o[obj.name] = obj.value || ''
+  //       }
+  //     });
+  //     console.log(o)
+  //     $.ajax({
+  //         url: $("#team_form").attr('action'),
+  //         type: $("#team_form").attr('method'),
+  //         data: o,
+  //         success: function(response) {
+  //           if(response.err){
+  //             $('.help-block').last().html(response.data)
+  //             $('.backend').last().addClass("error")      
+  //           }
+  //           else{ 
+  //             window.location = "/"
+  //           }
+  //         }
+  //     });
+  //   return false;
+  // });
 
 
   // Remove member
