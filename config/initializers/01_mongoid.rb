@@ -1,8 +1,9 @@
 CarrierWave.configure do |config|
-  config.grid_fs_database = 'contributingcode'
-  config.grid_fs_host = 'ds031607.mongolab.com'
-  config.grid_fs_port = 31607 
-  config.grid_fs_username = "mahilis"
-  config.grid_fs_password ="magiapr06"
+
+  config.grid_fs_database = ENV['mongodb_db']
+  config.grid_fs_host = ENV['mongodb_host']
+  config.grid_fs_port = ENV['mongodb_port']
+  config.grid_fs_username = ENV['mongodb_username']
+  config.grid_fs_password = ENV['mongodb_password']
   config.grid_fs_access_url = "/grid"
 end
