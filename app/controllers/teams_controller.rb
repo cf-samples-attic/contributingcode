@@ -33,7 +33,11 @@ class TeamsController < ApplicationController
   def update 
     team = Team.find_by_owner_id(current_user.id)
     render :json => {:err => "present", :data => nil}  if team.blank?
-    if Team.update(team.id,:name=> params[:name],:desc=>params[:desc]) 
+    team.image = params[:image] if params[:image].present?
+    team.name = params[:name]
+    team.desc = params[:desc]
+    # Team.update(team.id,:name=> params[:name],:desc=>params[:desc]) 
+    if team.save 
       # team.update_attribute("desc",params[:desc])
       render :json => {:err => nil, :data => team} 
     else 
