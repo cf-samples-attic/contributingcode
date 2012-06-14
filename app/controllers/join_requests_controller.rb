@@ -11,7 +11,7 @@ class JoinRequestsController < ApplicationController
     # check if there exists a team with the id in params
     render :json => {:err => "e2", :data => "No such team !"} if team.blank?
     # Check for team size
-    render :json => {:err => "e3", :data => "Team has already has four members !"} if team.member_count == 4
+    render :json => {:err => "e3", :data => "Team has already has four members."} if team.member_count == 4
     # Add to team members 
     join_request = JoinRequest.new(:team_id => team.id, :user_id => current_user.id, :user_handle => current_user.handle)
     # save teammember 
@@ -20,7 +20,7 @@ class JoinRequestsController < ApplicationController
     owner = User.find(team.owner_id)
     # Now send an accept email to owner 
     Resque.enqueue(RequestMailer, current_user.name, team.name, owner.email, 1)
-    render :json => {:err =>nil, :data => nil} 
+    render :json => {:err =>nil, :data => "Request sent to team owner."} 
   end 
 
   # Owner of a team accepts the join request 

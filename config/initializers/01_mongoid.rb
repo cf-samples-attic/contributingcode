@@ -6,4 +6,5 @@ CarrierWave.configure do |config|
   config.grid_fs_username = ENV['mongodb_username']
   config.grid_fs_password = ENV['mongodb_password']
   config.grid_fs_access_url = "/grid"
+ 
 end

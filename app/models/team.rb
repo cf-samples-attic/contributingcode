@@ -9,5 +9,5 @@ class Team < ActiveRecord::Base
   validates_uniqueness_of :name 
   validates_uniqueness_of :owner_id, :message => "Cant own many teams"
 
-   mount_uploader :image, TeamImageUploader
+  mount_uploader :image, TeamImageUploader
 end
