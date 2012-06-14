@@ -5,18 +5,40 @@
     <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
         <div class="active item">
-          <div class="hero-unit">
-            <h1> Teams </h1>
+          <div class="row">
+            <div class="span3 offset3">
+              <h1> Teams </h1>
+            </div>
           </div>
         </div>
         <% @teams.each do |team| %>
           <div class="item">
-            <div class="hero-unit">
-              <h1><%= team.name %></h1>
-              <% team.team_members.each do |member| %>
-                <img src='<%= @members[member.user_id].avatar%>'>
-                <%= @members[member.user_id].handle %>
-              <% end %>
+            <div class="row">
+              <div class= "span4 offset2" >
+                <h1><%= team.name %></h1>
+                <img src = "/assets/avatar_team.gif">
+                <%= team.desc %>
+              </div>
+              <div class= "span4">
+                <div class = "row">
+                  <div class ="span2">
+                    <img src = "/assets/avatar_user.gif">
+                  </div>
+                  <div class ="span2">
+                    <img src = "/assets/avatar_user.gif">
+                  </div>
+                </div>
+                <br>
+                <br>
+                <div class = "row">
+                  <div class ="span2">
+                    <img src = "/assets/avatar_user.gif">
+                  </div>
+                  <div class ="span2">
+                    <img src = "/assets/avatar_user.gif">
+                  </div>
+                </div>
+              </div>            
             </div>
           </div>
         <% end %>
