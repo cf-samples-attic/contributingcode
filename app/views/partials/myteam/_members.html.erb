@@ -1,7 +1,40 @@
 <div class="general" id="a1">
-  <ul>
-    <% @team_members.each do |member| %>
-      <li><img src="<%= @members[member.user_id].avatar %>"><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %></a>  <a  href='<%= team_member_path(member.user_id) %>' class='btn removeMember'> Remove member</a> </li>
-    <% end %>
-  </ul>
+  <div class = "row">
+    <div class = "span3">
+      <% if @team_members.length >= 1%>
+        <% member = @team_members[0] %>
+        <img src="<%= @members[member.user_id].avatar %>"><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %></a>  <a  href='<%= team_member_path(member.user_id) %>' class='btn removeMember'> Remove member</a> 
+        <% else %>
+          <img src = "/assets/avatar_user.gif">
+        <% end %>
+    </div>
+    <div class = "span3 offset1">
+      <% if @team_members.length >= 2%>
+        <% member = @team_members[1] %>
+        <img src="<%= @members[member.user_id].avatar %>"><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %></a>  <a  href='<%= team_member_path(member.user_id) %>' class='btn removeMember'> Remove member</a> 
+        <% else %>
+          <img src = "/assets/avatar_user.gif">
+        <% end %>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class = "row">
+    <div class = "span3">
+      <% if @team_members.length >= 3%>
+        <% member = @team_members[2] %>
+        <img src="<%= @members[member.user_id].avatar %>"><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %></a>  <a  href='<%= team_member_path(member.user_id) %>' class='btn removeMember'> Remove member</a> 
+        <% else %>
+          <img src = "/assets/avatar_user.gif">
+        <% end %>
+    </div>
+    <div class = "span3 offset1">
+      <% if @team_members.length == 4%>
+        <% member = @team_members[3] %>
+        <img src="<%= @members[member.user_id].avatar %>"><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %></a>  <a  href='<%= team_member_path(member.user_id) %>' class='btn removeMember'> Remove member</a> 
+        <% else %>
+          <img src = "/assets/avatar_user.gif">
+        <% end %>
+    </div>
+  </div>
 </div>
