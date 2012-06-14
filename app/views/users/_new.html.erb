@@ -1,18 +1,24 @@
 <div class="modal hide" id="myModal">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>Please Complete the form to finish the registraion </h3>
+    <h3>Please Complete the form to finish the registration </h3>
   </div>
   <div class="modal-body">
-    <img src='<%= @avatar %>'>
-    <p> Github handle : <%= @handle %> </p>
     <%= form_tag users_path , :class => "formset",  :name => "register_form", :id=>"register_form", :method => "post" %>
-  
+
     <div class="control-group">
-      <%= label_tag :FirstName, nil, :class => "control-label" %>
+      <%= label_tag "GitHub", "GitHub", :class => "control-label" %>
+      <div class="controls">
+        <a href="http://github.com/<%= @handle %>" target="_blank"><img src='<%= @avatar %>'></a>
+        <a href="http://github.com/<%= @handle %>" target="_blank"><%= @handle %></a>
+    </div>
+    <br/>
+    <br/>
+    <div class="control-group">
+      <%= label_tag :FirstName, "Name", :class => "control-label" %>
       <div class="controls">
         <%= text_field_tag(:name,@name, :"data-rules"=> "required",  :"data-name" =>"name", :class => "validate input-xlarge") %>
-        <p class="help-block"></p>
+        <p class="help-block">Please fill out your full name.</p>
       </div>
     </div>
 
@@ -20,7 +26,7 @@
       <%= label_tag :Email, nil, :class => "control-label" %>
       <div class="controls">
         <%= text_field_tag(:email,@email, :class => "validate input-xlarge", :"data-rules"=> "required|valid_email", :"data-display"=>"Email", :"data-name" =>"email" ) %>
-        <p class="help-block"></p>
+        <p class="help-block">Email will only be used for the sprint.</p>
       </div>
     </div>
   </div>
@@ -28,7 +34,7 @@
     <div class="clearfix">
       <div class="input">
         <a href="#" class="btn" data-dismiss="modal">Close</a>
-        <%= submit_tag "Save", :class => "btn btn-primary" %>
+        <%= submit_tag "Register", :class => "btn btn-primary" %>
       </div>
     </div>
   </div>

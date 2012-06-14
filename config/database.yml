@@ -2,19 +2,29 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: cfmagi1
+  database: contributingcode_dev
   pool: 5
   username: root
-  password: root
+  password: <%= ENV['mysql_pwd'] %>
+  socket: /tmp/mysql.sock
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: contributingcode_test
+  pool: 5
+  username: root
+  password: <%= ENV['mysql_pwd'] %>
   socket: /tmp/mysql.sock
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: cfmagi1
+  database: contributingcode_prod
   pool: 5
   username: root
-  password: root
+  password: <%= ENV['mysql_pwd'] %>
   socket: /tmp/mysql.sock
 

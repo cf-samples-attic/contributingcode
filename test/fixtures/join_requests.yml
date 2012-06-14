@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  user_handle: 1
-  team_id: 1
-
-two:
-  user_handle: 1
-  team_id: 1
