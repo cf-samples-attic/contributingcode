@@ -11,12 +11,31 @@
         </div>
         <% @teams.each do |team| %>
           <div class="item">
-            <div class="hero-unit">
-              <h1><%= team.name %></h1>
-              <% team.team_members.each do |member| %>
-                <img src='<%= @members[member.user_id].avatar%>'>
-                <%= @members[member.user_id].handle %>
-              <% end %>
+              <div class="row">
+                <div class= "span4">
+                  <h1><%= team.name %></h1>
+                  <img src = "/assets/avatar_team.gif">
+                  <%= team.desc %>
+                </div>
+                <div class= "span4">
+                  <div class = "row">
+                    <div class ="span2">
+                      <img src = "/assets/avatar_user.gif">
+                    </div>
+                    <div class ="span2">
+                      <img src = "/assets/avatar_user.gif">
+                    </div>
+                  </div>
+                  <div class = "row">
+                    <div class ="span2">
+                      <img src = "/assets/avatar_user.gif">
+                    </div>
+                    <div class ="span2">
+                      <img src = "/assets/avatar_user.gif">
+                    </div>
+                  </div>
+                </div>            
+              </div>
             </div>
           </div>
         <% end %>
