@@ -1,7 +1,12 @@
-<div class="general hide" id="a2">
-<ul class = "requests">
-    <% @requests.each do |request| %>
-      <li><img src ='<%= @members[request.user_id].avatar %>'> <a href='<%= get_url(request.user_handle) %>'> <%= request.user_handle %></a> <a href='<%= accept_path(request.user_id) %>' class='btn owner_decides'>Accept</a> <a href='<%= decline_path(request.user_id) %>' class='btn owner_decides'>Decline</a></li>
-    <% end %>
-</ul>
+<div class="space_top general" id="a2">
+  <h2>Team Requests</h2>
+  <%-if @requests.count > 0 %>
+    <ul class = "requests">
+        <% @requests.each do |request| %>
+          <li><img src ='<%= @members[request.user_id].avatar %>'> <a href='<%= get_url(request.user_handle) %>'> <%= request.user_handle %></a> <a href='<%= accept_path(request.user_id) %>' class='btn owner_decides'>Accept</a> <a href='<%= decline_path(request.user_id) %>' class='btn owner_decides'>Decline</a></li>
+        <% end %>
+    </ul>
+  <%-else %>
+  <p>There are no outstanding requests to join your team at this time.</p>
+  <%-end%>
 </div>

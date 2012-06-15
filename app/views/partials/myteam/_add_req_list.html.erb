@@ -1,3 +1,4 @@
+<%-if current_user and @add_reqs %>
 <a class="btn" data-toggle="modal" href="#addReqModal" >Pending Requests <%= @add_reqs.length %></a>
 <div class="modal hide" id="addReqModal">
   <div class="modal-header">
@@ -8,8 +9,8 @@
     <ul>
     <% @add_reqs.each do |req| %>
         <li><h3><%= req.team_name %></h3>
-        <a href='<%= accept_add_path(req.team_id) %>' class="btn addReq">Accept</a>    
-        <a href='<%= decline_add_path(req.team_id) %>' class="btn addReq">Decline</a>    
+        <a href='<%= accept_add_path(req.team_id) %>' class="btn addReq">Accept</a>
+        <a href='<%= decline_add_path(req.team_id) %>' class="btn addReq">Decline</a>
         </li>
     <% end %>
   </ul>
@@ -18,3 +19,4 @@
     <a href="#" class="btn" data-dismiss="modal">Close</a>
   </div>
 </div>
+<%-end%>
