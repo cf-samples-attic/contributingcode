@@ -1,44 +1,25 @@
-<div class="contributors content_pos" style="font-size:20px;width:1000px;height:1000px;">
-  <% if current_user.blank? %>
-    <h3> Login to view teams </h3>
-  <% else %>
+<div class="contributors content_pos">
+  <%-if @users.count > 0 %>
+      <h2>Students who have signed up so far</h2>
     <div id="contributorsCarousel" class="carousel slide">
       <div class="carousel-inner">
-        <div class="active item">
-          <div class="row">
-            <div class="span3 offset3">
-              <h1> Contributors </h1>
-            </div>
-          </div>
-        </div>
         <div class="item">
-          <div class="row">
-            <div class= "span3 offset1">
-              <img src = "/assets/avatar_user.gif">
-            </div>
-            <div class= "span3">
-              <img src = "/assets/avatar_user.gif">
-            </div>
-            <div class= "span3">
-              <img src = "/assets/avatar_user.gif">
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class= "span3 offset1">
-              <img src = "/assets/avatar_user.gif">
-            </div>
-            <div class= "span3">
-              <img src = "/assets/avatar_user.gif">
-            </div>
-            <div class= "span3">
-              <img src = "/assets/avatar_user.gif">
-            </div>
-          </div>
+          <%-@users.each_with_index do |user, index| %>
+              <div class="row" style="margin-left: 100px; margin-right:100px">
+                <div class= "span2 <%-index == 0 ? 'offset2':'' %>">
+                  <img src = "<%=user.avatar%>">
+                  <a href="http://github.com/<%= user.handle %>">
+                  <span class="small"><%=  user.name %></span>
+                 </a>
+                </div>
+              </div>
+          <%-end%>
         </div>
       </div>
+      <div class="row">
       <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
       <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      </div>
     </div>
   <% end %>
 </div>
