@@ -25,6 +25,9 @@ Tumblrtv::Application.routes.draw do
   # User  leaves team
   match '/leave/:id'  => 'team_members#leave',  :as =>'leave_team'
 
+  # api for team members 
+  match '/api_members' => 'team_members#api_members', :as =>'get_members'
+
   # REST methods
   resources :teams
   resources :users

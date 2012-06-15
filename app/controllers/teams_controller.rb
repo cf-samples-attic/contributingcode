@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
 
   # crate a new team 
   def create  
-    render :json => {:err => "present", :data =>"Already in a team"} if current_user.team.present?
+    render :json => {:err => "present", :data =>"Cannot create a team"} and return  if current_user.team.present?
     team = Team.new
     team.name = params[:name] 
     team.desc = params[:desc]
@@ -19,9 +19,9 @@ class TeamsController < ApplicationController
       # Create a team memeber 
       member = TeamMember.new(:team_id => team.id, :user_id => team.owner_id, :user_handle => team.owner_handle)
       member.save
-      render :json => {:err => nil, :data => team} 
+      render :json => {:err => nil, :data => team} and return 
     else
-      render :json => {:err => "present", :data => team.errors.full_messages.to_s} 
+      render :json => {:err => "present", :data => team.errors.full_messages.to_s} and return 
     end 
   end 
  
