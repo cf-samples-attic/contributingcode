@@ -1,11 +1,8 @@
-<h2> My team </h2>
-<h3><%= @my_team.name %></h3><br>
-<img src= '<%= @my_team.image_url %>'>
-<% if @my_team.owner_id == current_user.id %>
-
-  <a class="btn primary team_btn" id="b1">My Team</a>
-  <a class="btn team_btn" id="b2">Join Requests</a>
-  <a class="btn team_btn" id="b3">Add Members</a>
+<%if @my_team.owner_id == current_user.id %>
+  <div class="hero-unit">
+  <h1>Team: <%= @my_team.name %></h1>
+    <p>You are the team owner of <strong><%= @my_team.name %></strong>. To be most successful in the #ContributingCode Sprint invite your friends to help you.</p>
+  </div>
   <div class="row-fluid">
     <div class="span6">
       <%= render :partial => "partials/myteam/edit_team"%>
@@ -17,11 +14,14 @@
     </div>
   </div>
 <% else %>
-  <img src= '<%= @my_team.image_url %>'>
+    <div class="hero-unit">
+      <h1>Team: <%= @my_team.name %></h1>
+        <p>You are a team member</p>
+      </div>
   <ul>
    <% @team_members.each do |member| %>
-     <li><img src='<%= @members[member.user_id].avatar %>'><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %> </a></li>
+     <li><img class='avatar' src='<%= @members[member.user_id].avatar %>'><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %> </a></li>
    <% end %>
   </ul>
   <a href='<%= leave_team_path(current_user.id) %>' class='btn'>Leave team</a>
-<% end %> 
+<% end %>
