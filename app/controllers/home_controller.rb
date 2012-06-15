@@ -8,8 +8,9 @@ class HomeController < ApplicationController
     @teams = Team.all || []
     # Get all users
     @users = User.all
+    # users indexed by id 
+    @members = @users.index_by(&:id)
     if current_user
-      @members = @users.index_by(&:id)
       # Check to determine if the current_ user already is in a team ?
       @is_member = current_user ? current_user.team_member : nil
       if !@is_member

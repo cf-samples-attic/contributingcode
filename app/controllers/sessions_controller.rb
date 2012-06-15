@@ -13,7 +13,8 @@ class SessionsController < ApplicationController
     else
       session[:auth] = auth
       @teams = Team.all
-      @user = User.all
+      @users = User.all
+      @members = @users.index_by(&:id)
       @name = auth[:info][:name]
       @email = auth[:info][:email]
       @avatar = auth[:extra][:raw_info][:avatar_url]
