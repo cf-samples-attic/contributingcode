@@ -195,8 +195,8 @@ h1, .hero-unit h1 {
 }
 
 .avatar {
-    max-width: 119px;
-    max-height: 119px;
+    width: 119px;
+    height: 119px;
     border: solid 6px white;
 }
 

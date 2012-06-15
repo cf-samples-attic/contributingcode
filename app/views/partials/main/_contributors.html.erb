@@ -3,23 +3,26 @@
       <h2>Students who have signed up so far</h2>
     <div id="contributorsCarousel" class="carousel slide">
       <div class="carousel-inner">
-        <div class="item">
-          <%-@users.each_with_index do |user, index| %>
-              <div class="row" style="margin-left: 100px; margin-right:100px">
-                <div class= "span2 <%-index == 0 ? 'offset2':'' %>">
-                  <img src = "<%=user.avatar%>">
-                  <a href="http://github.com/<%= user.handle %>">
-                  <span class="small"><%=  user.name %></span>
-                 </a>
-                </div>
+        <% i=0 %>
+        <%-@users.each_with_index do |user, index| %>
+          <% if i%4==0 %>
+            <div class="item">
+              <div class="row-fluid" style="margin-left: 100px; margin-right:100px">
+          <% end %>
+          <div class= "span2 offset1">
+            <img class='avatar' src = "<%=user.avatar%>">
+            <a href="http://github.com/<%= user.handle %>">
+            <span class="small"><%=  user.name %></span></a>
+          </div>
+          <% if i%4==3 || i==@users.length-1%>
               </div>
-          <%-end%>
-        </div>
+             </div>
+          <% end %>            
+          <% i = i+1 %>
+        <%-end%>
       </div>
-      <div class="row">
       <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
       <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-      </div>
     </div>
   <% end %>
 </div>
