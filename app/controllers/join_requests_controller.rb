@@ -20,7 +20,7 @@ class JoinRequestsController < ApplicationController
     owner = User.find(team.owner_id)
     # Now send an accept email to owner 
     Resque.enqueue(RequestMailer, current_user.name, team.name, owner.email, 1)
-    render :json => {:err =>nil, :data => "Request sent to team owner."} 
+    render :json => {:err =>nil, :data => "Request sent to team owner. You will receive an email if the Team owner accepts you."} 
   end 
 
   # Owner of a team accepts the join request 

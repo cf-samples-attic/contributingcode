@@ -4,11 +4,11 @@ class HomeController < ApplicationController
   # Gather all info if user is logged in
   # Lists teams
   def index
-
-      # Get all teams
-      @teams = Team.all || []
-      # Get all users
-      @users = User.all
+    # Get all teams
+    @teams = Team.all || []
+    # Get all users
+    @users = User.all
+    if current_user
       @members = @users.index_by(&:id)
       # Check to determine if the current_ user already is in a team ?
       @is_member = current_user ? current_user.team_member : nil
@@ -29,19 +29,20 @@ class HomeController < ApplicationController
         @requested_teams = current_user ? current_user.join_requests.collect(&:team_id) : []
       else
         # Fined the current user's team
-        @my_team = current_user.team if current_user
-        # Push into array to remove from list of team members
-        owner = [@is_member]
-        # REmove owner
-        @team_members = @my_team.team_members - owner
-        # To show team join requests to owner alone
-        if current_user and @my_team.owner_id == current_user.id
+        @my_team = current_user.team
+        # ginf team emmbers 
+        @team_members = @my_team.team_members
+        # owner user info
+        @owner = @members[@my_team.owner_id]
+        # remove owner form team members
+        #@team_members = @team_members - [@owner.team_member]
+        # To show team join requests to owner alone 
+        if @my_team.owner_id == current_user.id
           @added_members = @my_team.add_requests.collect(&:user_id)
           @requests = @my_team.join_requests
           @candidates = @users.select{|user| user.team.blank? && !@added_members.include?(user.id)}
         end
-
+      end
     end
   end
-
 end

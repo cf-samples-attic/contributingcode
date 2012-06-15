@@ -23,5 +23,5 @@
      <li><img class='avatar' src='<%= @members[member.user_id].avatar %>'><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %> </a></li>
    <% end %>
   </ul>
-  <a href='<%= leave_team_path(current_user.id) %>' class='btn'>Leave team</a>
-<% end %>
+  <a href='<%= leave_team_path(current_user.id) %>' class='btn leaveTeam'>Leave team</a>
+<% end %> 

@@ -60,13 +60,30 @@ $(document).ready(function(){
     event.preventDefault();
     var choice = $(this).attr('id')
     $(".general").addClass("hide")
-    if(choice=="b1")
-      $("#a1").removeClass("hide")
-    else if(choice=="b2")
+    if(choice=="b2")
        $("#a2").removeClass("hide")
     else 
       $("#a3").removeClass("hide")
   })
+
+  $("#b1").click(function(){
+    event.preventDefault();
+    $.ajax({
+        url     : "/api_members"
+      , success : function (response) {
+          if(response.err){
+            window.location = "/"
+          }else{
+            $("#a1").removeClass("hide")
+            $("#a1").html(response.data)
+          }
+        }
+      }); 
+    return false
+  })
+
+
+
     
   // Join  a team 
   $(".selectTeam").click(function(e){
@@ -79,10 +96,11 @@ $(document).ready(function(){
       $.ajax({
         url     : $this.attr("href")
       , success : function (response) {
-        if(response.err){         
-          $this.parent().remove()
-          
-        }
+        
+        $this.parent().remove()
+        $("#join_message").html(response.data)
+        $('#joinModal').modal('toggle')
+
         }
       });
     }); 
@@ -122,6 +140,29 @@ $(document).ready(function(){
       });
     return false
   })
+
+
+  // Leave team 
+  $(".leaveTeam").click(function(e){
+    e.preventDefault();
+    var self = $(this)
+    bootbox.confirm("Are you sure you want to leave the team ?", function(result) {
+      if (!result) {
+        return false
+      }
+      $.ajax({
+        url     : self.attr("href")
+      , data    : {}
+      , type    : "get"
+      , success : function (response) {
+          window.location = "/"
+        }
+      });
+     return false  
+    });
+  })
+  
+
   
 
   // Delete team 

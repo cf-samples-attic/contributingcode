@@ -1,3 +1,11 @@
+ <div class="modal hide" id="joinModal">
+    <div class="modal-body">
+      <p id="join_message"></p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
+  </div>
 <ul>
 <% @teams.each do |team| %>
   <% if team.member_count < 4 %>

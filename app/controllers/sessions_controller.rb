@@ -12,7 +12,8 @@ class SessionsController < ApplicationController
       redirect_to root_url, :notice => "Signed in!"
     else
       session[:auth] = auth
-      @teams = []
+      @teams = Team.all
+      @user = User.all
       @name = auth[:info][:name]
       @email = auth[:info][:email]
       @avatar = auth[:extra][:raw_info][:avatar_url]
