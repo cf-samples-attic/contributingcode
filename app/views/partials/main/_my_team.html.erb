@@ -1,5 +1,5 @@
 <div class="myteam content_pos">
-  <a name="teamHash"></a>
+  <div class="hero-unit">
   <% if @current_user %>
     <% if @is_member.blank? %>
       <div class="row-fluid">
@@ -19,5 +19,6 @@
   <% else %>
     <%= render :partial => "partials/myteam/dummy" %>
   <% end %>
+</div>
 </div>
 

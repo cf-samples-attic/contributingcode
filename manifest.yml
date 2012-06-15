@@ -14,7 +14,7 @@ applications:
     mem: 256M
     instances: 1
     services:
-      ccmdb:
-        type: mongodb
-      ccque:
+      ccdb:
+        type: mysql
+      ccq:
         type: redis

@@ -288,10 +288,11 @@ $(document).ready(function(){
             var els = $(".nav_hover")
             $.each(els, function (index, el) {
               $(el).removeClass("clicked1")
-              var src = $(el).attr("src").replace("_hover.png", ".png");
+              var src = $(el).attr("src").replace("_hover", "");
               $(el).attr("src", src);
             })
-          var src = self.attr("src").replace(".png", "_hover.png");
+          var newName = self.attr("alt_src");
+          var src = self.attr("src").replace($(this).attr("src"), newName);
           self.attr("src", src);
           self.addClass("clicked1");
           })

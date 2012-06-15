@@ -9,12 +9,10 @@ applications:
         description: Rails Application
         exec: 
     url: ${name}.${target-base}
-    mem: 512M
+    mem: 1G
     instances: 1
     services:
-      ccmdb:
-        type: mongodb
-      ccque:
-        type: redis
-      cf:
+      ccdb:
         type: mysql
+      ccq:
+        type: redis
