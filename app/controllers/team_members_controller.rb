@@ -22,7 +22,7 @@ class TeamMembersController < ApplicationController
     team_member = team.team_members.find_by_user_id(params[:id])
     render :json => {:err =>"e3", :data => "No such memeber in team"} and return  if team_member.blank? 
     # check if id is not current_user/team owner
-    render :json => {:err =>"e2", :data => "Cannot delete owner"}  and return if team.owner_id == current_user.id
+    render :json => {:err =>"e2", :data => "Cannot delete owner"}  and return if team.owner_id == team_member.user_id
     # Find member to email 
     member = User.find(team_member.user_id)
     # delete team memebr 
