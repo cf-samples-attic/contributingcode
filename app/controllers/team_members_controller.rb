@@ -17,10 +17,12 @@ class TeamMembersController < ApplicationController
   def destroy
     # find current user's team
     team = current_user.owned_team
-    return :json => {:err =>"e2", :data => "No such team"} if team.blank?
+    render :json => {:err =>"e1", :data => "No such team"} and return  if team.blank?
     # Check if the user is a member of the team 
     team_member = team.team_members.find_by_user_id(params[:id])
-    return :json => {:err =>"e3", :data => "No such memeber in team"} if team_member.blank?
+    render :json => {:err =>"e3", :data => "No such memeber in team"} and return  if team_member.blank? 
+    # check if id is not current_user/team owner
+    render :json => {:err =>"e2", :data => "Cannot delete owner"}  and return if team.owner_id == current_user.id
     # Find member to email 
     member = User.find(team_member.user_id)
     # delete team memebr 

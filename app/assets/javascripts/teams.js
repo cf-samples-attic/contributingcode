@@ -251,14 +251,13 @@ $(document).ready(function(){
   // Remove member
   $(".removeMember").click(function(e){
     e.preventDefault();
-    console.log("loolll")
     var $this = $(this)
     bootbox.confirm("Are you sure you want to delete the team member ?", function(result) {
       if (!result) {
         return false
       }
       $.ajax({
-          url: this.href,
+          url: $this.attr('href'),
           type: "DELETE",
           data: {},
           success: function(response) {
