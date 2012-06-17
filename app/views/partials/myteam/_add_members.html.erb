@@ -1,14 +1,31 @@
-<%-if @added_members.count < 4 and @candidates.count > 0 %>
-    <div class="space_top general" id="a3">
+<%-if @added_members.count < 4 %>
+<div class="modal hide" id="addMemberModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
       <h2>Candidates to invite</h2>
-      <ul>
-        <% @candidates.each do |user| %>
-        <li>
-          <img src="<%= user.avatar %>">
-          <h3><%= user.handle %></h3>
-          <a href='<%= add_request_path(user.id) %>' class="btn addReq">Add</a>
-        </li>
-        <% end %>
-      </ul>
-    </div>
+  </div>
+  <div class="modal-body" style="overflow:scroll;height:250px;">
+    <% if @candidates.length < 1%>
+      <h3 style="padding-left:20px"> No members to add</h3>
+    <% else %>
+      <% @candidates.each do |user| %>
+        <div class="row-fluid space_top">
+          <div class="span2 ">
+            <img class="small-avatar " src="<%= user.avatar %>">
+          </div>
+          <div class="span2">
+            <h3><%= user.name %></h3>
+            <div>
+              <a href='<%= add_request_path(user.id) %>' class="btn addReq">Add</a>
+            </div>
+          </div>
+          <div class="span8">
+            <a href='http://github.com/<%= user.handle %>'><h3><%= user.handle %></h3></a>
+            <h3> <%= user.email %> </h3>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 <%-end %>

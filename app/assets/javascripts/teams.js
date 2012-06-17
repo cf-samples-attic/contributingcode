@@ -84,7 +84,6 @@ $(document).ready(function(){
 
 
 
-
   // Join  a team
   $(".selectTeam").click(function(e){
     e.preventDefault();
@@ -97,7 +96,7 @@ $(document).ready(function(){
         url     : $this.attr("href")
       , success : function (response) {
 
-        $this.parent().remove()
+        $this.parent().parent().remove()
         $("#join_message").html(response.data)
         $('#joinModal').modal('toggle')
 
@@ -107,7 +106,31 @@ $(document).ready(function(){
     return false
   })
 
+  // User delclines team request 
+   $(".acceptTeamReq").click(function(e){
+    e.preventDefault();
+    var $this = $(this)
+      $.ajax({
+        url     : $this.attr("href")
+      , success : function (response) {
+          window.location = "/"
+        }
+      });
+    return false
+  })
 
+  // User declines team request 
+  $(".declineTeamReq").click(function(e){
+    e.preventDefault();
+    var $this = $(this)
+      $.ajax({
+        url     : $this.attr("href")
+      , success : function (response) {
+          $this.parent().parent().remove()
+        }
+      });
+    return false
+  })
 
   // Owner adds a user to team  request
   $(".addReq").click(function(e){
@@ -116,7 +139,8 @@ $(document).ready(function(){
       $.ajax({
         url     : $this.attr("href")
       , success : function (response) {
-          window.location = "/"
+          $this.parent().parent().next().html(response.data)
+          $this.parent().html("")
         }
       });
     return false
@@ -134,13 +158,17 @@ $(document).ready(function(){
           window.location = "/"
         }
         else{
-          $this.parent().remove()
+          $this.parent().parent().remove()
         }
         }
       });
     return false
   })
 
+  // On close after owner decides join request page refresh
+  $('#pendingJoinReqModal').on('hide', function () {
+    window.location = "/"
+  })
 
   // Leave team
   $(".leaveTeam").click(function(e){
@@ -221,8 +249,9 @@ $(document).ready(function(){
 
 
   // Remove member
-  $(".removeMember").click(function(){
-    event.preventDefault();
+  $(".removeMember").click(function(e){
+    e.preventDefault();
+    console.log("loolll")
     var $this = $(this)
     bootbox.confirm("Are you sure you want to delete the team member ?", function(result) {
       if (!result) {
@@ -233,13 +262,7 @@ $(document).ready(function(){
           type: "DELETE",
           data: {},
           success: function(response) {
-              if(response.err){
                 window.location = "/"
-
-              }
-              else{
-                $this.parent().remove()
-             }
           }
       });
     });

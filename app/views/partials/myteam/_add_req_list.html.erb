@@ -1,19 +1,26 @@
 <%-if current_user and @add_reqs %>
-<a class="btn" data-toggle="modal" href="#addReqModal" >Pending Requests <%= @add_reqs.length %></a>
+<a class="btn" data-toggle="modal" href="#addReqModal" >Pending Requests <span class="notification"><%= @add_reqs.length %></span></a>
+
 <div class="modal hide" id="addReqModal">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">×</button>
     <h3>Accept to join a team or Decline</h3>
   </div>
-  <div class="modal-body">
-    <ul>
+  <div class="modal-body" style="overflow:scroll;height:250px;">
+  
     <% @add_reqs.each do |req| %>
-        <li><h3><%= req.team_name %></h3>
-        <a href='<%= accept_add_path(req.team_id) %>' class="btn addReq">Accept</a>
-        <a href='<%= decline_add_path(req.team_id) %>' class="btn addReq">Decline</a>
-        </li>
+      <div class="row-fluid space_top">
+        <div class="span2">
+          <img class ="small-avatar" src="<%= @teams_index[req.team_id].image_url %>">
+        </div>
+        <div class="span10"
+          <h3><%= req.team_name %></h3>
+          <a href='<%= accept_add_path(req.team_id) %>' class="btn acceptTeamReq">Accept</a>
+          <a href='<%= decline_add_path(req.team_id) %>' class="btn declineTeamReq">Decline</a>      
+        </div>
+      </div>
     <% end %>
-  </ul>
+  
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" data-dismiss="modal">Close</a>

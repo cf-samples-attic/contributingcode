@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   # Lists teams
   def index
     # Get all teams
-    @teams = Team.all || []
+    @teams = Team.all
     # Get all users
     @users = User.all
     # users indexed by id 
@@ -26,12 +26,14 @@ class HomeController < ApplicationController
             @add_reqs.push(req)
           end
         end
+        # teams indexed by id 
+        @teams_index = @teams.index_by(&:id)
         # collect requests to join if any
         @requested_teams = current_user ? current_user.join_requests.collect(&:team_id) : []
       else
         # Fined the current user's team
         @my_team = current_user.team
-        # ginf team emmbers 
+        # Find team emmbers 
         @team_members = @my_team.team_members
         # owner user info
         @owner = @members[@my_team.owner_id]

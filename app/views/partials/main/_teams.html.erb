@@ -32,7 +32,8 @@
                     <div class="span4">
                       <% if @team_members.length >= i %>
                         <% member = @team_members[(2*row) + col] %>
-                        <img class='avatar' src="<%= @members[member.user_id].avatar %>"><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %></a> 
+                        <img class='avatar' src="<%= @members[member.user_id].avatar %>">
+                        <center><a href='<%= get_url(member.user_handle) %>'><%= member.user_handle %></a></center> 
                         <% else %>
                           <img class='avatar' src = "/assets/avatar_user.gif">
                         <% end %>

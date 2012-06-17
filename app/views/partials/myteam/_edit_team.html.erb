@@ -3,7 +3,7 @@
 <div class="control-group">
   <%= label_tag :"Team Name", nil, :class => "control-label" %>
   <div class="controls">
-    <%= text_field_tag(:name, @my_team.name, :class => " input-xlarge", :"data-rules" => "required", :"data-display"=>"Team Name", "placeholder" => "Team name", :"data-name" =>"Team Name", :id=>"Team Name") %>
+    <%= text_field_tag(:name, @my_team.name, :class => " input-xlarge validate team_data", :"data-rules" => "required", :"data-display"=>"Team Name", "placeholder" => "Team name", :"data-name" =>"Team Name", :id=>"Team Name") %>
     <p class="help-block"></p>
   </div>
 </div>
@@ -11,7 +11,7 @@
 <div class="control-group">
   <%= label_tag :"Team Description", nil, :class => "control-label"%>
   <div class="controls">
-  <%= text_area_tag(:desc, @my_team.desc, :class => " input-xlarge") %>
+  <%= text_area_tag(:desc, @my_team.desc, :class => " input-xlarge team_data") %>
     <p class="help-block"></p>
   </div>
 </div>
@@ -31,8 +31,8 @@
 
 <div class="clearfix">
   <div class="input">
-    <%= submit_tag "Save", :class => "btn" %>
+    <%= submit_tag "Update", :class => "btn" %>
   </div>
 </div>
 <% end %>
-<a href='<%= team_path(@my_team) %>' id="delete_team" class='btn'>Delete team</a>
+<a href='<%= team_path(@my_team) %>' id="delete_team" class='btn btn-danger'>Delete team</a>

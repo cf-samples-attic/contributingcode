@@ -1,6 +1,6 @@
 <div class="contributors content_pos">
   <%-if @users.count > 0 %>
-      <h2>Students who have signed up so far</h2>
+      <h2 style="text-align:center;">Students who have signed up so far</h2>
     <div id="contributorsCarousel" class="carousel slide">
       <div class="carousel-inner">
         <% i=0 %>
@@ -9,10 +9,10 @@
             <div class="item">
               <div class="row-fluid" style="margin-left: 100px; margin-right:100px">
           <% end %>
-          <div class= "span2 offset1">
-            <img class='avatar' src = "<%=user.avatar%>">
+          <div class= "span1 offset1">
             <a href="http://github.com/<%= user.handle %>">
-            <span class="small"><%=  user.name %></span></a>
+              <img class='small-avatar' src = "<%=user.avatar%>">
+            </a>
           </div>
           <% if i%4==3 || i==@users.length-1%>
               </div>

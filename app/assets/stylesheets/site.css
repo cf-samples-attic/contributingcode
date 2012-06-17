@@ -195,8 +195,8 @@ h1, .hero-unit h1 {
 }
 
 .avatar {
-    max-width: 119px;
-    max-height: 119px;
+    width: 119px;
+    height: 119px;
     border: solid 6px white;
 }
 
@@ -204,6 +204,65 @@ h1, .hero-unit h1 {
     margin-left: 20px;
 }
 
+.small-avatar {
+    width: 60px;
+    height: 60px;
+    border: solid 6px white;
+}
+
 .space_top {
     margin-top: 30px;
+}
+
+
+.team_data {
+    background: transparent;
+    font-size: 16px;
+}
+
+.notification{
+  background: #08C;
+    display: inline-block;
+    -webkit-border-radius: 9px; -moz-border-radius: 1px; 
+    border-radius: 12px;
+    color: #fff;
+    text-align: center;
+    padding: 1px 6px;
+}
+
+.tmember {
+  position: relative;
+}
+
+
+/*.tmember .del {
+  display: none;
+}*/
+
+.del {
+  z-index: 9;
+  position: absolute;
+  top: -5px;
+  cursor: pointer;
+  right: -5px;
+  font-size: 20px;
+  padding: 1px 5px;
+  background: #c83025;
+}
+
+.tmember:hover .del {
+  display: block;
+}
+
+
+.center-text {
+  position: relative;
+  left: 25px;
+}
+
+.center-button {
+  position: relative;
+  left: 22px;
+  top:-20px;
+  margin-top: 20px;
 }

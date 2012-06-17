@@ -1,22 +1,29 @@
- <div class="modal hide" id="joinModal">
-    <div class="modal-body">
-      <p id="join_message"></p>
-    </div>
-    <div class="modal-footer">
-      <a href="#" class="btn" data-dismiss="modal">Close</a>
-    </div>
+<!-- Modal to display message after join request -->
+<div class="modal hide" id="joinModal">
+  <div class="modal-body">
+    <p id="join_message"></p>
   </div>
-<ul>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+  </div>
+</div>
+
+<!-- Display teams to join  -->
+
 <% @teams.each do |team| %>
   <% if team.member_count < 4 %>
-    <li>
-    <%= team.name %>
-    <%  if @requested_teams.include?(team.id) %>
-      Request pending !
-    <% else %>
-      <a href= '<%= join_team_path(team) %>' class="btn selectTeam"> Join </a>
-    <% end %>
-    </li>
+    <div class="row-fluid space_top">
+      <div class="span3">    
+        <img class ="small-avatar" src="<%= team.image_url %>">
+      </div>
+      <div class="span2">
+        <%= team.name %>
+        <%  if @requested_teams.include?(team.id) %>
+          Request pending
+        <% else %>
+          <a href= '<%= join_team_path(team) %>' class="btn selectTeam"> Join </a>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 <% end %>
-</ul>
