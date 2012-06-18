@@ -6,8 +6,10 @@
     <button type="button" class="close" data-dismiss="modal">×</button>
     <h3>Accept to join a team or Decline</h3>
   </div>
-  <div class="modal-body" style="overflow:scroll;height:250px;">
-  
+  <div class="modal-body" style="overflow:scroll;">
+    <% if @add_reqs.length < 1 %>
+       <h3> You dont have requests from any team right now. You can join/create a team</h3>
+    <% else %>
     <% @add_reqs.each do |req| %>
       <div class="row-fluid space_top">
         <div class="span2">
@@ -20,7 +22,7 @@
         </div>
       </div>
     <% end %>
-  
+   <% end %>
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" data-dismiss="modal">Close</a>

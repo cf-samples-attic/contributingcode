@@ -20,6 +20,12 @@
         <a class="brand" href="/"><img src="<%= image_path 'logo_mini.png' %>"></a>
         <div class='pull-right'>
           <% if current_user %>
+            <% if current_user.team.blank? %>
+              <a data-toggle="modal" href="#addReqModal" >Requests <span class="notification"><%= @add_reqs.length %></span></a>
+            <% end %>
+            <% if current_user.owned_team.present? && @requests.length > 0 %>
+              <a class="space_top" data-toggle="modal" href="#pendingJoinReqModal" ><span class="notification"><%= @requests.length %></span></a>
+            <% end %>
             Hi <strong><%= current_user.name %></strong> |
             <a href="/logout/"> <strong>Logout</strong></a>
           <% else %>
