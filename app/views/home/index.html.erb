@@ -11,5 +11,9 @@
 
 
 <% if (params[:action] == "create" || params[:action] == "create_user")&& current_user.blank? %>
-  <%= render :partial => "users/new" %>
+  <% if @users.length < 300 %>
+    <%= render :partial => "users/new" %>
+  <% else %>
+     <%= render :partial => "users/registration_closed" %>
+  <% end %>
 <% end %>

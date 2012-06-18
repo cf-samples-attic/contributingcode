@@ -2,13 +2,13 @@ class TeamMembersController < ApplicationController
 
   def api_members
     team = current_user.owned_team
-    render :json => {:err => nil , :data => nil } if team.blank?
+    render :json => {:err => nil , :data => nil } and return if team.blank?
     @team_members = team.team_members
     member_ids = @team_members.collect(&:user_id)
     @members = User.where(:id => member_ids).index_by(&:id)
     @team_members = @team_members - [current_user.team_member]
     @owner = current_user.team_member
-    render :json => {:err => nil, :data => render_to_string(partial: "partials/myteam/members") }
+    render :json => {:err => nil, :data => render_to_string(partial: "partials/myteam/members") } and return 
   end
   
   # Remove a memeber from a team 

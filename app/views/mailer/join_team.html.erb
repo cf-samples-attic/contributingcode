@@ -4,22 +4,25 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <table width="100%" style='border: 2px dashed #aaa'>
+    <table width="100%" style='border: 2px solid #aaa'>
       <tr>
         <td style='padding:5px;'></td>
       </tr>
-      <tr
+      <tr>
         <td align='center' style='font-family: Georgia; padding:10px 0 25px; font-size:26px'>
           <%if @type == 0 %>
-            <%= @sender %> has added you to the team <%= @team %>
-            PS: you may not be able to join if the team gets filled up.
+           <span style='color: #2c9cc2; font-style:italic'> <%= @sender %> </span> has added you to the team <span style='color: #2c9cc2; font-style:italic'><%= @team %></span>
+            Hurry up ! you may not be able to join if the team gets filled up.
           <% else %>
             <%= @sender %> has requested to join your team <%= @team %>
           <% end %>
         </td>
       </tr>
       <tr>
-        <td align='center' style='font-family: Georgia; padding:40px 0 10px; font-size:26px; color: #d04429'>Visit contributingcode.cloudfoundry.com to <strong>accept/decline</strong> request !</td>
+        <td align='center' style='font-family: Georgia; padding:40px 0 10px; font-size:26px; color: #42963B'>Visit contributingcode.cloudfoundry.com to <strong>accept/decline</strong> request</td>
+      </tr>
+      <tr>
+        <td align='center'><img src="http://shapeshed.com/images/articles/cloud_foundry.jpg"></td>
       </tr>
       <tr>
         <td style='padding:10px;'></td>

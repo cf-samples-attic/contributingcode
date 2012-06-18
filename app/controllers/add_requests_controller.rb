@@ -15,9 +15,9 @@ class AddRequestsController < ApplicationController
     request = AddRequest.new(:user_id =>params[:id], :team_id=> team.id, :team_name => team.name)  
     if request.save
       Resque.enqueue(RequestMailer,current_user.name,team.name,user.email,0)
-      render :json => {:err => nil, :data => "Request sent via email"}
+      render :json => {:err => nil, :data => "Request sent via email"} and return 
     else  
-      render :json => {:err => "present", :data => request.errors.full_messages.to_s}
+      render :json => {:err => "present", :data => request.errors.full_messages.to_s} and return 
     end 
   end 
 
@@ -56,11 +56,11 @@ class AddRequestsController < ApplicationController
     # fetch team 
     team = Team.find_by_id(params[:id])
     # check team 
-    render :json => {:err =>"e1", :data => "No such team"} if team.blank?
+    render :json => {:err =>"e1", :data => "No such team"} and return if team.blank?
     # Query for member  
     add_request = team.add_requests.find_by_user_id(current_user.id)
     # Check if member request exists 
-    render :json => {:err =>"e2", :data => "No such request"}  if add_request.blank?
+    render :json => {:err =>"e2", :data => "No such request"} and return  if add_request.blank?
     # Find member to send email 
     owner = User.find_by_id(team.owner_id)
     # Delete add_req
@@ -68,7 +68,7 @@ class AddRequestsController < ApplicationController
     # Email member 
     Resque.enqueue(DecideTeamMailer, current_user.name, team.name, owner.email, 6)
     # return team 
-    render :json => {:err => nil, :data => nil} 
+    render :json => {:err => nil, :data => nil} and return 
   end
 
 end

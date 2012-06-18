@@ -32,16 +32,16 @@ class TeamsController < ApplicationController
 
   def update 
     team = Team.find_by_owner_id(current_user.id)
-    render :json => {:err => "present", :data => nil}  if team.blank?
+    render :json => {:err => "present", :data => nil} and return if team.blank?
     team.image = params[:image] if params[:image].present?
     team.name = params[:name]
     team.desc = params[:desc]
     # Team.update(team.id,:name=> params[:name],:desc=>params[:desc]) 
     if team.save 
       # team.update_attribute("desc",params[:desc])
-      render :json => {:err => nil, :data => team} 
+      render :json => {:err => nil, :data => team} and return 
     else 
-      render :json => {:err => "present", :data => nil}  
+      render :json => {:err => "present", :data => nil}  and return 
     end 
   end 
 
@@ -49,7 +49,7 @@ class TeamsController < ApplicationController
   # Inform all members via email 
   def destroy
     team = current_user.owned_team
-    render :json => {:err => nil, :data => nil} if team.blank?
+    render :json => {:err => nil, :data => nil} and return if team.blank?
     team_members = team.team_members
     # collect all users in team 
     users = User.where(:id => team_members.collect(&:user_id)).index_by(&:id)
@@ -59,7 +59,7 @@ class TeamsController < ApplicationController
       Resque.enqueue(DecideTeamMailer, current_user.name, team.name, users[member.user_id].email, 4) if member.user_id != current_user.id
     end
     team.destroy
-    render :json => {:err => nil, :data => nil}
+    render :json => {:err => nil, :data => nil} and return 
   end 
   
 end
