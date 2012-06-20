@@ -20,7 +20,7 @@ Tumblrtv::Application.routes.draw do
   match '/add/:id' => 'add_requests#create', :as => 'add_request'
   match '/accept_add/:id' => 'add_requests#accept', :as => 'accept_add'
   match '/decline_add/:id'=> 'add_requests#destroy', :as => 'decline_add'
-
+  match '/add_member2/'  => 'add_requests#add2', :as => 'add2'
 
   # User  leaves team
   match '/leave/:id'  => 'team_members#leave',  :as =>'leave_team'

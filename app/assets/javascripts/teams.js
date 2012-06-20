@@ -132,6 +132,29 @@ $(document).ready(function(){
     return false
   })
 
+  // Owner adds members via type ahead 
+  $("#add2_form").submit(function(e){
+      e.preventDefault();
+      if($("#add2_form").find(".error").length > 0 )
+          return false
+      var $form = $(this)
+     // Run Ajax
+      $.ajax({
+          url     : $form.attr("action")
+        , data    : $form.serializeArray()
+        , type    : "POST"
+        , success : function ( response ) {
+            if (response.err) {
+              $('.help-block').last().html(response.data)
+              $('.control-group').last().addClass("error")
+            } else {
+              $('.help-block').last().html(response.data)
+            }
+          }
+      })
+      return false
+    });
+
   // Owner adds a user to team  request
   $(".addReq").click(function(e){
     e.preventDefault();

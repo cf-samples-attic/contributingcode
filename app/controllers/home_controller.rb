@@ -39,9 +39,13 @@ class HomeController < ApplicationController
         @owner = @members[@my_team.owner_id]
         # To show team join requests to owner alone 
         if @my_team.owner_id == current_user.id
+          # Collect add requests made by the owner
           @added_members = @my_team.add_requests.collect(&:user_id)
           @requests = @my_team.join_requests
           @candidates = @users.select{|user| user.team.blank? && !@added_members.include?(user.id)}
+          # for type ahead durigna add 
+          @handles = @candidates.collect(&:handle)
+          @handles = @handles.to_s
         end
       end
     end
