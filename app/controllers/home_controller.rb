@@ -5,9 +5,9 @@ class HomeController < ApplicationController
   # Lists teams
   def index
     # Get all teams
-    @teams = Team.all
+    @teams = Team.find(:all, :order => "name")
     # Get all users
-    @users = User.all
+    @users = User.find(:all, :order => "name")
     # users indexed by id 
     @members = @users.index_by(&:id)
     if current_user
@@ -31,14 +31,12 @@ class HomeController < ApplicationController
         # collect requests to join if any
         @requested_teams = current_user ? current_user.join_requests.collect(&:team_id) : []
       else
-        # Fined the current user's team
+        # Find the current user's team
         @my_team = current_user.team
         # Find team emmbers 
         @team_members = @my_team.team_members
         # owner user info
         @owner = @members[@my_team.owner_id]
-        # remove owner form team members
-        #@team_members = @team_members - [@owner.team_member]
         # To show team join requests to owner alone 
         if @my_team.owner_id == current_user.id
           @added_members = @my_team.add_requests.collect(&:user_id)

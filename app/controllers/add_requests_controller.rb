@@ -45,7 +45,7 @@ class AddRequestsController < ApplicationController
     # delete all join requests 
     current_user.join_requests.destroy_all
     # Delete add_req
-    add_request.destroy
+    current_user.add_requests.destroy_all
     # Email member 
     Resque.enqueue(DecideTeamMailer, current_user.name, team.name, owner.email, 5)
     # return team 

@@ -19,6 +19,9 @@ class TeamsController < ApplicationController
       # Create a team memeber 
       member = TeamMember.new(:team_id => team.id, :user_id => team.owner_id, :user_handle => team.owner_handle)
       member.save
+      # delete the current_users/ team owner's requests
+      current_user.join_requests.destroy_all
+      current_user.add_requests.destroy_all
       render :json => {:err => nil, :data => team} and return 
     else
       render :json => {:err => "present", :data => team.errors.full_messages.to_s} and return 
@@ -58,6 +61,7 @@ class TeamsController < ApplicationController
       # send email to all except owner
       Resque.enqueue(DecideTeamMailer, current_user.name, team.name, users[member.user_id].email, 4) if member.user_id != current_user.id
     end
+    # destroy team,team_members and add_requests,join_requests
     team.destroy
     render :json => {:err => nil, :data => nil} and return 
   end 

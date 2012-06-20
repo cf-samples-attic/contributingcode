@@ -4,7 +4,7 @@
     <button type="button" class="close" data-dismiss="modal">×</button>
       <h2>Candidates to invite</h2>
   </div>
-  <div class="modal-body" style="overflow:scroll;height:250px;">
+  <div class="modal-body" style="overflow:scroll;height:550px;">
     <% if @candidates.length < 1%>
       <h3 style="padding-left:20px"> No members to add</h3>
     <% else %>
@@ -13,13 +13,13 @@
           <div class="span2 ">
             <img class="small-avatar " src="<%= user.avatar %>">
           </div>
-          <div class="span2">
+          <div class="span4">
             <h3><%= user.name %></h3>
             <div>
               <a href='<%= add_request_path(user.id) %>' class="btn addReq">Add</a>
             </div>
           </div>
-          <div class="span8">
+          <div class="span6">
             <a href='http://github.com/<%= user.handle %>'><h3><%= user.handle %></h3></a>
             <h3> <%= user.email %> </h3>
           </div>

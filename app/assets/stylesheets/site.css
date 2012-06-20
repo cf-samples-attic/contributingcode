@@ -204,6 +204,12 @@ h1, .hero-unit h1 {
     margin-left: 20px;
 }
 
+.medium-avatar {
+    width: 100px;
+    height: 100px;
+    border: solid 6px white;
+}
+
 .small-avatar {
     width: 60px;
     height: 60px;
@@ -265,4 +271,21 @@ h1, .hero-unit h1 {
   left: 22px;
   top:-20px;
   margin-top: 20px;
+}
+
+
+.light {
+  font-weight: 200;
+}
+.regular {
+  font-weight: 500;
+}
+.bold {
+  font-weight: 700;
+}
+.green {
+  color: #11b233;
+}
+.blue {
+  color: #3d88f3;
 }

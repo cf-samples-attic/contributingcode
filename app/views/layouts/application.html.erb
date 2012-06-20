@@ -23,7 +23,7 @@
             <% if current_user.team.blank? %>
               <a data-toggle="modal" href="#addReqModal" >Requests <span class="notification"><%= @add_reqs.length %></span></a>
             <% end %>
-            <% if current_user.owned_team.present? && @requests.length > 0 %>
+            <% if current_user.owned_team.present? && @requests.length > 0 && current_user.owned_team.member_count < 4 %>
               <a class="space_top" data-toggle="modal" href="#pendingJoinReqModal" ><span class="notification"><%= @requests.length %></span></a>
             <% end %>
             Hi <strong><%= current_user.name %></strong> |

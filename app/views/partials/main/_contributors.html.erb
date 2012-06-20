@@ -5,7 +5,7 @@
       <div class="carousel-inner">
         <% i=0 %>
         <%-@users.each_with_index do |user, index| %>
-          <% if i%4==0 %>
+          <% if i%8==0 %>
             <div class="item">
               <div class="row-fluid" style="margin-left: 100px; margin-right:100px">
           <% end %>
@@ -14,15 +14,15 @@
               <img class='small-avatar' src = "<%=user.avatar%>">
             </a>
           </div>
-          <% if i%4==3 || i==@users.length-1%>
+          <% if i%8==7 || i==@users.length-1%>
               </div>
              </div>
           <% end %>            
           <% i = i+1 %>
         <%-end%>
       </div>
-      <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-      <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      <a class="carousel-control left" href="#contributorsCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#contributorsCarousel" data-slide="next">&rsaquo;</a>
     </div>
   <% end %>
 </div>

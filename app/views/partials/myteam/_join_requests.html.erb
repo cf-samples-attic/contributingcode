@@ -7,6 +7,9 @@
   </div>
   <div class="modal-body" style="overflow:scroll;height:250px;">
     <%-if @requests.count > 0 %>
+      <% if @my_team.member_count == 4 %> 
+        You Cannot any members now as your team is full.
+      <% end %> 
       <% @requests.each do |request| %>
       <div class="row-fluid space_top">
         <div class="span2">
@@ -14,7 +17,9 @@
         </div>
         <div class="span4">
           <h3><%= @members[request.user_id].name %></h3>
-          <a href='<%= accept_path(request.user_id) %>' class='btn owner_decides'>Accept</a> 
+          <% if @my_team.member_count < 4 %> 
+            <a href='<%= accept_path(request.user_id) %>' class='btn owner_decides'>Accept</a> 
+          <% end %>
           <a href='<%= decline_path(request.user_id) %>' class='btn owner_decides'>Decline</a>
         </div>
         <div class="span6">

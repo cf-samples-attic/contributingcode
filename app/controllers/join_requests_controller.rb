@@ -47,6 +47,8 @@ class JoinRequestsController < ApplicationController
     member = User.find(params[:id])
     # delete all join requests 
     member.join_requests.destroy_all
+    # delete all add  requests
+    member.add_requests.destroy_all
     # Email member 
     Resque.enqueue(DecideTeamMailer, current_user.name, team.name, member.email, 1)
     # return team 

@@ -56,7 +56,7 @@ class Notifier < ActionMailer::Base
     elsif @type == 6
       subject = "A member declined your request"  
     elsif @type == 4
-      subject = "The owener deleted your team" 
+      subject = "The owner deleted your team" 
     end
     mail( :to             => to_email, 
           :subject        => subject,

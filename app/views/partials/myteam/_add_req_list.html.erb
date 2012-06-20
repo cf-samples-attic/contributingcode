@@ -15,8 +15,10 @@
         <div class="span2">
           <img class ="small-avatar" src="<%= @teams_index[req.team_id].image_url %>">
         </div>
-        <div class="span10"
+        <div class="span5">
           <h3><%= req.team_name %></h3>
+        </div>
+        <div class="span5">
           <a href='<%= accept_add_path(req.team_id) %>' class="btn acceptTeamReq">Accept</a>
           <a href='<%= decline_add_path(req.team_id) %>' class="btn declineTeamReq">Decline</a>      
         </div>
