@@ -47,5 +47,9 @@ module Tumblrtv
     config.assets.version = '1.0'
 
     config.middleware.use "ServeGridfsImage"
+
+    config.generators do |g|
+      g.orm :active_record
+    end
   end
 end

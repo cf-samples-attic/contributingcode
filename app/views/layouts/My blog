@@ -1,0 +1,51 @@
+My blog 
+
+
+I was excited to hear during the orientation  that the cloufoundry team was going to organize the contributigcode event for the interns and the students.
+
+To my surprise I was incharge of building the website for the event. 
+
+   Lets dive into the crux of the app 
+
+   Analyzing the scenario I listed down the requirements as follows 
+
+   1) A login system 
+   2) Ability to create teams or join existing ones 
+   3) The ability of the owner to edit the team and others to leave a team if they wanted to 
+   4) Sections to post various events 
+
+   Design 
+
+    1) We decided it to be a single page app 
+    2) With social feel  in it 
+    3) Wit regards to the backend the models were quite straight forward 
+        *  A user model 
+        *  A team model 
+        *  A member model associating the users and the teams they belong to 
+        *  Join requests and add requests model to record the requests 
+
+    4) From the storage perspective 
+        * Mysql for storing the data represented by the model 
+        * Redis for resque operations which I will talk about later 
+        * MongoDB Gridfs to store team avatars 
+
+    5) Imprementations 
+        I did a quick scaffolding of basic controllers, models required and got the basic code working without validations and optimisations.
+
+    6) Makeing it neat 
+        As the design was figured made. I integrated the twitter bootstrap into the project to make it look pretty.
+
+    7) Whats new 
+        1) The front end validator - An opensourse library validatehelper written on top of validate js to validate forms in the 
+        frontend with the help of twitter bootstrap. 
+        This was made as a separeate opensource code and can be used irespective of the backend framework.
+
+        2) Redis was used to bring in resque operations for emailing the users. This was primarily done to improve the user experience by sending the emails lazily and responding to post requests as soon as the database entries have been made
+
+        3) We wanted to make the app prettier by adding a team avatar option. We used the carrierwave gem for uploading the images and storing it , and mongoid gem was used to connect with mongo lab to store the images using the grid fs.
+
+        talk about retrieval 
+
+        4) Github oauth for user sign in - this reduces the burden of having a custom login system - thanks to oauth 
+
+     8) Havin gotten the backend crux working smoothly  

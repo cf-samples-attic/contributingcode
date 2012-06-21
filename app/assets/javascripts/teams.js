@@ -20,7 +20,7 @@ $(document).ready(function(){
   $("#ShareTweet").click(function(e) {
       e.preventDefault()
       var self = this
-      var turl = "https://twitter.com/intent/tweet?text=Team for good @cfcodesprint&url=http://contributingcode.cloudfoundry.com&related=cloudfoundry"
+      var turl = "https://twitter.com/intent/tweet?text=Team up for good @cfcodesprint&url=http://contributingcode.cloudfoundry.com&related=cloudfoundry"
       var width  = 575,
         height = 400,
         left   = ($(window).width()  - width)  / 2,
