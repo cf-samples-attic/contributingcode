@@ -3,19 +3,18 @@
     <button type="button" class="close" data-dismiss="modal">×</button>
     <h3>Please Complete the form to finish the registration </h3>
   </div>
-  <div class="modal-body">
+  <div class="modal-body" style="height:500px;">
     <%= form_tag users_path , :class => "formset",  :name => "register_form", :id=>"register_form", :method => "post" %>
 
     <div class="control-group">
-      <%= label_tag "GitHub", "GitHub", :class => "control-label" %>
+      Github : <a class="small-avatar" href="http://github.com/<%= @handle %>" target="_blank"><%= @handle %></a>
       <div class="controls">
         <a href="http://github.com/<%= @handle %>" target="_blank"><img src='<%= @avatar %>'></a>
-        <a href="http://github.com/<%= @handle %>" target="_blank"><%= @handle %></a>
+       </div>
     </div>
     <br/>
-    <br/>
     <div class="control-group">
-      <%= label_tag :FirstName, "Name", :class => "control-label" %>
+      <%= label_tag :FirstName, "Name", :class => "control-label blue" %>
       <div class="controls">
         <%= text_field_tag(:name,@name, :"data-rules"=> "required|max_length[12]",  :"data-name" =>"name", :class => "validate input-xlarge") %>
         <p class="help-block">Please fill out your full name.</p>
@@ -23,22 +22,21 @@
     </div>
 
     <div class="control-group">
-      <%= label_tag :Email, nil, :class => "control-label" %>
+      <%= label_tag :Email, nil, :class => "control-label blue" %>
       <div class="controls">
         <%= text_field_tag(:email,@email, :class => "validate input-xlarge", :"data-rules"=> "required|valid_email", :"data-display"=>"Email", :"data-name" =>"email" ) %>
         <p class="help-block">Email will only be used for the sprint.</p>
       </div>
     </div>
-  </div>
-  <div class="control-group">
-    <div class="controls">
-      <%= label_tag :"Choose you shirt size" , nil, :class => "control-label" %>
-      <%= radio_button_tag(:tee, "S") %> S
-      <%= radio_button_tag(:tee, "M") %> M
-      <%= radio_button_tag(:tee, "L") %> L
-      <%= radio_button_tag(:tee, "XL") %> XL
-      <%= radio_button_tag(:tee, "XXL") %> XXL
-      <p class="help-block"></p>
+    <div class="control-group">
+      <div class="controls">
+        <p class="blue"> Choose your Shirt size</p>
+        <ul style="list-style-type: none;"><li><%= radio_button_tag(:tee, "S") %> S</li>
+        <li><%= radio_button_tag(:tee, "M")%> M</li>
+        <li><%= radio_button_tag(:tee, "L") %> L</li>
+        <li><%= radio_button_tag(:tee, "XL") %> XL</li>
+        <li><%= radio_button_tag(:tee, "XXL") %> XXL</li>
+      </div>
     </div>
   </div>
   <div class="modal-footer">
@@ -49,7 +47,4 @@
       </div>
     </div>
   </div>
-  <script>
-     $()
-  </script>
 </div>
