@@ -16,7 +16,7 @@
     <div class="control-group">
       <%= label_tag :FirstName, "Name", :class => "control-label blue" %>
       <div class="controls">
-        <%= text_field_tag(:name,@name, :"data-rules"=> "required|max_length[12]",  :"data-name" =>"name", :class => "validate input-xlarge") %>
+        <%= text_field_tag(:name,@name, :"data-rules"=> "required|max_length[15]",  :"data-name" =>"name", :class => "validate input-xlarge") %>
         <p class="help-block">Please fill out your full name.</p>
       </div>
     </div>
@@ -28,14 +28,28 @@
         <p class="help-block">Email will only be used for the sprint.</p>
       </div>
     </div>
-    <div class="control-group">
-      <div class="controls">
-        <p class="blue"> Choose your Shirt size</p>
-        <ul style="list-style-type: none;"><li><%= radio_button_tag(:tee, "S") %> S</li>
-        <li><%= radio_button_tag(:tee, "M")%> M</li>
-        <li><%= radio_button_tag(:tee, "L") %> L</li>
-        <li><%= radio_button_tag(:tee, "XL") %> XL</li>
-        <li><%= radio_button_tag(:tee, "XXL") %> XXL</li>
+
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="control-group">
+          <div class="controls">
+            <p class="blue"> Choose your Shirt size</p>
+            <ul style="list-style-type: none;"><li><%= radio_button_tag(:tee, "S") %> S</li>
+            <li><%= radio_button_tag(:tee, "M")%> M</li>
+            <li><%= radio_button_tag(:tee, "L") %> L</li>
+            <li><%= radio_button_tag(:tee, "XL") %> XL</li>
+            <li><%= radio_button_tag(:tee, "XXL") %> XXL</li>
+          </div>
+        </div>
+      </div>  
+      <div class="span6">
+          <div class="control-group">
+          <div class="controls">
+            <p class="blue">Gender</p>
+            <ul style="list-style-type: none;"><li><%= radio_button_tag(:gender, "F") %> F</li>
+            <li><%= radio_button_tag(:gender, "M")%> M</li>
+          </div>
+        </div>
       </div>
     </div>
   </div>

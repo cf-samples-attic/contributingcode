@@ -15,6 +15,11 @@ class UsersController < ApplicationController
     else 
      user.tee = "M"
     end
+    if params[:gender].present?
+      user.gender = params[:gender] 
+    else 
+     user.gender = "M"
+    end
       if user.save
         Resque.enqueue(RegisterMailer, user.id)
         session[:user_id] = user.id
