@@ -64,4 +64,11 @@ class Notifier < ActionMailer::Base
           :template_name  => 'decide_team')
   end
 
+  # Announcement Mailer 
+  def admin_mailer(to_email,subject,message)
+     mail( :to     => to_email, 
+          :subject => subject,
+          :body    => message)
+  end 
+
 end

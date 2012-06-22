@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
 
+
+ 
   # Landing page
   # Gather all info if user is logged in
   # Lists teams
@@ -50,4 +52,38 @@ class HomeController < ApplicationController
       end
     end
   end
+
+
+  # Admin pannel 
+  # Only for admin
+  def admin
+    admins = [2,45]
+    redirect_to "/" and return if current_user.nil? or !admins.include?(current_user.id)
+    @users = User.all
+    @members = TeamMember.all
+    @teams = Team.all
+    @ms = @users.select{|u| u.gender == "M" && u.tee =="S"}.count 
+    @mm = @users.select{|u| u.gender == "M" && u.tee =="M"}.count 
+    @ml = @users.select{|u| u.gender == "M" && u.tee =="L"}.count 
+    @mxl = @users.select{|u| u.gender == "M" && u.tee =="XL"}.count 
+    @mxxl = @users.select{|u| u.gender == "M" && u.tee =="XXL"}.count 
+    @fs = @users.select{|u| u.gender == "F" && u.tee =="S"}.count 
+    @fm = @users.select{|u| u.gender == "F" && u.tee =="M"}.count 
+    @fl = @users.select{|u| u.gender == "F" && u.tee =="L"}.count 
+    @fxl = @users.select{|u| u.gender == "F" && u.tee =="XL"}.count 
+    @fxxl = @users.select{|u| u.gender == "F" && u.tee =="XXL"}.count 
+    render :layout => "admin_layout"
+  end
+
+  # only for admins to send announcements
+  def announcement 
+    admins = [2,45]
+    redirect_to "/" and return if current_user.nil? or !admins.include?(current_user.id)
+    users = User.all
+    users.each do |user|
+      Resque.enqueue(AnnouncementMailer, user.email, params[:subject], params[:message])
+    end 
+    redirect_to "/admin/"
+  end 
+
 end

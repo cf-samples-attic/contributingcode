@@ -28,6 +28,10 @@ Tumblrtv::Application.routes.draw do
   # api for team members 
   match '/api_members' => 'team_members#api_members', :as =>'get_members'
 
+  #Admin 
+  match '/admin/' =>'home#admin' 
+  match '/announcement/' =>'home#announcement' 
+
   # REST methods
   resources :teams
   resources :users
