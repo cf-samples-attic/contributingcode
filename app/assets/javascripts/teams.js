@@ -8,7 +8,8 @@ $(document).ready(function(){
   $('.carousel').carousel({
      interval: 2000
   })
-
+  $('#mee').popover()
+  
   // Csrf verification
   $.ajaxSetup({
     headers: {
@@ -291,6 +292,18 @@ $(document).ready(function(){
   return false;
   });
 
+  // faq 
+  $(".q1").click(function(e){
+    e.preventDefault();
+    var $this = $(this)
+    if ($this.html()=='-'){
+     $this.next().addClass('hide')
+     $this.html('+')
+    }else{
+      $this.next().removeClass('hide')
+      $this.html('-')
+    }
+  })
 
   // For page scrolling
   function scrollToElement(selector, callback){

@@ -32,6 +32,9 @@ Tumblrtv::Application.routes.draw do
   match '/admin/' =>'home#admin' 
   match '/announcement/' =>'home#announcement' 
 
+  #FAQ
+  match '/faq/' => 'home#faq'
+
   # REST methods
   resources :teams
   resources :users

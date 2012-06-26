@@ -1,6 +1,4 @@
 class HomeController < ApplicationController
-
-
  
   # Landing page
   # Gather all info if user is logged in
@@ -53,6 +51,10 @@ class HomeController < ApplicationController
     end
   end
 
+  # faq
+  def faq
+    render :layout => "secondary_layout"
+  end 
 
   # Admin pannel 
   # Only for admin
@@ -72,7 +74,7 @@ class HomeController < ApplicationController
     @fl = @users.select{|u| u.gender == "F" && u.tee =="L"}.count 
     @fxl = @users.select{|u| u.gender == "F" && u.tee =="XL"}.count 
     @fxxl = @users.select{|u| u.gender == "F" && u.tee =="XXL"}.count 
-    render :layout => "admin_layout"
+    render :layout => "secondary_layout"
   end
 
   # only for admins to send announcements

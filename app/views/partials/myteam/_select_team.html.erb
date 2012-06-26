@@ -9,7 +9,7 @@
 </div>
 
 <!-- Display teams to join  -->
-<div style="height:500px;overflow:scroll;">
+<div style="height:500px;overflow:scroll;">    
   <% @teams.each do |team| %>
     <% if team.member_count < 4 %>
       <div class="row-fluid space_top">

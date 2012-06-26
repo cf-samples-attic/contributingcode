@@ -288,3 +288,26 @@ h1, .hero-unit h1 {
 .blue {
   color: #3d88f3;
 }
+
+
+.faq_pos{
+   padding:20px 0;
+   font-size:20px;
+   margin-top:80px
+}
+
+.question {
+  font-weight: 700;
+  color: #3A87AD;
+  background-color: #D9EDF7;
+  border-color: #BCE8F1;
+  padding: 8px 35px 8px 14px;
+  
+}
+
+.answer{
+ font-weight: 100;
+ font-size:16px;
+ padding: 20px 0px 0px 30px;
+ color: black;
+}
