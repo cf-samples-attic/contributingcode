@@ -2,6 +2,12 @@
 $(document).ready(function(){
     console.log("ko");
 
+
+  // Move the page to a particular div 
+  var loc=$(window.location)[0].hash.replace("#","")
+  if (loc){
+    scrollToElement('.'+loc);
+  }
   // Activate bootstrap elements
   $('#myModal').modal();
   $('.typeahead').typeahead();
@@ -392,5 +398,7 @@ $(document).ready(function(){
   $(".m").click(function(){
     scrollToElement('.myteam');
   })
+
+
 
 });
