@@ -21,8 +21,9 @@
 
         <div class='control-group' style='margin-bottom:0'>
           <div class="controls">
+            <%= label_tag :"Team avatar", nil, :class => "control-label"%>
+            <img class='avatar' src = "/assets/avatar_team.gif"><br>
             <%= file_field_tag :image, :class => "medium", :size => "30" %>
-           <p class="help-block"></p>
           </div>
         </div>
 

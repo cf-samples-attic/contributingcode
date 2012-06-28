@@ -10,6 +10,7 @@ $(document).ready(function(){
   }
   // Activate bootstrap elements
   $('#myModal').modal();
+  $('#transportModal').modal();
   $('.typeahead').typeahead();
   $('.carousel').carousel({
      interval: 2000
@@ -266,7 +267,6 @@ $(document).ready(function(){
             }
             else{
               window.location = "/"
-               scrollToElement('.myteam');
             }
           }
         }

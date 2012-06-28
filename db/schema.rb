@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120622065901) do
+ActiveRecord::Schema.define(:version => 20120628150500) do
 
   create_table "add_requests", :force => true do |t|
     t.integer  "user_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20120622065901) do
     t.datetime "updated_at", :null => false
     t.string   "tee"
     t.string   "gender"
+    t.integer  "transport"
   end
 
 end

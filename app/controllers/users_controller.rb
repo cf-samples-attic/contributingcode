@@ -10,16 +10,9 @@ class UsersController < ApplicationController
     user.email = params[:email] 
     user.handle = auth["extra"]["raw_info"]["login"]
     user.avatar = auth["extra"]["raw_info"]["avatar_url"]
-    if params[:tee].present?
-      user.tee = params[:tee] 
-    else 
-     user.tee = "M"
-    end
-    if params[:gender].present?
-      user.gender = params[:gender] 
-    else 
-     user.gender = "M"
-    end
+    user.tee = params[:tee] if params[:tee].present?
+    user.gender = params[:gender]  if params[:gender].present?
+    user.transport = params[:transport] if params[:transport].present?
       if user.save
         Resque.enqueue(RegisterMailer, user.id)
         session[:user_id] = user.id
@@ -36,5 +29,15 @@ class UsersController < ApplicationController
         render "home/index"
       end 
   end  
+
+  def update
+    if current_user
+      current_user.tee = params[:tee] if params[:tee].present?
+      current_user.gender = params[:gender] if params[:gender].present?
+      current_user.transport = params[:transport] if params[:transport].present?
+      current_user.save
+    end
+    redirect_to "/"
+  end 
 
 end

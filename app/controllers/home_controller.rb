@@ -74,6 +74,9 @@ class HomeController < ApplicationController
     @fl = @users.select{|u| u.gender == "F" && u.tee =="L"}.count 
     @fxl = @users.select{|u| u.gender == "F" && u.tee =="XL"}.count 
     @fxxl = @users.select{|u| u.gender == "F" && u.tee =="XXL"}.count 
+    @intern_shuttle = @users.select{|u| u.transport == 0}.count
+    @caltrain_shuttle = @users.select{|u| u.transport == 1}.count
+    @no_shuttle = @users.select{|u| u.transport == 2}.count
     render :layout => "secondary_layout"
   end
 
