@@ -18,9 +18,11 @@ Sections to post various information.
 
 #####Deploying the app on Cloud Foundry
 Fork the project and then 
-> git clone git@github.com:<your_name>/contributingcode.git contributingcode
-> cd contributingcode
-> bundle install;bundle package
-> rake assets:precompile
-> vmc push --runtime ruby19 --nostart 
+```ruby
+git clone git@github.com:<your_name>/contributingcode.git contributingcode
+cd contributingcode
+bundle install;bundle package
+rake assets:precompile
+vmc push --runtime ruby19 --nostart 
+```
 
