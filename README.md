@@ -39,7 +39,7 @@ vmc env-add contributingcode github_client_secret= 'github client secret'
 vmc env-add contributingcode mongodb_host= 'host'
 vmc env-add contributingcode mongodb_port= 'port'
 vmc env-add contributingcode mongodb_username= 'username'
-vmc env-add contributingcode mongodb_password= 'password
+vmc env-add contributingcode mongodb_password= 'password'
 vmc env-add contributingcode mongodb_db='db name'
 ```
 
