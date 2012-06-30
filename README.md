@@ -26,3 +26,23 @@ rake assets:precompile
 vmc push --runtime ruby19 --nostart 
 ```
 
+######To start the worker app 
+Rename the manifest file if you have creted 
+```ruby
+vmc push <workerappname> --nostart
+```
+#####To configure
+Set the Github, SendGrid and  Mongolab credentials
+```ruby
+vmc env-add contributingcode github_client_id=  'github client id'
+vmc env-add contributingcode github_client_secret= 'github client secret'
+vmc env-add contributingcode mongodb_host= 'host'
+vmc env-add contributingcode mongodb_port= 'port'
+vmc env-add contributingcode mongodb_username= 'username'
+vmc env-add contributingcode mongodb_password= 'password
+vmc env-add contributingcode mongodb_db='db name'
+```
+
+Similarly set the environmental variables to the worker app too.
+
+
