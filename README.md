@@ -11,10 +11,10 @@ The ability of the owner to edit the team and others to leave a team if they wan
 Sections to post various information. 
 
 ####Prerequesites 
-*Create a Cloud Foudnry account to deploy your app [here](http://www.cloudfoundry.com/)
-*Create an application on Github and obtain the client id and client sceret to use for OAuth [here](https://github.com/settings/applications)
-*Create a Mongolab account to store the images in Mongo GridFs [here](https://mongolab.com/home)
-*Create a Sendgrid account and obtain you credentials for email delivery [here](http://sendgrid.com/)
+* Create a Cloud Foudnry account to deploy your app [here](http://www.cloudfoundry.com/)
+* Create an application on Github and obtain the client id and client sceret to use for OAuth [here](https://github.com/settings/applications)
+* Create a Mongolab account to store the images in Mongo GridFs [here](https://mongolab.com/home)
+* Create a Sendgrid account and obtain you credentials for email delivery [here](http://sendgrid.com/)
 
 #####Deploying the app on Cloud Foundry
 Precompiling assets 
