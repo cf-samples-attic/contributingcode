@@ -17,6 +17,6 @@
      <%= render :partial => "users/registration_closed" %>
   <% end %>
 <% end %>
-<% if current_user && (current_user.tee.blank? || current_user.transport.blank?) %>
+<% if current_user && (current_user.tee.blank? || current_user.transport.blank? || current_user.gender.blank?) %>
   <%= render :partial => "users/update_info" %>
 <% end %> 
