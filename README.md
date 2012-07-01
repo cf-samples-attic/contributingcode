@@ -32,7 +32,7 @@ Rename the manifest file if you have creted
 vmc push <workerappname> --nostart
 ```
 #####To configure
-Set the Github, SendGrid and  Mongolab credentials
+Set the Github and  Mongolab credentials for core app
 ```ruby
 vmc env-add contributingcode github_client_id=  'github client id'
 vmc env-add contributingcode github_client_secret= 'github client secret'
@@ -43,6 +43,25 @@ vmc env-add contributingcode mongodb_password= 'password'
 vmc env-add contributingcode mongodb_db='db name'
 ```
 
-Similarly set the environmental variables to the worker app too.
+Similarly set the environmental variables to the worker app too. Set the sendgrid credentiols in addition to the 
+Mongolab and Github credentials
+```ruby
+vmc env-add <worker appname> github_client_id=  'github client id'
+vmc env-add <worker appname> github_client_secret= 'github client secret'
+vmc env-add <worker appname> mongodb_host= 'host'
+vmc env-add <worker appname> mongodb_port= 'port'
+vmc env-add <worker appname> mongodb_username= 'username'
+vmc env-add <worker appname> mongodb_password= 'password'
+vmc env-add <worker appname> mongodb_db='db name'
+vmc env-add <worker appname> sendgrid_username='sendgrid username'
+vmc env-add <worker appname> sendgrid_password='sendgrid_password'
+```
+
+While running on localhost set mysql_pwd as follows
+```ruby 
+export mysql_pwd='mysql password'
+```
+
+
 
 
