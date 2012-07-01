@@ -1,8 +1,8 @@
 ####Overview
 Contributing code app was primarily built for the #contributingcode event with the functionality to organize an coding event.
-It is a Rails 3.2.6 app using Mysql for storing data, Mongo gridFS to store images, Sendgrid API for email delivery and redis for 
-resque operations. There is a core app and additionally a worker app to perform the resque operations in the background.
-This app is very generic and can be used for other events by just changing the content and css.
+It is a **Rails 3.2.6** app using **Mysql** for storing data, **Mongo GridFS** to store images, **Sendgrid API** for email delivery
+and **Redis** for **Resque** operations. There is a core app and additionally a worker app to perform the resque operations in 
+the background. This app is very generic and can be used for other events by just changing the content and css as required.
 
 ####Requirements
 A login system. 
