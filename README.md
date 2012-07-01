@@ -1,7 +1,7 @@
 ####Overview
-Contributing code app was primarily built for the #contributingcode event with the functionality for participants 
-to register for an event, and later create or join teams. The app has the standard sections like venue, FAQ's,etc, to be 
-displayed. Additionally email notifications for various actions like registration confirmation, join team,etc were implemented.
+Contributing code app was primarily built for the #contributingcode event with the functionality to organize an coding event.
+It is a Rails 3.2.6 app using Mysql for storing data, Mongo gridFS to store images, Sendgrid API for email delivery and redis for 
+resque operations. There is a core app and additionally a worker app to perform the resque operations in the background.
 This app is very generic and can be used for other events by just changing the content and css.
 
 ####Requirements
@@ -9,6 +9,7 @@ A login system.
 Ability for users to create teams or join existing ones. 
 The ability of the owner to edit the team and others to leave a team if they wanted to. 
 Sections to post various information. 
+Email notifications for registering, add requests and any modification to team.
 
 ####Prerequesites 
 * Create a Cloud Foundry account to deploy your app [here](http://www.cloudfoundry.com/)
@@ -103,7 +104,7 @@ Bind another? [yN]: y
 1: mydb
 2: myque
 Which one?: 2
-Create services to bind to 'ccworke'? [yN]: n
+Create services to bind to 'ccworker'? [yN]: n
 Would you like to save this configuration? [yN]: y
 Manifest written to manifest.yml.
 Creating Application: OK
@@ -119,27 +120,27 @@ Push Status: OK
 #####To configure
 Set the Github and  Mongolab credentials for core app
 ```ruby
-vmc env-add contributingcode github_client_id=  'github client id'
+vmc env-add contributingcode github_client_id= 'github client id'
 vmc env-add contributingcode github_client_secret= 'github client secret'
 vmc env-add contributingcode mongodb_host= 'host'
 vmc env-add contributingcode mongodb_port= 'port'
 vmc env-add contributingcode mongodb_username= 'username'
 vmc env-add contributingcode mongodb_password= 'password'
-vmc env-add contributingcode mongodb_db='db name'
+vmc env-add contributingcode mongodb_db= 'db name'
 ```
 
 Similarly set the environmental variables to the worker app too. Set the sendgrid credentiols in addition to the 
 Mongolab and Github credentials
 ```ruby
-vmc env-add <worker appname> github_client_id=  'github client id'
-vmc env-add <worker appname> github_client_secret= 'github client secret'
-vmc env-add <worker appname> mongodb_host= 'host'
-vmc env-add <worker appname> mongodb_port= 'port'
-vmc env-add <worker appname> mongodb_username= 'username'
-vmc env-add <worker appname> mongodb_password= 'password'
-vmc env-add <worker appname> mongodb_db='db name'
-vmc env-add <worker appname> sendgrid_username='sendgrid username'
-vmc env-add <worker appname> sendgrid_password='sendgrid_password'
+vmc env-add ccworker github_client_id= 'github client id'
+vmc env-add ccworker github_client_secret= 'github client secret'
+vmc env-add ccworker mongodb_host= 'host'
+vmc env-add ccworker mongodb_port= 'port'
+vmc env-add ccworker mongodb_username= 'username'
+vmc env-add ccworker mongodb_password= 'password'
+vmc env-add ccworker mongodb_db= 'db name'
+vmc env-add ccworker sendgrid_username= 'sendgrid username'
+vmc env-add ccworker sendgrid_password= 'sendgrid_password'
 ```
 
 While running on localhost set mysql_pwd as follows
@@ -149,10 +150,14 @@ export mysql_pwd='mysql password'
 
 Finally to start your app on cloudfoundry 
 ```ruby 
-app start <core app name>
-app start <worker app name>
+app start contributingcode
+app start ccworker
 ```
 
+Visit contributingcode.cloudfoundry.com to view your web application 
+
+PS: The core app and worker app names are subject to availability so you may not get the same app name as 'contributingcode' instead 
+give your own app names.
 
 
 
