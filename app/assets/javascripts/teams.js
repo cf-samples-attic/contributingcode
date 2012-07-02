@@ -13,9 +13,11 @@ $(document).ready(function(){
   $('#transportModal').modal();
   $('.typeahead').typeahead();
   $('.carousel').carousel({
-     interval: 2000
+     interval: 3000
   })
-  $('#mee').popover()
+  
+
+  $('.ttip').tooltip('show',{ placement: 'top'})
   
   // Csrf verification
   $.ajaxSetup({

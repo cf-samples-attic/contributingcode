@@ -5,16 +5,17 @@
       <div class="carousel-inner">
         <% i=0 %>
         <%-@users.each_with_index do |user, index| %>
-          <% if i%8==0 %>
+          <% if i%7==0 %>
             <div class="item">
-              <div class="row-fluid" style="margin-left: 100px; margin-right:100px">
+              <div style="width:800px;heigth:100px;margin-left:100px; margin-right:100px">
           <% end %>
-          <div class= "span1 offset1">
-            <a href="http://github.com/<%= user.handle %>">
-              <img class='small-avatar' src = "<%=user.avatar%>">
+          <div style="float: left;margin:10px">
+            <a href="http://github.com/<%= user.handle %>" target="_blank">
+              <img class='contributor-avatar' src = "<%=user.avatar%>">
             </a>
+            <div style="font-size:11px;width:72px;height:11px;margin-top:5px;text-align:center;"><a href="http://github.com/<%= user.handle %>" target="_blank"><%= user.name %></a></div>
           </div>
-          <% if i%8==7 || i==@users.length-1%>
+          <% if i%7==6|| i==@users.length-1%>
               </div>
              </div>
           <% end %>            

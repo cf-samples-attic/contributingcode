@@ -221,6 +221,23 @@ h1, .hero-unit h1 {
     border: solid 6px white;
 }
 
+.contributor-avatar {
+    width: 70px;
+    height: 70px;
+    border: solid 6px white;
+}
+
+.avatar_footer{
+  width: 68px;  
+  height:14px;
+  font-size: 11px;
+  margin-top: 0px;
+  background-color: black;
+  color: white;
+  padding: 2px;
+  border: solid 2px black; 
+}
+
 .space_top {
     margin-top: 30px;
 }
@@ -317,3 +334,4 @@ h1, .hero-unit h1 {
  padding: 20px 0px 0px 30px;
  color: black;
 }
+
