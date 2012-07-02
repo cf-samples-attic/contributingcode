@@ -150,8 +150,8 @@ export mysql_pwd='mysql password'
 
 Finally to start your app on cloudfoundry 
 ```ruby 
-app start contributingcode
-app start ccworker
+vmc app start contributingcode
+vmc app start ccworker
 ```
 
 Visit contributingcode.cloudfoundry.com to view your web application 
