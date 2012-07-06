@@ -67,6 +67,7 @@ $(document).ready(function(){
     })
 
   // User profile init
+  if(typeof(tee) != "undefined"){
   if(tee)
     $('#tee_'+tee)[0].checked = true;
   else 
@@ -79,7 +80,7 @@ $(document).ready(function(){
     $('#transport_'+transport)[0].checked = true;
   else 
     $('#transport_2')[0].checked = true;
-
+}
   // My team js hide and show
   $(".team_btn").click(function(){
     event.preventDefault();
