@@ -10,7 +10,8 @@ $(document).ready(function(){
   }
   // Activate bootstrap elements
   $('#myModal').modal();
-  $('#transportModal').modal();
+  if(open=="1")
+    $('#userModal').modal();
   $('.typeahead').typeahead();
   $('.carousel').carousel({
      interval: 3000
@@ -64,6 +65,20 @@ $(document).ready(function(){
       window.open(fburl, 'facebookpop', opts)
       return false;
     })
+
+  // User profile init
+  if(tee)
+    $('#tee_'+tee)[0].checked = true;
+  else 
+     $('#tee_M')[0].checked = true;
+  if(gender)
+    $('#gender_'+gender)[0].checked = true;
+  else 
+    $('#gender_M')[0].checked = true;
+  if(transport)
+    $('#transport_'+transport)[0].checked = true;
+  else 
+    $('#transport_2')[0].checked = true;
 
   // My team js hide and show
   $(".team_btn").click(function(){

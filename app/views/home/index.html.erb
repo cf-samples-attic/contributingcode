@@ -8,8 +8,6 @@
   <%= render  :partial => "partials/main/teams"%>
 
 
-
-
 <% if (params[:action] == "create" || params[:action] == "create_user")&& current_user.blank? %>
   <% if @users.length < 300 %>
     <%= render :partial => "users/new" %>
@@ -18,5 +16,11 @@
   <% end %>
 <% end %>
 <% if current_user && (current_user.tee.blank? || current_user.transport.blank? || current_user.gender.blank?) %>
-  <%= render :partial => "users/update_info" %>
-<% end %> 
+ <%= render  :partial => "users/user_info"%>
+ <%= content_for :js do %>
+   var open="1"
+ <% end %> 
+<% elsif current_user %>
+  <%= render  :partial => "users/user_info"%>
+<% end %>
+  

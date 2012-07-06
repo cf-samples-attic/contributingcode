@@ -1,10 +1,17 @@
-<div class="modal hide" id="transportModal">
+<div class="modal hide" id="userModal">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>Please fill up  the appropriate fields </h3>
+    <h3>Update profile</h3>
   </div>
   <div class="modal-body">
-    <%= form_tag user_path(current_user) , :class => "formset",  :name => "transport_form", :id=>"transport_form", :method => "put" %>
+    <%= form_tag user_path(current_user) , :class => "formset",  :name => "user_info_form", :id=>"user_info_form", :method => "put" %>
+      <div class="control-group">
+          <%= label_tag :FirstName, "Name", :class => "control-label blue" %>
+          <div class="controls">
+            <%= text_field_tag(:name,current_user.name, :"data-rules"=> "required|max_length[16]",  :"data-name" =>"name", :class => "validate input-xlarge") %>
+            <p class="help-block">Please fill out your full name.</p>
+          </div>
+      </div>
     <div class="row-fluid">
       <div class="span4">
         <div class="control-group">
@@ -39,6 +46,7 @@
         <li>* An email on shuttle service will be sent once registrations are over</li>
       </ul>        
     </div>
+    <h4>* You can change/set your profile picture on Github </h4>
   </div>
   <div class="modal-footer">
     <div class="clearfix">
@@ -48,3 +56,9 @@
     </div>
   </div>
 </div>
+
+<% content_for :js do %>
+ tee = '<%= current_user.tee %>'
+ gender = '<%= current_user.gender %>'
+ transport = '<%= current_user.transport %>'
+<% end %>

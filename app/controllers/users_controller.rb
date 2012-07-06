@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
   def update
     if current_user
+      current_user.name = params[:name] if params[:name].present?
       current_user.tee = params[:tee] if params[:tee].present?
       current_user.gender = params[:gender] if params[:gender].present?
       current_user.transport = params[:transport] if params[:transport].present?
