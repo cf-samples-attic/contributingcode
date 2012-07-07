@@ -171,10 +171,10 @@ $(document).ready(function(){
         , type    : "POST"
         , success : function ( response ) {
             if (response.err) {
-              $('.help-block').last().html(response.data)
-              $('.control-group').last().addClass("error")
+              $('#add2_form').find(".help-block").html(response.data)
+               $('#add2_form').find('.control-group').addClass("error")
             } else {
-              $('.help-block').last().html(response.data)
+              $('#add2_form').find(".help-block").html(response.data)
             }
           }
       })
@@ -280,7 +280,7 @@ $(document).ready(function(){
             if (xhr.status === 200) {
               var response = JSON.parse(xhr.responseText)
             if(response.err){
-              $('.help-block').last().html(response.data)
+              $('#team_form').find(".help-block").last().html(response.data)
               $('.backend').last().addClass("error")
             }
             else{

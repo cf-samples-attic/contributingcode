@@ -44,7 +44,7 @@ class TeamsController < ApplicationController
       # team.update_attribute("desc",params[:desc])
       render :json => {:err => nil, :data => team} and return 
     else 
-      render :json => {:err => "present", :data => nil}  and return 
+      render :json => {:err => "present", :data => team.errors.full_messages.to_s} and return 
     end 
   end 
 
