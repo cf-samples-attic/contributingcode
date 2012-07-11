@@ -23,6 +23,12 @@ Fork the project and then
 git clone git@github.com:<your_name>/contributingcode.git contributingcode
 cd contributingcode
 bundle install;bundle package
+```
+Before precompiling the assets make sure mongo is running in the local and set the following environmental variables 
+```ruby
+export mysql_pwd='your mysql password'
+export github_client_id= 'github client id'
+export github_client_secret= 'github client secret'
 rake assets:precompile
 ```
 
