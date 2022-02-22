@@ -1,3 +1,6 @@
+# This repository is no longer actively maintained by VMware, Inc.
+
+
 ####Overview
 Contributing code app was primarily built for the #contributingcode event with the functionality to organize an coding event.
 It is a **Rails 3.2.6** app using **Mysql** for storing data, **Mongo GridFS** to store images, **Sendgrid API** for email delivery
